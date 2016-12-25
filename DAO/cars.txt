@@ -1,0 +1,4 @@
+10	bmw	red	14
+11	mers	green	2
+13	lada	serai	4
+33	sok	white	141

@@ -1,0 +1,9 @@
+3	MASHA	22
+140	rust1	18
+34	oly	1
+66	oly	1
+85	oly	1
+102	MancvxA	51
+99	MASHA	22
+104	MancvxA	51
+43	MASHA	22
