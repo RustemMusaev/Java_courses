@@ -53,7 +53,6 @@ public class LinkedListMergerSort {
         buckets[i-1].rank=0;
     }
     public LinkedList sort(LinkedList linkedList) {
-        LinkedList result=new LinkedList();
         bucketsinit();
         int i=0;
         while (linkedList.hasNext()){
