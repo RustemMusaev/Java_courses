@@ -8,8 +8,5 @@ public interface UsersDao {
     boolean update(User user);
     boolean delete(int id);
     public void printmycarslist(User users);
-    public List<Cars> getUserCars(int id,List<Cars> getusercars);
-    public  String userfind(int id);
-    public User findusertolist(int id, List<User> userList);
-
+    public List<Cars> getUserCars(int user_id);
 }

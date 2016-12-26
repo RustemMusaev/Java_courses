@@ -32,13 +32,4 @@ public class UserService {
         }
         return result;
     }
-
-    public String serviceuserfind(int id) {
-        return  usersDao.userfind(id);
-    }
-
-    public User finusertolist (int id, List<User> userList) {
-        return usersDao.findusertolist(id, userList);
-    }
-
 }

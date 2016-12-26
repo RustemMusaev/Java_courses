@@ -10,30 +10,21 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 public class Main {
 
     public static void main(String[] args) {
-        String userFileName="C:\\Users\\musaevrr\\Desktop\\JAVA\\Java_courses\\DAO\\users.txt";
-        String carsFileName="C:\\Users\\musaevrr\\Desktop\\JAVA\\Java_courses\\DAO\\cars.txt";
-        final User MASHA= new User(43, "MASHA", 22);
-        final User DASHA  = new User(34, "Dasha", 22);
-        final User RUSTEM = new User(30,"rustem",30);
-        final List<User> USER_LIST= Arrays.asList(MASHA,DASHA,RUSTEM);
+       String userFileName="C:\\Users\\musaevrr\\Desktop\\JAVA\\Java_courses\\DAO\\users.txt";
+       String carsFileName="C:\\Users\\musaevrr\\Desktop\\JAVA\\Java_courses\\DAO\\cars.txt";
 
 
-        UsersDao usersDao=new UsersDaoFileBasedImpl(userFileName,carsFileName);
-        User masha  = new User(104, "MancvxA", 51);
-        boolean result=usersDao.update(masha);
-        System.out.println(result);
-        UserService userService=new UserService(usersDao);
-        userService.addUser(MASHA);
-
-        System.out.println(userService.finusertolist(30,USER_LIST).getName());
+      CarsDaoSqlBasedImpl carsDao=new CarsDaoSqlBasedImpl();
+      Cars Volga=new Cars(24,"volga","red",102);
+      User Ivan=new User(24,"Ivan",102);
+      User Vasya=new User(85,"Vasya1",34);
 
 
-        // User user=usersDao.find(141);
-        //System.out.println(carsDao.find(12).getColor());
-        //System.out.println(user.getName());
-        //usersDao.printmycarslist(user);
+        //carsDao.update(Volga);
+        UsersDaoSqlBasedImpl usersDaoSqlBased=new UsersDaoSqlBasedImpl();
+       // List<User> userList= usersDaoSqlBased.findAll();
+       //System.out.println(usersDaoSqlBased.update(Vasya));
+        //usersDaoSqlBased.printmycarslist(Vasya);
 
-        //System.out.println(usersDao.find(13).getName());
-        //usersDao.delete(13);
     }
 }

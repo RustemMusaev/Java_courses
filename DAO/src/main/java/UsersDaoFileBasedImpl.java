@@ -8,9 +8,9 @@ import java.util.List;
 
 public  class UsersDaoFileBasedImpl implements UsersDao {
 
-    String usersFileName;//="C:\\Users\\musaevrr\\Desktop\\JAVA\\userdao\\users.txt";
+    String usersFileName;
     String carsFileName;
-    WriteReadFile file = new WriteReadFile();
+    final String SEPARATOR="\t";
 
     UsersDaoFileBasedImpl(String usersFileName, String carsFileName) {
         this.usersFileName = usersFileName;
@@ -19,10 +19,21 @@ public  class UsersDaoFileBasedImpl implements UsersDao {
 
     public List<User> findAll() {
         List<User> userlist = new ArrayList<User>();
-        userlist = file.ReadUsersFile(usersFileName);
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(usersFileName));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] userdata=line.split("\t");
+                User user=new User(Integer.parseInt(userdata[0]),userdata[1],Integer.parseInt(userdata[2]));
+                userlist.add(user);
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+
         for (User user : userlist) {
             // System.out.println("count");
-            user.setMycars(getUserCars(user.getId(), new CarsDaoFileBasedImpl(carsFileName).findAll()));
+            user.setMycars(getUserCars(user.getId()));
         }
         return userlist;
     }
@@ -58,7 +69,7 @@ public  class UsersDaoFileBasedImpl implements UsersDao {
         }
         if (count == 0) {
             userList.add(user);
-            file.WriteUsersFile(userList, usersFileName);
+            WriteUsersFile(userList, usersFileName);
             System.out.println("Добавлен новый User");
         } else {
             System.out.println("Не уникальный id");
@@ -78,7 +89,7 @@ public  class UsersDaoFileBasedImpl implements UsersDao {
             }
         }
         if (count > 0) {
-            file.WriteUsersFile(userList, usersFileName);
+            WriteUsersFile(userList, usersFileName);
             return true;
         } else {
             return false;
@@ -97,7 +108,7 @@ public  class UsersDaoFileBasedImpl implements UsersDao {
         if (indexremove != -1) {
             userList.remove(indexremove);
             System.out.println("Delete complete");
-            file.WriteUsersFile(userList, usersFileName);
+            WriteUsersFile(userList, usersFileName);
         } else {
             System.out.println("id не найден");
             return false;
@@ -105,18 +116,15 @@ public  class UsersDaoFileBasedImpl implements UsersDao {
         return true;
     }
 
-    public List<Cars> getUserCars(int id, List<Cars> carsList) {
+    public List<Cars> getUserCars(int user_id) {
         //   System.out.println("id "+id);
         List<Cars> mycarslist = new ArrayList<Cars>();
-        //if(mycarslist==null)
-        int count = 0;
-        for (Cars cars : carsList) {
-            //     System.out.println(carsList.size());
-            if (cars.getId_user() == id) {
+        CarsDaoFileBasedImpl carsDaoFileBased=new CarsDaoFileBasedImpl(carsFileName);
+        mycarslist=carsDaoFileBased.findAll();
+        for (Cars cars : mycarslist) {
+            if (cars.getId_user() == user_id) {
                 mycarslist.add(cars);
-                //System.out.println("Cars found");
-                count++;
-            }
+           }
         }
         return mycarslist;
     }
@@ -127,16 +135,15 @@ public  class UsersDaoFileBasedImpl implements UsersDao {
         }
     }
 
-    public User findusertolist(int id,List<User> userList) {
-        User count=null;
-        for(User temp:userList) {
-            if (temp.getId()==id){
-                count=temp;
+    public  void WriteUsersFile(List<User> userList,String usersFileName){
+        try(FileWriter writer = new FileWriter(usersFileName, false))
+        {
+            for(User user:userList) {
+                String text = user.getId() + SEPARATOR + user.getName() + SEPARATOR + user.getAge() + System.getProperty("line.separator");
+                writer.write(text);
             }
+        } catch (IOException ex){
+            throw new IllegalArgumentException();
         }
-        if (count==null){
-            return  null;
-        }
-        return count;
     }
 }

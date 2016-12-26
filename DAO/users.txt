@@ -1,5 +1,6 @@
-3;"Masha";22
-85;"Oly";11
-99;"Michael";51
-102;"Maxim";35
-140;"Rustem";18
+3	Masha	22
+85	Oly	11
+99	Michael	51
+102	Maxim	35
+140	Rustem	18
+43	MASHA	22

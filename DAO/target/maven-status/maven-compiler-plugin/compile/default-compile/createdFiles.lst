@@ -4,6 +4,7 @@ Cars.class
 User.class
 UsersDao.class
 CarsDao.class
+CarsDaoSqlBasedImpl.class
 UsersDaoFileBasedImpl.class
 CarsDaoFileBasedImpl.class
-WriteReadFile.class
+UsersDaoSqlBasedImpl.class

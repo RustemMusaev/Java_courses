@@ -12,7 +12,7 @@ public class User {
     List<Cars> mycars;
     String status;
 
-    public User(int id, String name,int age,Cars mycars) {
+    public User(int id, String name,int age,List<Cars> mycars) {
         this.id = id;
         this.name = name;
         this.age = age;
