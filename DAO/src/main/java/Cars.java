@@ -17,6 +17,11 @@ public class Cars{
         this.color = color;
         this.id_user = id_user;
     }
+    public Cars(int id, String model, String color) {
+        this.id = id;
+        this.model = model;
+        this.color = color;
+    }
 
     public int getId() {
         return id;

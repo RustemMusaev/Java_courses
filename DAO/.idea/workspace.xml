@@ -45,81 +45,64 @@
         <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
       </PATH_ELEMENT>
     </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MavenDatabase@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="26" column="10" lean-forward="false" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UsersDaoSqlBasedImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/UsersDaoSqlBasedImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="9" column="31" lean-forward="false" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+            <state relative-caret-position="221">
+              <caret line="29" column="29" lean-forward="false" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#findAll#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
-                <element signature="e#429#435#0" expanded="true" />
                 <element signature="method#find#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
                 <element signature="method#save#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
                 <element signature="method#update#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
-                <element signature="e#3980#3981#0" expanded="true" />
-                <element signature="e#4008#4009#0" expanded="true" />
+                <element signature="method#delete#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
                 <element signature="method#printmycarslist#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
                 <element signature="method#getUserCars#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
-                <element signature="e#4561#4567#0" expanded="true" />
-                <marker date="1482782192033" expanded="true" signature="711:735" ph="SELECT * FRO... group_user" />
-                <marker date="1482782192033" expanded="true" signature="1732:1771" ph="SELECT * FRO... group_user" />
-                <marker date="1482782192033" expanded="true" signature="2613:2702" ph="INSERT INTO group_user... " />
-                <marker date="1482782192033" expanded="true" signature="2619:2644" ph="insert into group_user... " />
-                <marker date="1482782192033" expanded="true" signature="2619:2663" ph="insert into group_user... " />
-                <marker date="1482782192033" expanded="true" signature="2619:2684" ph="insert into group_user... " />
-                <marker date="1482782192033" expanded="true" signature="2619:2702" ph="insert into group_user... " />
-                <marker date="1482782192033" expanded="true" signature="3419:3426" ph="UPDATE group... " />
-                <marker date="1482782192033" expanded="true" signature="3419:3503" ph="UPDATE group... " />
-                <marker date="1482782192033" expanded="true" signature="3419:3556" ph="UPDATE group... " />
-                <marker date="1482782192033" expanded="true" signature="4803:4839" ph="SELECT * FRO... car" />
+                <marker date="1482825072615" expanded="true" signature="443:467" ph="SELECT * FRO... group_user" />
+                <marker date="1482825072615" expanded="true" signature="1121:1160" ph="SELECT * FRO... group_user" />
+                <marker date="1482825072615" expanded="true" signature="1751:1840" ph="INSERT INTO group_user... " />
+                <marker date="1482825072615" expanded="true" signature="1757:1782" ph="insert into group_user... " />
+                <marker date="1482825072615" expanded="true" signature="1757:1801" ph="insert into group_user... " />
+                <marker date="1482825072615" expanded="true" signature="1757:1822" ph="insert into group_user... " />
+                <marker date="1482825072615" expanded="true" signature="1757:1840" ph="insert into group_user... " />
+                <marker date="1482825072615" expanded="true" signature="2074:2197" ph="insert into car... " />
+                <marker date="1482825072615" expanded="true" signature="2074:2218" ph="insert into car... " />
+                <marker date="1482825072615" expanded="true" signature="2709:2716" ph="UPDATE group... " />
+                <marker date="1482825072615" expanded="true" signature="2709:2793" ph="UPDATE group... " />
+                <marker date="1482825072615" expanded="true" signature="2709:2846" ph="UPDATE group... " />
+                <marker date="1482825072615" expanded="true" signature="3329:3366" ph="DELETE FROM " />
+                <marker date="1482825072615" expanded="true" signature="4346:4382" ph="SELECT * FRO... car" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CarsDaoSqlBaseImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/CarsDaoSqlBaseImpl.java">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="21" column="13" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="21" selection-end-column="13" />
+            <state relative-caret-position="244">
+              <caret line="33" column="51" lean-forward="false" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#370#376#0" expanded="true" />
-                <element signature="method#save#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
-                <element signature="method#find#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
-                <element signature="method#update#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
-                <element signature="method#delete#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
-                <marker date="1482780854016" expanded="true" signature="650:667" ph="SELECT * FRO... car" />
-                <marker date="1482780854016" expanded="true" signature="1473:1618" ph="insert into car... " />
-                <marker date="1482780854016" expanded="true" signature="2299:2316" ph="SELECT * FRO... car" />
-                <marker date="1482780854016" expanded="true" signature="2299:2322" ph="SELECT * FRO... car" />
-                <marker date="1482780854016" expanded="true" signature="2299:2323" ph="SELECT * FRO... car" />
-                <marker date="1482780854016" expanded="true" signature="2299:2330" ph="SELECT * FRO... car" />
-                <marker date="1482780854016" expanded="true" signature="2299:2332" ph="SELECT * FRO... car" />
-                <marker date="1482780854016" expanded="true" signature="3194:3219" ph="UPDATE car S... " />
-                <marker date="1482780854016" expanded="true" signature="3194:3220" ph="UPDATE car S... " />
-                <marker date="1482780854016" expanded="true" signature="3194:3329" ph="UPDATE car S... " />
-                <marker date="1482780854016" expanded="true" signature="3194:3335" ph="UPDATE car S... " />
-                <marker date="1482780854016" expanded="true" signature="3194:3385" ph="UPDATE car S... " />
-                <marker date="1482780854016" expanded="true" signature="3194:3387" ph="UPDATE car S... " />
-                <marker date="1482780854016" expanded="true" signature="4099:4133" ph="DELETE FROM " />
-                <marker date="1482780854016" expanded="true" signature="4099:4153" ph="DELETE FROM " />
-                <marker date="1482780854016" expanded="true" signature="4099:4154" ph="DELETE FROM " />
               </folding>
             </state>
           </provider>
@@ -143,19 +126,19 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/Cars.java" />
         <option value="$PROJECT_DIR$/src/main/java/WriteReadFile.java" />
         <option value="$PROJECT_DIR$/src/main/java/UserDaoFileBasedImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/UserService.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/CarsDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/CarsDaoSqlBaseImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/UsersDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/UsersDaoSqlBasedImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/CarsDaoFileBasedImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/UsersDaoFileBasedImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Cars.java" />
+        <option value="$PROJECT_DIR$/src/main/java/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/CarsDaoSqlBaseImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/UsersDaoSqlBasedImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
     </option>
   </component>
@@ -204,7 +187,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -229,6 +211,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -300,6 +286,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -734,11 +721,13 @@
       <workItem from="1482697115647" duration="285000" />
       <workItem from="1482739889509" duration="8000" />
       <workItem from="1482761685627" duration="19701000" />
+      <workItem from="1482783554483" duration="1448000" />
+      <workItem from="1482814691724" duration="9482000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20746000" />
+    <option name="totallyTimeSpent" value="31676000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -747,26 +736,26 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14052288" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30882353" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19771242" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16013072" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19364598" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10892587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19969743" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13691376" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39869282" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -818,7 +807,17 @@
     </ignored-roots>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/CarsDaoSqlBaseImpl.java</url>
+          <line>45</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="3" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -826,11 +825,85 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/UsersDaoSqlBasedImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#findAll#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
+            <element signature="method#find#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
+            <element signature="method#save#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
+            <element signature="method#update#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
+            <element signature="method#delete#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
+            <element signature="method#printmycarslist#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
+            <element signature="method#getUserCars#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
+            <marker date="1482825072615" expanded="true" signature="443:467" ph="SELECT * FRO... group_user" />
+            <marker date="1482825072615" expanded="true" signature="1121:1160" ph="SELECT * FRO... group_user" />
+            <marker date="1482825072615" expanded="true" signature="1751:1840" ph="INSERT INTO group_user... " />
+            <marker date="1482825072615" expanded="true" signature="1757:1782" ph="insert into group_user... " />
+            <marker date="1482825072615" expanded="true" signature="1757:1801" ph="insert into group_user... " />
+            <marker date="1482825072615" expanded="true" signature="1757:1822" ph="insert into group_user... " />
+            <marker date="1482825072615" expanded="true" signature="1757:1840" ph="insert into group_user... " />
+            <marker date="1482825072615" expanded="true" signature="2074:2197" ph="insert into car... " />
+            <marker date="1482825072615" expanded="true" signature="2074:2218" ph="insert into car... " />
+            <marker date="1482825072615" expanded="true" signature="2709:2716" ph="UPDATE group... " />
+            <marker date="1482825072615" expanded="true" signature="2709:2793" ph="UPDATE group... " />
+            <marker date="1482825072615" expanded="true" signature="2709:2846" ph="UPDATE group... " />
+            <marker date="1482825072615" expanded="true" signature="3329:3366" ph="DELETE FROM " />
+            <marker date="1482825072615" expanded="true" signature="4346:4382" ph="SELECT * FRO... car" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CarsDaoSqlBaseImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="21" column="13" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="21" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#findAll#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
+            <element signature="method#save#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
+            <element signature="method#find#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
+            <element signature="method#update#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
+            <element signature="method#delete#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
+            <marker date="1482824602647" expanded="true" signature="451:468" ph="SELECT * FRO... car" />
+            <marker date="1482824602647" expanded="true" signature="1040:1185" ph="insert into car... " />
+            <marker date="1482824602647" expanded="true" signature="1622:1639" ph="SELECT * FRO... car" />
+            <marker date="1482824602647" expanded="true" signature="1622:1645" ph="SELECT * FRO... car" />
+            <marker date="1482824602647" expanded="true" signature="1622:1646" ph="SELECT * FRO... car" />
+            <marker date="1482824602647" expanded="true" signature="1622:1653" ph="SELECT * FRO... car" />
+            <marker date="1482824602647" expanded="true" signature="1622:1655" ph="SELECT * FRO... car" />
+            <marker date="1482824602647" expanded="true" signature="2296:2321" ph="UPDATE car S... " />
+            <marker date="1482824602647" expanded="true" signature="2296:2322" ph="UPDATE car S... " />
+            <marker date="1482824602647" expanded="true" signature="2296:2410" ph="UPDATE car S... " />
+            <marker date="1482824602647" expanded="true" signature="2296:2416" ph="UPDATE car S... " />
+            <marker date="1482824602647" expanded="true" signature="2296:2445" ph="UPDATE car S... " />
+            <marker date="1482824602647" expanded="true" signature="2296:2447" ph="UPDATE car S... " />
+            <marker date="1482824602647" expanded="true" signature="2911:2945" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="918">
           <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#981#982#0" expanded="false" />
+            <element signature="e#1007#1008#0" expanded="false" />
+            <element signature="e#1052#1053#0" expanded="true" />
+            <element signature="e#1084#1085#0" expanded="true" />
+            <element signature="e#1193#1194#0" expanded="true" />
+            <element signature="e#1228#1229#0" expanded="true" />
+            <element signature="e#1261#1262#0" expanded="false" />
+            <element signature="e#1289#1290#0" expanded="false" />
+            <element signature="e#1329#1330#0" expanded="false" />
+            <element signature="e#1361#1362#0" expanded="false" />
+            <element signature="e#1396#1397#0" expanded="false" />
+            <element signature="e#1426#1427#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -838,25 +911,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="850">
           <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <marker date="1482696481171" expanded="true" signature="1030:1262" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/WriteReadFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="46" lean-forward="false" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/WriteReadFile.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/UsersDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -873,12 +939,13 @@
         <state relative-caret-position="2244">
           <caret line="132" column="1" lean-forward="false" selection-start-line="132" selection-start-column="1" selection-end-line="132" selection-end-column="1" />
           <folding>
+            <element signature="method#findAll#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#find#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#save#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#update#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#delete#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#getUserCars#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
-            <element signature="method#printmycarslist#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#WriteUsersFile#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -890,10 +957,10 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#findAll#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
-            <element signature="e#445#451#0" expanded="true" />
             <element signature="method#find#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#save#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#update#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#delete#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -902,10 +969,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="36" column="1" lean-forward="false" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
-          <folding>
-            <element signature="method#addUser#0;class#UserService#0" expanded="false" />
-            <element signature="method#IsRegistred#0;class#UserService#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -913,7 +977,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -921,7 +987,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -929,7 +994,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="918">
           <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#981#982#0" expanded="false" />
+            <element signature="e#1007#1008#0" expanded="false" />
+            <element signature="e#1052#1053#0" expanded="true" />
+            <element signature="e#1084#1085#0" expanded="true" />
+            <element signature="e#1193#1194#0" expanded="true" />
+            <element signature="e#1228#1229#0" expanded="true" />
+            <element signature="e#1261#1262#0" expanded="false" />
+            <element signature="e#1289#1290#0" expanded="false" />
+            <element signature="e#1329#1330#0" expanded="false" />
+            <element signature="e#1361#1362#0" expanded="false" />
+            <element signature="e#1396#1397#0" expanded="false" />
+            <element signature="e#1426#1427#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -937,25 +1016,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
           <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding>
-            <marker date="1482696481171" expanded="true" signature="1030:1262" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/WriteReadFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="46" lean-forward="false" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/WriteReadFile.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/UsersDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -972,12 +1044,13 @@
         <state relative-caret-position="2261">
           <caret line="141" column="1" lean-forward="false" selection-start-line="141" selection-start-column="1" selection-end-line="141" selection-end-column="1" />
           <folding>
+            <element signature="method#findAll#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#find#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#save#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#update#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#delete#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#getUserCars#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
-            <element signature="method#printmycarslist#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#WriteUsersFile#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -989,10 +1062,10 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#findAll#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
-            <element signature="e#445#451#0" expanded="true" />
             <element signature="method#find#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#save#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#update#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#delete#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1001,10 +1074,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="43" column="1" lean-forward="false" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
-          <folding>
-            <element signature="method#addUser#0;class#UserService#0" expanded="false" />
-            <element signature="method#IsRegistred#0;class#UserService#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1012,7 +1082,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1020,7 +1092,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1028,7 +1099,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="918">
           <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#981#982#0" expanded="false" />
+            <element signature="e#1007#1008#0" expanded="false" />
+            <element signature="e#1052#1053#0" expanded="true" />
+            <element signature="e#1084#1085#0" expanded="true" />
+            <element signature="e#1193#1194#0" expanded="true" />
+            <element signature="e#1228#1229#0" expanded="true" />
+            <element signature="e#1261#1262#0" expanded="false" />
+            <element signature="e#1289#1290#0" expanded="false" />
+            <element signature="e#1329#1330#0" expanded="false" />
+            <element signature="e#1361#1362#0" expanded="false" />
+            <element signature="e#1396#1397#0" expanded="false" />
+            <element signature="e#1426#1427#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1036,25 +1121,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding>
-            <marker date="1482696481171" expanded="true" signature="1030:1262" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/WriteReadFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="28" column="46" lean-forward="false" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/WriteReadFile.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/UsersDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1071,12 +1149,13 @@
         <state relative-caret-position="2261">
           <caret line="141" column="1" lean-forward="false" selection-start-line="141" selection-start-column="1" selection-end-line="141" selection-end-column="1" />
           <folding>
+            <element signature="method#findAll#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#find#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#save#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#update#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#delete#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#getUserCars#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
-            <element signature="method#printmycarslist#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#WriteUsersFile#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1088,10 +1167,10 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#findAll#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
-            <element signature="e#445#451#0" expanded="true" />
             <element signature="method#find#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#save#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
             <element signature="method#update#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#delete#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1100,10 +1179,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="43" column="1" lean-forward="false" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
-          <folding>
-            <element signature="method#addUser#0;class#UserService#0" expanded="false" />
-            <element signature="method#IsRegistred#0;class#UserService#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1111,33 +1187,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Cars.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding>
-            <marker date="1482696481171" expanded="true" signature="1030:1262" ph="{...}" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/WriteReadFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="11" column="38" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="66" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/WriteReadFile.java" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
           <caret line="20" column="7" lean-forward="false" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1145,7 +1205,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1153,6 +1212,95 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
           <caret line="543" column="6" lean-forward="false" selection-start-line="543" selection-start-column="6" selection-end-line="543" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cars.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/Cars">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>Cars</OriginalElement>
+          <nodes>
+            <node x="" y="">UsersDaoFileBasedImpl</node>
+            <node x="" y="">CarsDao</node>
+            <node x="" y="">Cars</node>
+            <node x="" y="">User</node>
+            <node x="" y="">UserService</node>
+            <node x="" y="">UsersDaoSqlBasedImpl</node>
+            <node x="" y="">CarsDaoFileBasedImpl</node>
+            <node x="" y="">CarsDaoSqlBasedImpl</node>
+            <node x="" y="">Main</node>
+            <node x="" y="">UsersDao</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="316.0" y="150.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/UsersDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="45" lean-forward="false" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/UsersDaoFileBasedImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="19" column="32" lean-forward="false" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+          <folding>
+            <element signature="method#findAll#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#find#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#save#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#update#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#delete#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#getUserCars#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#WriteUsersFile#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CarsDaoFileBasedImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="15" column="32" lean-forward="false" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#findAll#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#find#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#save#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#update#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
+            <element signature="method#delete#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="524">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1165,157 +1313,125 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/60725dcf/967f468e-b6c6-4bb6-9f7c-5a43cf5c602b/MavenDatabase.public.car">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/60725dcf/967f468e-b6c6-4bb6-9f7c-5a43cf5c602b/MavenDatabase.public.group_user">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UserService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Cars.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="method#addUser#0;class#UserService#0" expanded="false" />
-            <element signature="method#IsRegistred#0;class#UserService#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="238">
+          <caret line="19" column="50" lean-forward="false" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="14" column="53" lean-forward="false" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UsersDaoFileBasedImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="35" column="51" lean-forward="false" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
+        <state relative-caret-position="89">
+          <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
           <folding>
-            <element signature="method#find#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
-            <element signature="method#save#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
-            <element signature="method#update#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
-            <element signature="method#delete#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
-            <element signature="method#getUserCars#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
-            <element signature="e#3560#3566#0" expanded="true" />
-            <element signature="method#printmycarslist#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
-            <element signature="method#WriteUsersFile#0;class#UsersDaoFileBasedImpl#0" expanded="false" />
+            <element signature="e#234#240#0" expanded="true" />
+            <element signature="method#iquals#0;class#User#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CarsDaoFileBasedImpl.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/postgresql/postgresql/9.4-1200-jdbc41/postgresql-9.4-1200-jdbc41.jar!/org/postgresql/jdbc2/AbstractJdbc2ResultSet.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="15" column="32" lean-forward="false" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#findAll#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
-            <element signature="e#445#451#0" expanded="true" />
-            <element signature="method#find#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
-            <element signature="method#save#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
-            <element signature="method#update#0;class#CarsDaoFileBasedImpl#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UsersDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="45" lean-forward="false" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
+        <state relative-caret-position="113">
+          <caret line="316" column="81" lean-forward="false" selection-start-line="316" selection-start-column="81" selection-end-line="316" selection-end-column="81" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CarsDaoSqlBaseImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="21" column="13" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="21" selection-end-column="13" />
+        <state relative-caret-position="204">
+          <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#370#376#0" expanded="true" />
+            <element signature="method#findAll#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
             <element signature="method#save#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
             <element signature="method#find#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
             <element signature="method#update#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
             <element signature="method#delete#0;class#CarsDaoSqlBasedImpl#0" expanded="false" />
-            <marker date="1482780854016" expanded="true" signature="650:667" ph="SELECT * FRO... car" />
-            <marker date="1482780854016" expanded="true" signature="1473:1618" ph="insert into car... " />
-            <marker date="1482780854016" expanded="true" signature="2299:2316" ph="SELECT * FRO... car" />
-            <marker date="1482780854016" expanded="true" signature="2299:2322" ph="SELECT * FRO... car" />
-            <marker date="1482780854016" expanded="true" signature="2299:2323" ph="SELECT * FRO... car" />
-            <marker date="1482780854016" expanded="true" signature="2299:2330" ph="SELECT * FRO... car" />
-            <marker date="1482780854016" expanded="true" signature="2299:2332" ph="SELECT * FRO... car" />
-            <marker date="1482780854016" expanded="true" signature="3194:3219" ph="UPDATE car S... " />
-            <marker date="1482780854016" expanded="true" signature="3194:3220" ph="UPDATE car S... " />
-            <marker date="1482780854016" expanded="true" signature="3194:3329" ph="UPDATE car S... " />
-            <marker date="1482780854016" expanded="true" signature="3194:3335" ph="UPDATE car S... " />
-            <marker date="1482780854016" expanded="true" signature="3194:3385" ph="UPDATE car S... " />
-            <marker date="1482780854016" expanded="true" signature="3194:3387" ph="UPDATE car S... " />
-            <marker date="1482780854016" expanded="true" signature="4099:4133" ph="DELETE FROM " />
-            <marker date="1482780854016" expanded="true" signature="4099:4153" ph="DELETE FROM " />
-            <marker date="1482780854016" expanded="true" signature="4099:4154" ph="DELETE FROM " />
+            <marker date="1482824602647" expanded="true" signature="451:468" ph="SELECT * FRO... car" />
+            <marker date="1482824602647" expanded="true" signature="1040:1185" ph="insert into car... " />
+            <marker date="1482824602647" expanded="true" signature="1622:1639" ph="SELECT * FRO... car" />
+            <marker date="1482824602647" expanded="true" signature="1622:1645" ph="SELECT * FRO... car" />
+            <marker date="1482824602647" expanded="true" signature="1622:1646" ph="SELECT * FRO... car" />
+            <marker date="1482824602647" expanded="true" signature="1622:1653" ph="SELECT * FRO... car" />
+            <marker date="1482824602647" expanded="true" signature="1622:1655" ph="SELECT * FRO... car" />
+            <marker date="1482824602647" expanded="true" signature="2296:2321" ph="UPDATE car S... " />
+            <marker date="1482824602647" expanded="true" signature="2296:2322" ph="UPDATE car S... " />
+            <marker date="1482824602647" expanded="true" signature="2296:2410" ph="UPDATE car S... " />
+            <marker date="1482824602647" expanded="true" signature="2296:2416" ph="UPDATE car S... " />
+            <marker date="1482824602647" expanded="true" signature="2296:2445" ph="UPDATE car S... " />
+            <marker date="1482824602647" expanded="true" signature="2296:2447" ph="UPDATE car S... " />
+            <marker date="1482824602647" expanded="true" signature="2911:2945" ph="DELETE FROM " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/60725dcf/967f468e-b6c6-4bb6-9f7c-5a43cf5c602b/MavenDatabase.public.group_user">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/60725dcf/967f468e-b6c6-4bb6-9f7c-5a43cf5c602b/MavenDatabase.public.car">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="26" column="10" lean-forward="false" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
-          <folding />
+        <state relative-caret-position="244">
+          <caret line="33" column="51" lean-forward="false" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/UsersDaoSqlBasedImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="9" column="31" lean-forward="false" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+        <state relative-caret-position="221">
+          <caret line="29" column="29" lean-forward="false" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#findAll#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
-            <element signature="e#429#435#0" expanded="true" />
             <element signature="method#find#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
             <element signature="method#save#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
             <element signature="method#update#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
-            <element signature="e#3980#3981#0" expanded="true" />
-            <element signature="e#4008#4009#0" expanded="true" />
+            <element signature="method#delete#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
             <element signature="method#printmycarslist#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
             <element signature="method#getUserCars#0;class#UsersDaoSqlBasedImpl#0" expanded="false" />
-            <element signature="e#4561#4567#0" expanded="true" />
-            <marker date="1482782192033" expanded="true" signature="711:735" ph="SELECT * FRO... group_user" />
-            <marker date="1482782192033" expanded="true" signature="1732:1771" ph="SELECT * FRO... group_user" />
-            <marker date="1482782192033" expanded="true" signature="2613:2702" ph="INSERT INTO group_user... " />
-            <marker date="1482782192033" expanded="true" signature="2619:2644" ph="insert into group_user... " />
-            <marker date="1482782192033" expanded="true" signature="2619:2663" ph="insert into group_user... " />
-            <marker date="1482782192033" expanded="true" signature="2619:2684" ph="insert into group_user... " />
-            <marker date="1482782192033" expanded="true" signature="2619:2702" ph="insert into group_user... " />
-            <marker date="1482782192033" expanded="true" signature="3419:3426" ph="UPDATE group... " />
-            <marker date="1482782192033" expanded="true" signature="3419:3503" ph="UPDATE group... " />
-            <marker date="1482782192033" expanded="true" signature="3419:3556" ph="UPDATE group... " />
-            <marker date="1482782192033" expanded="true" signature="4803:4839" ph="SELECT * FRO... car" />
+            <marker date="1482825072615" expanded="true" signature="443:467" ph="SELECT * FRO... group_user" />
+            <marker date="1482825072615" expanded="true" signature="1121:1160" ph="SELECT * FRO... group_user" />
+            <marker date="1482825072615" expanded="true" signature="1751:1840" ph="INSERT INTO group_user... " />
+            <marker date="1482825072615" expanded="true" signature="1757:1782" ph="insert into group_user... " />
+            <marker date="1482825072615" expanded="true" signature="1757:1801" ph="insert into group_user... " />
+            <marker date="1482825072615" expanded="true" signature="1757:1822" ph="insert into group_user... " />
+            <marker date="1482825072615" expanded="true" signature="1757:1840" ph="insert into group_user... " />
+            <marker date="1482825072615" expanded="true" signature="2074:2197" ph="insert into car... " />
+            <marker date="1482825072615" expanded="true" signature="2074:2218" ph="insert into car... " />
+            <marker date="1482825072615" expanded="true" signature="2709:2716" ph="UPDATE group... " />
+            <marker date="1482825072615" expanded="true" signature="2709:2793" ph="UPDATE group... " />
+            <marker date="1482825072615" expanded="true" signature="2709:2846" ph="UPDATE group... " />
+            <marker date="1482825072615" expanded="true" signature="3329:3366" ph="DELETE FROM " />
+            <marker date="1482825072615" expanded="true" signature="4346:4382" ph="SELECT * FRO... car" />
           </folding>
         </state>
       </provider>

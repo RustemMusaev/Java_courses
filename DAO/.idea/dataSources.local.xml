@@ -8,7 +8,7 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>maven_allow</user-name>
-      <resolve-scope>MavenDatabase:public,maven_allow</resolve-scope>
+      <resolve-scope>MavenDatabase:maven_allow,public</resolve-scope>
     </data-source>
   </component>
 </project>

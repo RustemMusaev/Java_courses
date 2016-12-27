@@ -9,14 +9,20 @@ public class User {
     private int id;
     private String name;
     private int age;
-    List<Cars> mycars;
+    List<Cars> mycars=new ArrayList<Cars>();
     String status;
 
     public User(int id, String name,int age,List<Cars> mycars) {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.mycars=null;
+        this.mycars=mycars;
+    }
+    public User(int id, String name,int age,Cars mycar) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.mycars.add(mycar);
     }
 
     public User(int id, String name,int age) {
@@ -43,7 +49,9 @@ public class User {
     public void setMycars(List<Cars> cars){
         this.mycars=cars;
     }
-
+    public void setMyCar(Cars cars){
+        this.mycars.add(cars);
+    }
     public List<Cars> getMycars(){
         return  this.mycars;
     }
