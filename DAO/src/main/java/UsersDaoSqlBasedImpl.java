@@ -28,7 +28,6 @@ public class UsersDaoSqlBasedImpl implements UsersDao {
     }
     @Override
     public User find(int id) {
-        Connection connection=null;
         User result=null;
         try {
             String SQL_FIND_USER="SELECT * FROM group_user WHERE user_id="+id;

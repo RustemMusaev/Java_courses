@@ -25,7 +25,7 @@ class CarsDaoFileBasedImpl implements CarsDao{
                 carslist.add(cars);
             }
         } catch (Exception e) {
-            throw new IllegalArgumentException();
+           // throw new IllegalArgumentException();
         }
          return carslist;
     }

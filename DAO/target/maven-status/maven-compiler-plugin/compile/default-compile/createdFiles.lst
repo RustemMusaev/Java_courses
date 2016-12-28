@@ -2,6 +2,7 @@ Main.class
 UserService.class
 Cars.class
 User.class
+UserDaoFactory.class
 UsersDao.class
 CarsDao.class
 CarsDaoSqlBasedImpl.class

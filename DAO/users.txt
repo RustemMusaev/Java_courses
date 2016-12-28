@@ -3,4 +3,4 @@
 99	Michael	51
 102	Maxim	35
 140	Rustem	18
-43	MASHA	22
+43	Rust	43

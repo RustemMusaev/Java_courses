@@ -10,12 +10,6 @@ public class UserService {
         this.usersDao = usersDao;
     }
 
-    public void addUser(User user) {
-        user.status="Add";
-        usersDao.save(user);
-        usersDao.save(user);
-    }
-
     public boolean IsRegistred(String name) {
         List<User> userList=usersDao.findAll();
         boolean result=false;

@@ -1,22 +1,17 @@
 import javax.jws.soap.SOAPBinding;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public  class UsersDaoFileBasedImpl implements UsersDao {
 
     String usersFileName;
-    String carsFileName;
+    String carsFileName="C:\\\\Users\\\\musaevrr\\\\Desktop\\\\JAVA\\\\Java_courses\\\\DAO\\\\cars.txt";
     final String SEPARATOR="\t";
 
-    UsersDaoFileBasedImpl(String usersFileName, String carsFileName) {
+    public UsersDaoFileBasedImpl(String usersFileName) {
         this.usersFileName = usersFileName;
-        this.carsFileName = carsFileName;
     }
-
     public List<User> findAll() {
         List<User> userlist = new ArrayList<User>();
         try {
@@ -27,29 +22,39 @@ public  class UsersDaoFileBasedImpl implements UsersDao {
                 User user=new User(Integer.parseInt(userdata[0]),userdata[1],Integer.parseInt(userdata[2]));
                 userlist.add(user);
             }
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException();
+        } catch (FileNotFoundException e) {
+            throw new IllegalArgumentException();
+        } catch (IOException e) {
             throw new IllegalArgumentException();
         }
-
         for (User user : userlist) {
-            // System.out.println("count");
             user.setMycars(getUserCars(user.getId()));
         }
+        System.out.println("complete");
         return userlist;
     }
-
     public User find(int id) {
-        List<User> userList = this.findAll();
         User finduser = null;
-        for (User usersearch : userList) {
-            if (id == usersearch.getId()) {
-                finduser = usersearch;
+        //try {
+        System.out.println("33");
+            List<User> userList = this.findAll();
+            for (User usersearch : userList) {
+                System.out.println(usersearch);
+                if (id == usersearch.getId()) {
+                    finduser = usersearch;
+                }
             }
-        }
+     //   }
+      //  catch (IllegalArgumentException e) {
+      //      System.out.println("Error");
+     //       e.printStackTrace();
+    //    }
+        System.out.println("44");
         if (finduser != null) {
             return finduser;
         } else {
-
             System.out.println("Not find user");
             return null;
         }
