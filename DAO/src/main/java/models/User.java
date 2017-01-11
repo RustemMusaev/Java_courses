@@ -1,30 +1,22 @@
-import java.io.*;
+package models;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.awt.SystemColor.text;
 
 public class User {
 
     private int id;
     private String name;
     private int age;
-    List<Cars> mycars=new ArrayList<Cars>();
-    String status;
+    List<Car> mycars=new ArrayList<Car>();
+   // String status;
 
-    public User(int id, String name,int age,List<Cars> mycars) {
+    public User(int id, String name,int age,List<Car> mycars) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.mycars=mycars;
     }
-    public User(int id, String name,int age,Cars mycar) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.mycars.add(mycar);
-    }
-
     public User(int id, String name,int age) {
         this.id = id;
         this.name = name;
@@ -32,7 +24,6 @@ public class User {
     }
 
     public int getId() { return id;}
-
     public String getName() {
         if(this!=null) {
             return name;
@@ -46,28 +37,22 @@ public class User {
         return age;
     }
 
-    public void setMycars(List<Cars> cars){
+    public void setMycars(List<Car> cars){
         this.mycars=cars;
     }
-    public void setMyCar(Cars cars){
-        this.mycars.add(cars);
-    }
-    public List<Cars> getMycars(){
+    public void addMyCar(Car car){ this.mycars.add(car); }
+    public List<Car> getMycars(){
         return  this.mycars;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public void setAge(int age) {
         this.age = age;
     }
-
     public boolean iquals (User user){
         if(this.getId()==user.getId()&&this.getName()==user.getName()&&this.getAge()==user.getAge()){
             return  true;

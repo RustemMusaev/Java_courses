@@ -1,8 +1,13 @@
-import javax.jws.soap.SOAPBinding;
+package dao;
+
+import models.Car;
+import models.User;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
+/*
 public  class UsersDaoFileBasedImpl implements UsersDao {
 
     String usersFileName;
@@ -12,7 +17,7 @@ public  class UsersDaoFileBasedImpl implements UsersDao {
     public UsersDaoFileBasedImpl(String usersFileName) {
         this.usersFileName = usersFileName;
     }
-    public List<User> findAll() {
+    public Map<Integer, User> findAll() {
         List<User> userlist = new ArrayList<User>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(usersFileName));
@@ -75,7 +80,7 @@ public  class UsersDaoFileBasedImpl implements UsersDao {
         if (count == 0) {
             userList.add(user);
             WriteUsersFile(userList, usersFileName);
-            System.out.println("Добавлен новый User");
+            System.out.println("Добавлен новый models.User");
         } else {
             System.out.println("Не уникальный id");
             return false;
@@ -121,26 +126,26 @@ public  class UsersDaoFileBasedImpl implements UsersDao {
         return true;
     }
 
-    public List<Cars> getUserCars(int user_id) {
+    public List<Car> getUserCars(int user_id) {
         //   System.out.println("id "+id);
-        List<Cars> mycarslist = new ArrayList<Cars>();
+        List<Car> mycarslist = new ArrayList<Car>();
         CarsDaoFileBasedImpl carsDaoFileBased=new CarsDaoFileBasedImpl(carsFileName);
         mycarslist=carsDaoFileBased.findAll();
-        for (Cars cars : mycarslist) {
-            if (cars.getId_user() == user_id) {
-                mycarslist.add(cars);
+        for (Car car : mycarslist) {
+            if (car.getId_user() == user_id) {
+                mycarslist.add(car);
            }
         }
         return mycarslist;
     }
 
     public void printmycarslist(User user) {
-        for (Cars car : user.getMycars()) {
+        for (Car car : user.getMycars()) {
             System.out.println("id cars=" + car.getId() + "\tmodel=" + car.getModel() + "\tcolor=" + car.getColor() + "\tid user=" + car.getId_user());
         }
     }
 
-    public  void WriteUsersFile(List<User> userList,String usersFileName){
+    public  void WriteUsersFile(List<User> userList, String usersFileName){
         try(FileWriter writer = new FileWriter(usersFileName, false))
         {
             for(User user:userList) {
@@ -152,3 +157,4 @@ public  class UsersDaoFileBasedImpl implements UsersDao {
         }
     }
 }
+*/
