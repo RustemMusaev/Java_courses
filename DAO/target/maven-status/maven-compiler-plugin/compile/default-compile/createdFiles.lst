@@ -1,3 +1,4 @@
+servlet\SimpleServlet.class
 models\Car.class
 dao\UsersDao.class
 models\User.class
@@ -10,3 +11,5 @@ dao\UsersDaoJdbcBasedImpl$1.class
 dao\UsersDaoJdbcBasedImpl$2.class
 factory\DataSourceFactory.class
 factory\UserDaoFactory.class
+servlet\SimpleServlet2.class
+servlet\Util.class
