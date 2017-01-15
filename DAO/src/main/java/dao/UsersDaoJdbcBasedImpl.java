@@ -16,8 +16,8 @@ import java.util.Map;
 
 public class UsersDaoJdbcBasedImpl implements UsersDao {
 
-    JdbcTemplate template;
-    Map<Integer,User> usersMap;
+    private JdbcTemplate template;
+    private Map<Integer,User> usersMap;
 
     //language=SQL
     private static String SQL_FIND_CAR_BY_USER_ID="SELECT * FROM car WHERE car_user_id=?";
@@ -31,6 +31,8 @@ public class UsersDaoJdbcBasedImpl implements UsersDao {
     private static String SQL_SAVE_USER ="INSERT INTO group_user VALUES (?, ?, ?);";
     //language=SQL
     private static String SQL_DELETE_USER = "DELETE FROM group_user WHERE user_id=?";
+    //language=SQL
+    private static String SQL_DELETE_USER_CARS = "DELETE FROM car WHERE car_user_id=?";
     //language=SQL
     private static String SQL_UPDATE_USER = "UPDATE group_user SET user_name=?, user_age=? WHERE user_id=?";
 
@@ -47,7 +49,6 @@ public class UsersDaoJdbcBasedImpl implements UsersDao {
             return user;
         }
     };
-
     private RowMapper<Car> carRowMapper = new RowMapper<Car>() {
         public Car mapRow(ResultSet resultSet, int i) throws SQLException {
             Car car = new Car(resultSet.getInt("car_id"),resultSet.getString("car_model"), resultSet.getString("car_color"));
@@ -58,7 +59,6 @@ public class UsersDaoJdbcBasedImpl implements UsersDao {
             return car;
         }
     };
-
     @Override
     public List<User> findAll() {
         List<User> userList;
@@ -77,41 +77,34 @@ public class UsersDaoJdbcBasedImpl implements UsersDao {
         }
     @Override
     public boolean save(User user) {
-        template.update(SQL_SAVE_USER,user.getId(),user.getName(),user.getAge());
-        System.out.println("save user");
-      return  true;
+        if (template.update(SQL_SAVE_USER,user.getId(),user.getName(),user.getAge())==1) {
+            System.out.println("save user");
+            return true;
+        } else return false;
     }
     @Override
     public boolean update(User user) {
-        int i;
-        i=template.update(SQL_UPDATE_USER,user.getName(),user.getAge(),user.getId());
-        System.out.println("update user");
-        return true;
+        if (template.update(SQL_UPDATE_USER,user.getName(),user.getAge(),user.getId())==1) {
+            System.out.println("update user");
+            return true;
+        } else return false;
     }
-
     @Override
     public boolean delete(int id) {
-        template.update(SQL_DELETE_USER,id);
-        System.out.println("delete user and his cars");
-        return true;
+        if (template.update(SQL_DELETE_USER,id)==1) {
+            if (usersMap.get(id).getMycars()!=null) {
+                template.update(SQL_DELETE_USER_CARS,id);
+                }
+            System.out.println("delete user and his cars");
+            return true;
+        } else return false;
     }
-
     @Override
-    public void printmycarslist(User users) {//ДОДЕЛАТЬ
-        List<Car> carList = users.getMycars();
-        System.out.println("My car list:");
-        for(Car car: carList) {
-            System.out.println("car_id= "+car.getId()+"\t car_model= "+car.getModel()+"\t car_color= "+car.getColor());
-        }
-    }
-
-    @Override
-    public List<Car> getUserCars(int user_id) {
+    public List<Car> getUserCars(int id) {
         List<Car> carList =new ArrayList<Car>();
-        User user=usersMap.get(user_id);
+        User user=usersMap.get(id);
         carList=user.getMycars();
         System.out.println("find car");
         return carList;
     }
-
 }

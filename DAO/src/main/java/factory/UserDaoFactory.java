@@ -43,12 +43,10 @@ public class UserDaoFactory {
         String userDaoClassName = properties.getProperty("users.dao.type");
         try {
                 if (userDaoClassName.equals("jdbc")) {
-               // System.out.println("1");
                 userDaoClassName = properties.getProperty("userdaojdbc");
                 Constructor<?> constructor = Class.forName(userDaoClassName).getConstructor(DataSource.class);
                 usersDao = (UsersDao)constructor.newInstance(DataSourceFactory.getInstanse().getDataSource());
                 } else {
-               // System.out.println("2");
                 String file = properties.getProperty("file");
                 userDaoClassName = properties.getProperty("userdaofile");
                 Class<UsersDao> usersDaoClass = (Class<UsersDao>) Class.forName(userDaoClassName);
@@ -64,6 +62,5 @@ public class UserDaoFactory {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-
     }
 }

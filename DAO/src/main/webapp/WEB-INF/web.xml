@@ -5,23 +5,39 @@
          version="3.0">
 
     <servlet>
-        <servlet-name>SimpleServlet</servlet-name>
-        <servlet-class>servlet.SimpleServlet</servlet-class>
+        <servlet-name>FrontController</servlet-name>
+        <servlet-class>servlet.FrontController</servlet-class>
     </servlet>
-
     <servlet>
-        <servlet-name>SimpleServlet2</servlet-name>
-        <servlet-class>servlet.SimpleServlet2</servlet-class>
+        <servlet-name>UserController</servlet-name>
+        <servlet-class>servlet.UserController</servlet-class>
     </servlet>
-
+    <servlet>
+        <servlet-name>CarController</servlet-name>
+        <servlet-class>servlet.CarController</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>SimpleServlet</servlet-name>
-        <url-pattern>/simple</url-pattern>
+        <servlet-name>FrontController</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>SimpleServlet2</servlet-name>
-        <url-pattern>/tasks</url-pattern>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/UserController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CarController</servlet-name>
+        <url-pattern>/CarController</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <servlet-name>FrontController</servlet-name>
+    </filter-mapping>
 
 </web-app>

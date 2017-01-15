@@ -22,8 +22,6 @@ public class DataSourceFactory {
     public DataSource getDataSource(){
         return dataSource;
     }
-
-
     private DataSourceFactory() {
         Properties properties = new Properties();
         try {

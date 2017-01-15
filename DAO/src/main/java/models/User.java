@@ -8,8 +8,7 @@ public class User {
     private int id;
     private String name;
     private int age;
-    List<Car> mycars=new ArrayList<Car>();
-   // String status;
+    private List<Car> mycars=new ArrayList<Car>();
 
     public User(int id, String name,int age,List<Car> mycars) {
         this.id = id;

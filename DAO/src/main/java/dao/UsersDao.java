@@ -13,6 +13,5 @@ public interface UsersDao {
     boolean save(User user);
     boolean update(User user);
     boolean delete(int id);
-    public void printmycarslist(User users);
-    public List<Car> getUserCars(int user_id);
+    List<Car> getUserCars(int id);
 }

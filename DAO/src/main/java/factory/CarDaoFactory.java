@@ -1,7 +1,7 @@
 package factory;
 
+import dao.CarsDao;
 import dao.UsersDao;
-import service.UserService;
 
 import javax.sql.DataSource;
 import java.io.FileInputStream;
@@ -9,35 +9,39 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
 import java.util.Properties;
 
-public class UserServiceFactory {
-    private static UserServiceFactory instanse;
-    private UserService userService;
+public class CarDaoFactory {
+
+    private static CarDaoFactory instance;
+    private CarsDao carsDao;
     private  static String PROPERTIES_FILE_NAME =
             "C:\\Users\\musaevrr\\Desktop\\JAVA\\Java_courses\\DAO\\src\\main\\resources\\contex.properties";
     static {
-        instanse=new UserServiceFactory();
-    }
-    public static UserServiceFactory getInstanse(){
-        return instanse;
-    }
-    public UserService getUserService(){
-        return userService;
-    }
+        instance=new CarDaoFactory();
+        }
+    public  static  CarDaoFactory getInstance() {
+        return instance;
+        }
+    public static void closeConnection(){
+        Connection connection = null;
+        }
+    public CarsDao getCarsDao() {
+        return carsDao;
+        }
 
-    private UserServiceFactory(){
+    private CarDaoFactory() {
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream(PROPERTIES_FILE_NAME));
-            String userServiceClassName = properties.getProperty("userservice.class");
-            Class<UserService> userServiceClass = (Class<UserService>) Class.forName(userServiceClassName);
-            Constructor<UserService> constructor = userServiceClass.getConstructor(UsersDao.class);
-            userService = (UserService) constructor.newInstance(UserDaoFactory.getInstance().getUsersDao());
+        properties.load(new FileInputStream(PROPERTIES_FILE_NAME));
+        String carDaoClassName = properties.getProperty("cardaofile");
+        Constructor<?> constructor = Class.forName(carDaoClassName).getConstructor(DataSource.class);
+        carsDao = (CarsDao) constructor.newInstance(DataSourceFactory.getInstanse().getDataSource());
         } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
+        e1.printStackTrace();
         } catch (IOException e1) {
-            e1.printStackTrace();
+        e1.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
