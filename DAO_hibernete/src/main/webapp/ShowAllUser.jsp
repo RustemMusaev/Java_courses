@@ -35,6 +35,9 @@
             <td></td>
             <td><c:out value="${user.getAge()}" /></td>
             <td>
+                <a href="User?id=${user.getId()}">delete</a>
+            </td>
+            <td>
                 <form action="CarAdd.jsp?userid=${user.getId()}" method="POST">
                     <input type="submit" value="add car">
                 </form>

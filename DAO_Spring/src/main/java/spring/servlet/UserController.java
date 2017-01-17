@@ -1,31 +1,24 @@
-package servlet;
+package spring.servlet;
 
-import dao.UsersDao;
-import factory.UserDaoFactory;
-import factory.UserServiceFactory;
-import models.Car;
-import models.User;
-import service.UserService;
+import org.springframework.context.ApplicationContext;
+import spring.models.User;
+import spring.service.UserService;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class UserController extends HttpServlet {
     private UserService userService;
+
     public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        userService= UserServiceFactory.getInstanse().getUserService();
+        ApplicationContext context = (ApplicationContext)config.getServletContext().getAttribute("jdbcSpringContext");
+        userService = (UserService) context.getBean("userService");
     }
 
     @Override

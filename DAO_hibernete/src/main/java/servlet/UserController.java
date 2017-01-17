@@ -67,7 +67,7 @@ public class UserController extends HttpServlet {
         List<String> parametrlist= (List<String>) request.getAttribute("parametrlist");
         HttpSession httpSession=request.getSession(false);
         httpSession.setAttribute("namedelete",userService.find(Integer.parseInt(parametrlist.get(0))).getName());
-        userService.delete(Integer.parseInt(parametrlist.get(0)));
+        //userService.delete(Integer.parseInt(parametrlist.get(0)));
         httpSession.setAttribute("userList",userService.findAll());
         httpSession.setAttribute("idupdate",null);
         response.sendRedirect("/ShowAllUser.jsp");

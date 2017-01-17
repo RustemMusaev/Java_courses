@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="userService" class="spring.service.UserServiceImpl">
+        <constructor-arg ref="usersDao"/>
+    </bean>
+    <bean id="carService" class="spring.service.CarServiceImpl">
+        <constructor-arg ref="carsDao"/>
+    </bean>
+
+
+    <bean id="usersDao" class="spring.dao.UsersDaoJdbcBasedImpl">
+        <constructor-arg ref="sessionFactory"/>
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="carsDao" class="spring.dao.CarsDaoJdbcBasedImpl">
+        <constructor-arg ref="sessionFactory"/>
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/MavenDatabase"/>
+        <property name="username" value="maven_allow"/>
+        <property name="password" value="Qaz!23$56"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+            <list>
+                <value>hibernate/User.hbm.xml</value>
+                <value>hibernate/Car.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>
+            </props>
+        </property>
+    </bean>
+
+
+</beans>
