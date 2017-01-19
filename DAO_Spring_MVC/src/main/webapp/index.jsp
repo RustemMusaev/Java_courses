@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form action="User" method="GET">
+<form action="users" method="GET">
     <p>При нажатие на кнопку получим всех пользователей:</p>
     <input type="submit" value="Получить всех пользователей" />
 </form>

@@ -86,9 +86,10 @@ public class UsersDaoJdbcBasedImpl implements UsersDao {
 
     public boolean delete(int id) {
         if (template.update(SQL_DELETE_USER,id)==1) {
-            if (find(id).getMycars()!=null) {
-                template.update(SQL_DELETE_USER_CARS,id);
-                }
+
+    //        if (find(id).getMycars()!=null) {
+    //            template.update(SQL_DELETE_USER_CARS,id);
+     //           }
               return true;
         } else return false;
     }
