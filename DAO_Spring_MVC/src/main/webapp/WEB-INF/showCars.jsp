@@ -24,10 +24,9 @@
             <td></td>
             <td><c:out value="${car.getColor()}" /></td>
             <td>
-                <form action="/users/${car.getUser().getId()}/Car/${car.getId()}" method="POST">
-                    <input type="hidden" name="_method" value="DELETE">
+                <form:form action="/users/${car.getUser().getId()}/Car/${car.getId()}" method="DELETE">
                     <input type="submit" value="delete">
-                </form>
+                </form:form>
             </td>
             <td>
                 <form action="/users/${car.getUser().getId()}/Car/${car.getId()}" method="POST">

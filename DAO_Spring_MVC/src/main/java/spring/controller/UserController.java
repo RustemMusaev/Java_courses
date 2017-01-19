@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     //showUsers
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @GetMapping(value = "/users")
     @ResponseBody ModelAndView showUsers() {
         ModelAndView modelAndView = new ModelAndView();
         List<User> userList = userService.findAll();
@@ -26,7 +26,7 @@ public class UserController {
         return modelAndView;
     }
     //addUser
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    @PostMapping(value = "/users")
     @ResponseBody ModelAndView addUser(@ModelAttribute("user") User user) {
         ModelAndView modelAndView = new ModelAndView();
         userService.save(user);
@@ -36,13 +36,13 @@ public class UserController {
         return modelAndView;
     }
     //deleteUser
-    @RequestMapping(value = "/users/{userid}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/users/{userid}")
     public String deleteUser(@PathVariable("userid") int userid) {
-        //userService.delete(userid);
+        userService.delete(userid);
        return "redirect:/users";
     }
     //updateUser(POST)
-    @RequestMapping(value = "/users/{userid}", method = RequestMethod.POST)
+    @PostMapping(value = "/users/{userid}")
     @ResponseBody ModelAndView updateUser(@PathVariable("userid") String userid) {
         ModelAndView modelAndView = new ModelAndView();
         User user=userService.find(Integer.parseInt(userid));
@@ -51,7 +51,7 @@ public class UserController {
         return modelAndView;
     }
     //updateUser(PUT)
-    @RequestMapping(value = "/users/{userid}", method = RequestMethod.PUT)
+    @PutMapping(value = "/users/{userid}")
     public String updateUser(@PathVariable("userid") int userid, @RequestParam("name") String name,
                              @RequestParam("age") String age) {
         User user=userService.find(userid);

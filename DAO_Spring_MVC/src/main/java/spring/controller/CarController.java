@@ -22,7 +22,7 @@ public class CarController {
     @Autowired
     private CarService carService;
     //showCars
-    @RequestMapping(value = "/users/{id}/Car", method = RequestMethod.GET)
+    @GetMapping(value = "/users/{id}/Car")
     @ResponseBody
     ModelAndView showCars(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -34,7 +34,7 @@ public class CarController {
         return modelAndView;
     }
     //addCar
-    @RequestMapping(value = "/users/{id}/Car", method = RequestMethod.POST)
+    @PostMapping(value = "/users/{id}/Car")
     @ResponseBody ModelAndView addCar(@ModelAttribute("car") Car car, @PathVariable("id") int userid) {
         ModelAndView modelAndView = new ModelAndView();
         car.setUser(userService.find(userid));
@@ -45,13 +45,13 @@ public class CarController {
         return modelAndView;
     }
     //deleteCar
-    @RequestMapping(value = "/users/{userid}/Car/{carid}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/users/{userid}/Car/{carid}")
     public String deleteCar(@PathVariable("userid") int userid,@PathVariable("carid") int carid) {
         carService.delete(carid);
         return "redirect:/users/"+userid+"/Car";
     }
     //updateCar(POST)
-    @RequestMapping(value = "/users/{userid}/Car/{carid}", method = RequestMethod.POST)
+    @PostMapping(value = "/users/{userid}/Car/{carid}")
     @ResponseBody ModelAndView updateCar(@PathVariable("userid") int userid,@PathVariable("carid") int carid) {
         ModelAndView modelAndView = new ModelAndView();
         Car car =carService.find(carid);
@@ -61,7 +61,7 @@ public class CarController {
         return modelAndView;
     }
     //updateCar(PUT)
-    @RequestMapping(value = "/users/{userid}/Car/{carid}", method = RequestMethod.PUT)
+    @PutMapping(value = "/users/{userid}/Car/{carid}")
     public String updateCar(@PathVariable("userid") int userid,@PathVariable("carid") int carid,
                              @RequestParam("model") String model,
                              @RequestParam("color") String color) {

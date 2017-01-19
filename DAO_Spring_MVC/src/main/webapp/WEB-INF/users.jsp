@@ -10,9 +10,9 @@
     <tr><th>id</th><th>Name</th><th>Age</th></tr>
     <c:forEach items="${requestScope.users}" var="currentUser">
         <tr>
-            <td><c:out value="${currentUser.id}" /><td>
-            <td><c:out value="${currentUser.name}" /><td>
-            <td><c:out value="${currentUser.age}" /><td>
+            <td><c:out value="${currentUser.id}"/></td>
+            <td><c:out value="${currentUser.name}"/></td>
+            <td><c:out value="${currentUser.age}"/></td>
             <td>
                 <form action="/users/${currentUser.getId()}/Car" method="GET">
                     <input type="submit" value="find,add car">
@@ -23,10 +23,9 @@
                     <input type="submit" value="update">
                 </form>
             </td>
-            <td><form action="/users/${currentUser.getId()}" method="POST">
-                    <input type="hidden" name="_method" value="DELETE">
+            <td><form:form action="/users/${currentUser.getId()}" method="DELETE">
                     <input type="submit" value="delete">
-                </form>
+                </form:form>
             </td>
         </tr>
     </c:forEach>
