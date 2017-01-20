@@ -32,7 +32,7 @@ public class SpringConfig {
     public DataSource dataSource(){
         DriverManagerDataSource driverManagerDataSource=new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
-        driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/MavenDatabase");
+        driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/DaoSpringMvc");
         driverManagerDataSource.setUsername("maven_allow");
         driverManagerDataSource.setPassword("Qaz!23$56");
         return driverManagerDataSource;

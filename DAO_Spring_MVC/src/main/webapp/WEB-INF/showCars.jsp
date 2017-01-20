@@ -37,7 +37,6 @@
     </c:forEach>
 </table>
 <form:form modelAttribute="car" action="/users/${requestScope.userid}/Car" method="POST">
-    <form:input path="id" />
     <form:input path="model" />
     <form:input path="color" />
     <input type="submit" value="add new car" />

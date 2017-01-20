@@ -31,7 +31,6 @@
     </c:forEach>
 </table>
     <form:form modelAttribute="user" action="users" method="post">
-        <form:input path="id" />
         <form:input path="name" />
         <form:input path="age" />
         <input type="submit" value="add new user" />

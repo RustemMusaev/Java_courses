@@ -23,13 +23,13 @@ public class CarsDaoJdbcBasedImpl implements CarsDao {
     //language=SQL
     String SQL_SELECT_CAR="SELECT * FROM car;";
     //language=SQL
-    String SQL_ADD_CAR = "insert into car values (?,?,?,?)";
+    String SQL_ADD_CAR = "INSERT INTO car(model,color,user_id) values (?,?,?)";
     //language=SQL
-    String SQL_FIND_CAR="SELECT * FROM car WHERE car_id=?";
+    String SQL_FIND_CAR="SELECT * FROM car WHERE id=?";
     //language=SQL
-    String SQL_UPDATE_CAR = "UPDATE car SET car_model=?, car_color=?, car_user_id=? WHERE car_id=?";
+    String SQL_UPDATE_CAR = "UPDATE car SET model=?, color=? WHERE id=?";
     //language=SQL
-    String SQL_DELETE_CAR = "DELETE FROM car WHERE car_id=?";
+    String SQL_DELETE_CAR = "DELETE FROM car WHERE id=?";
     @Autowired
     public CarsDaoJdbcBasedImpl(DataSource dataSource){
         this.template=new JdbcTemplate(dataSource);
@@ -37,7 +37,7 @@ public class CarsDaoJdbcBasedImpl implements CarsDao {
 
     private RowMapper<Car> carRowMapper = new RowMapper<Car>() {
         public Car mapRow(ResultSet resultSet, int i) throws SQLException {
-            Car car = new Car(resultSet.getInt("car_id"), resultSet.getString("car_model"), resultSet.getString("car_color"));
+            Car car = new Car(resultSet.getString("model"), resultSet.getString("color"));
             return car;
         }
     };
@@ -46,7 +46,7 @@ public class CarsDaoJdbcBasedImpl implements CarsDao {
         return carslist;
     }
     public  boolean save(Car car){
-        template.update(SQL_ADD_CAR,car.getId(),car.getModel(),car.getColor(),car.getUser().getId());
+        template.update(SQL_ADD_CAR,car.getModel(),car.getColor(),car.getUser().getId());
         return true;
     }
 
@@ -54,7 +54,7 @@ public class CarsDaoJdbcBasedImpl implements CarsDao {
         return template.queryForObject(SQL_FIND_CAR,new Object[]{id},carRowMapper);
     }
     public  boolean update(Car car){
-        template.update(SQL_UPDATE_CAR,car.getModel(),car.getColor(),car.getUser().getId(),car.getId());
+        template.update(SQL_UPDATE_CAR,car.getModel(),car.getColor(),car.getId());
         return true;
     }
     public  boolean delete(int id){

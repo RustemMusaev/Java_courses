@@ -24,21 +24,21 @@ public class UsersDaoJdbcBasedImpl implements UsersDao {
     private JdbcTemplate template;
 
    //language=SQL
-    private static String SQL_FIND_CAR_BY_USER_ID="SELECT * FROM car WHERE car_user_id=?";
+    private static String SQL_FIND_CAR_BY_USER_ID="SELECT * FROM car WHERE user_id=?";
     //language=SQL
-    private static String SQL_FIND_USER_BY_ID="SELECT * FROM group_user WHERE user_id=?";
+    private static String SQL_FIND_USER_BY_ID="SELECT * FROM group_user WHERE id=?";
     //language=SQL
     private static String SQL_FIND_ALL_USER="SELECT * FROM group_user";
     //language=SQL
     private static String SQL_FIND_ALL_CAR="SELECT * FROM car";
     //language=SQL
-    private static String SQL_SAVE_USER ="INSERT INTO group_user VALUES (?, ?, ?);";
+    private static String SQL_SAVE_USER ="INSERT INTO group_user(name,age) VALUES (?, ?);";
     //language=SQL
-    private static String SQL_DELETE_USER = "DELETE FROM group_user WHERE user_id=?";
+    private static String SQL_DELETE_USER = "DELETE FROM group_user WHERE id=?";
     //language=SQL
-    private static String SQL_DELETE_USER_CARS = "DELETE FROM car WHERE car_user_id=?";
+    private static String SQL_DELETE_USER_CARS = "DELETE FROM car WHERE user_id=?";
     //language=SQL
-    private static String SQL_UPDATE_USER = "UPDATE group_user SET user_name=?, user_age=? WHERE user_id=?";
+    private static String SQL_UPDATE_USER = "UPDATE group_user SET name=?, age=? WHERE id=?";
     @Autowired
     public UsersDaoJdbcBasedImpl(DataSource dataSource) {
         this.template=new JdbcTemplate(dataSource);
@@ -73,7 +73,7 @@ public class UsersDaoJdbcBasedImpl implements UsersDao {
     }
 
     public boolean save(User user) {
-        if (template.update(SQL_SAVE_USER,user.getId(),user.getName(),user.getAge())==1) {
+        if (template.update(SQL_SAVE_USER,user.getName(),user.getAge())==1) {
             return true;
         } else return false;
     }
@@ -86,11 +86,7 @@ public class UsersDaoJdbcBasedImpl implements UsersDao {
 
     public boolean delete(int id) {
         if (template.update(SQL_DELETE_USER,id)==1) {
-
-    //        if (find(id).getMycars()!=null) {
-    //            template.update(SQL_DELETE_USER_CARS,id);
-     //           }
-              return true;
+            return true;
         } else return false;
     }
 

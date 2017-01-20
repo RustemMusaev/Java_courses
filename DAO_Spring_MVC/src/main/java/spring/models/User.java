@@ -18,8 +18,7 @@ public class User {
         this.age = age;
         this.mycars=mycars;
     }
-    public User(int id, String name,int age) {
-        this.id = id;
+    public User(String name,int age) {
         this.name = name;
         this.age = age;
     }
