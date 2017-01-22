@@ -12,17 +12,35 @@ public class CarServiceImpl implements CarService {
     @Autowired
     private CarsDao carsDao;
 
-    public Car find(Integer id) {
+    public boolean IsRegistred(String name) {
+        return true;
+    }
+
+    public Car find(int id) {
         return carsDao.find(id);
     }
+
+    ;
+
     public List<Car> findAll() {
         return carsDao.findAll();
     }
-    public Integer save(Car car) {
+
+    ;
+
+    public boolean save(Car car) {
         return carsDao.save(car);
     }
-    public Integer update(Car car) {
+
+    ;
+
+    public boolean update(Car car) {
         return carsDao.update(car);
     }
-    public Integer delete(Integer id) { return carsDao.delete(id);}
+
+    ;
+
+    public boolean delete(int id) {
+        return carsDao.delete(id);
+    }
 }

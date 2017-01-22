@@ -42,18 +42,23 @@ public class CarsDaoJdbcBasedImpl implements CarsDao {
         }
     };
     public List<Car> findAll() {
-        return template.query(SQL_SELECT_CAR,carRowMapper);
+        List<Car> carslist = new ArrayList<Car>();
+        return carslist;
     }
-    public  Integer save(Car car){
-        return template.update(SQL_ADD_CAR,car.getModel(),car.getColor(),car.getUser().getId());
+    public  boolean save(Car car){
+        template.update(SQL_ADD_CAR,car.getModel(),car.getColor(),car.getUser().getId());
+        return true;
     }
-    public Car find(Integer id){
+
+    public Car find(int id){
         return template.queryForObject(SQL_FIND_CAR,new Object[]{id},carRowMapper);
     }
-    public  Integer update(Car car){
-        return template.update(SQL_UPDATE_CAR,car.getModel(),car.getColor(),car.getId());
+    public  boolean update(Car car){
+        template.update(SQL_UPDATE_CAR,car.getModel(),car.getColor(),car.getId());
+        return true;
     }
-    public  Integer delete(Integer id){
-        return template.update(SQL_DELETE_CAR,id);
+    public  boolean delete(int id){
+        template.update(SQL_DELETE_CAR,id);
+         return true;
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import spring.dto.UserDto;
 import spring.models.Car;
 import spring.models.User;
 import org.hibernate.Session;
@@ -64,7 +63,7 @@ public class UsersDaoJdbcBasedImpl implements UsersDao {
        return userList;
     }
 
-   public User find(Integer id) {
+   public User find(int id) {
         Session session = getSession();
         session.beginTransaction();
         User user =  session.createQuery("from User user where id = :id", User.class)
@@ -73,16 +72,25 @@ public class UsersDaoJdbcBasedImpl implements UsersDao {
         return user;
     }
 
-    public Integer save(User user) {
-        return template.update(SQL_SAVE_USER,user.getName(),user.getAge());
+    public boolean save(User user) {
+        if (template.update(SQL_SAVE_USER,user.getName(),user.getAge())==1) {
+            return true;
+        } else return false;
     }
-    public Integer update(User user) {
-        return template.update(SQL_UPDATE_USER,user.getName(),user.getAge(),user.getId());
+
+    public boolean update(User user) {
+        if (template.update(SQL_UPDATE_USER,user.getName(),user.getAge(),user.getId())==1) {
+            return true;
+        } else return false;
     }
-    public Integer delete(Integer id) {
-        return template.update(SQL_DELETE_USER,id);
+
+    public boolean delete(int id) {
+        if (template.update(SQL_DELETE_USER,id)==1) {
+            return true;
+        } else return false;
     }
-    public List<Car> getUserCars(Integer id) {
+
+    public List<Car> getUserCars(int id) {
         List<Car> carList =new ArrayList<Car>();
         User user=find(id);
         carList=user.getMycars();

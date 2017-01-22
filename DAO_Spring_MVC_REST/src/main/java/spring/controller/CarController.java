@@ -24,43 +24,45 @@ public class CarController {
     //showCars
     @GetMapping(value = "/users/{id}/Car")
     @ResponseBody
-    ModelAndView showCars(@PathVariable("id") Integer id) {
-        ModelAndView modelAndView = new ModelAndView("showCars");
+    ModelAndView showCars(@PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView();
         List<Car> carList = userService.find(id).getMycars();
         modelAndView.addObject("cars", carList);
         modelAndView.addObject("userid", id);
         modelAndView.addObject("car", new Car());
+        modelAndView.setViewName("showCars");
         return modelAndView;
     }
     //addCar
     @PostMapping(value = "/users/{id}/Car")
-    @ResponseBody ModelAndView addCar(@ModelAttribute("car") Car car, @PathVariable("id") Integer userid) {
-        ModelAndView modelAndView = new ModelAndView("showCars");
+    @ResponseBody ModelAndView addCar(@ModelAttribute("car") Car car, @PathVariable("id") int userid) {
+        ModelAndView modelAndView = new ModelAndView();
         car.setUser(userService.find(userid));
         carService.save(car);
         List<Car> carList = userService.find(userid).getMycars();
         modelAndView.addObject("cars", carList);
-        modelAndView.addObject("car", new Car());
+        modelAndView.setViewName("showCars");
         return modelAndView;
     }
     //deleteCar
     @DeleteMapping(value = "/users/{userid}/Car/{carid}")
-    public String deleteCar(@PathVariable("userid") Integer userid,@PathVariable("carid") Integer carid) {
+    public String deleteCar(@PathVariable("userid") int userid,@PathVariable("carid") int carid) {
         carService.delete(carid);
         return "redirect:/users/"+userid+"/Car";
     }
     //updateCar(POST)
     @PostMapping(value = "/users/{userid}/Car/{carid}")
-    @ResponseBody ModelAndView updateCar(@PathVariable("userid") Integer userid,@PathVariable("carid") Integer carid) {
-        ModelAndView modelAndView = new ModelAndView("CarUpdate");
+    @ResponseBody ModelAndView updateCar(@PathVariable("userid") int userid,@PathVariable("carid") int carid) {
+        ModelAndView modelAndView = new ModelAndView();
         Car car =carService.find(carid);
         car.setUser(userService.find(userid));
         modelAndView.addObject("car", car);
+        modelAndView.setViewName("CarUpdate");
         return modelAndView;
     }
     //updateCar(PUT)
     @PutMapping(value = "/users/{userid}/Car/{carid}")
-    public String updateCar(@PathVariable("userid") Integer userid,@PathVariable("carid") Integer carid,
+    public String updateCar(@PathVariable("userid") int userid,@PathVariable("carid") int carid,
                              @RequestParam("model") String model,
                              @RequestParam("color") String color) {
         Car car=carService.find(carid);

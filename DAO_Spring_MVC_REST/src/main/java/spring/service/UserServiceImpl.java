@@ -17,18 +17,25 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UsersDao usersDao;
 
-    public User find(Integer id){
-        return usersDao.find(id);
+    public boolean IsRegistred(String name) {
+        return true;
     }
+    public User find(int id){
+        return usersDao.find(id);
+    };
     public List<User> findAll(){
         return  usersDao.findAll();
-    }
-    public Integer save(User user){return usersDao.save(user);}
-    public Integer update(User user){return usersDao.update(user);}
-    public Integer delete(Integer id){
+    };
+    public boolean save(User user){
+        return usersDao.save(user);
+    };
+    public boolean update(User user){return usersDao.update(user);
+    };
+    public boolean delete(int id){
         return usersDao.delete(id);
-    }
-    public List<Car> getCar(Integer id){
+    };
+    public List<Car> getUserCars(int id){
         return usersDao.getUserCars(id);
-    }
+    };
+
 }

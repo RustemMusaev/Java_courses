@@ -6,15 +6,10 @@ import spring.models.User;
 import java.util.List;
 
 public interface UsersDao {
-    User find(int id);
-
+    User find(Integer id);
     List<User> findAll();
-
-    boolean save(User user);
-
-    boolean update(User user);
-
-    boolean delete(int id);
-
-    List<Car> getUserCars(int id);
+    Integer save(User user);
+    Integer update(User user);
+    Integer delete(Integer id);
+    List<Car> getUserCars(Integer id);
 }

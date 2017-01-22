@@ -18,39 +18,41 @@ public class UserController {
     //showUsers
     @GetMapping(value = "/users")
     @ResponseBody ModelAndView showUsers() {
-        ModelAndView modelAndView = new ModelAndView("users");
+        ModelAndView modelAndView = new ModelAndView();
         List<User> userList = userService.findAll();
         modelAndView.addObject("users", userList);
         modelAndView.addObject("user", new User());
+        modelAndView.setViewName("users");
         return modelAndView;
     }
     //addUser
     @PostMapping(value = "/users")
     @ResponseBody ModelAndView addUser(@ModelAttribute("user") User user) {
-        ModelAndView modelAndView = new ModelAndView("users");
+        ModelAndView modelAndView = new ModelAndView();
         userService.save(user);
         List<User> userList = userService.findAll();
         modelAndView.addObject("users", userList);
-        modelAndView.addObject("user", new User());
+        modelAndView.setViewName("users");
         return modelAndView;
     }
     //deleteUser
     @DeleteMapping(value = "/users/{userid}")
-    public String deleteUser(@PathVariable("userid") Integer userid) {
+    public String deleteUser(@PathVariable("userid") int userid) {
         userService.delete(userid);
        return "redirect:/users";
     }
     //updateUser(POST)
     @PostMapping(value = "/users/{userid}")
     @ResponseBody ModelAndView updateUser(@PathVariable("userid") String userid) {
-        ModelAndView modelAndView = new ModelAndView("userUpdate");
+        ModelAndView modelAndView = new ModelAndView();
         User user=userService.find(Integer.parseInt(userid));
         modelAndView.addObject("user", user);
+        modelAndView.setViewName("userUpdate");
         return modelAndView;
     }
     //updateUser(PUT)
     @PutMapping(value = "/users/{userid}")
-    public String updateUser(@PathVariable("userid") Integer userid, @RequestParam("name") String name,
+    public String updateUser(@PathVariable("userid") int userid, @RequestParam("name") String name,
                              @RequestParam("age") String age) {
         User user=userService.find(userid);
         if (name.equals("")) {
