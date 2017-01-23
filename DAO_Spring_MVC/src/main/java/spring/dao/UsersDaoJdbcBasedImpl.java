@@ -66,10 +66,10 @@ public class UsersDaoJdbcBasedImpl implements UsersDao {
 
    public User find(Integer id) {
         Session session = getSession();
-        session.beginTransaction();
-        User user =  session.createQuery("from User user where id = :id", User.class)
-                .setParameter("id", id).getSingleResult();
-        session.getTransaction().commit();
+       session.beginTransaction();
+       User user =  session.createQuery("from User user where id = :id", User.class)
+               .setParameter("id", id).getSingleResult();
+       session.getTransaction().commit();
         return user;
     }
 

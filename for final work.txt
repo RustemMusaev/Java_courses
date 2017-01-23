@@ -1,0 +1,26 @@
+longpooling
+
+chat_user:
+login
+password hash
+id 
+
+session:
+id
+token
+user_ia
+message_last_id
+
+chat:
+id
+name
+
+message:
+id
+chat_id
+user_id
+text
+
+chat_member: пользователь чата
+chat id
+user id
