@@ -38,13 +38,13 @@ public class User {
     public List<Car> getMycars(){
         return  this.mycars;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public void setName(String name) {
         this.name = name;
     }
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 }

@@ -1,13 +1,10 @@
-package ru.itis.model;
-
-import ru.itis.service.GenerateHashMd5;
+package ru.itis;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "chatuser")
-public class ChatUser implements BaseModel{
+public class ChatUser{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Access(AccessType.FIELD)
@@ -22,12 +19,6 @@ public class ChatUser implements BaseModel{
     @Column(name = "password_hash")
     private String password_hash;
 
-    @ManyToMany
-    @JoinTable (name = "chatmember",
-            joinColumns = @JoinColumn (name = "chatuser_id"),
-            inverseJoinColumns = @JoinColumn (name = "chat_id"))
-    private List<Chat> chatList;
-
     public ChatUser() {
     }
 
@@ -35,7 +26,6 @@ public class ChatUser implements BaseModel{
         this.id = builder.id;
         this.login = builder.login;
         this.password_hash = builder.password_hash;
-        this.chatList = builder.chatList;
     }
 
     public Integer getId() {
@@ -50,15 +40,11 @@ public class ChatUser implements BaseModel{
         return password_hash;
     }
 
-    public List<Chat> getChatList() {
-        return chatList;
-    }
 
     public static class Builder {
         private Integer id;
         private String login;
         private String password_hash;
-        private List<Chat> chatList;
 
         public Builder id(Integer id) {
             this.id = id;
@@ -69,11 +55,7 @@ public class ChatUser implements BaseModel{
             return this;
         }
         public Builder password_hash(String password_hash) {
-            this.password_hash = GenerateHashMd5.crypt(password_hash);
-            return this;
-        }
-        public Builder chatList(List<Chat> chatList) {
-            this.chatList = chatList;
+            this.password_hash = password_hash;
             return this;
         }
 

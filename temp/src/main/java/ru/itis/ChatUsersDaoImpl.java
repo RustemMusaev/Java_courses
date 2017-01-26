@@ -1,12 +1,10 @@
-package ru.itis.dao;
+package ru.itis;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import ru.itis.model.ChatUser;
 
 import java.util.List;
 
@@ -21,7 +19,12 @@ public class ChatUsersDaoImpl implements ChatUsersDao {
 
     @Override
     public List<ChatUser> findAll() {
-        return getSession().createQuery("FROM ChatUser").list();
+        List<ChatUser> chatUserList;
+        Session session=getSession();
+        session.beginTransaction();
+        chatUserList=session.createQuery("FROM ChatUser", ChatUser.class).list();
+        session.getTransaction().commit();
+        return chatUserList;
     }
 
     @Override
@@ -32,7 +35,10 @@ public class ChatUsersDaoImpl implements ChatUsersDao {
 
     @Override
     public void save(ChatUser chatUser) {
-        getSession().saveOrUpdate(chatUser);
+        Session session=getSession();
+        session.beginTransaction();
+        session.save(chatUser);
+        session.getTransaction().commit();
     }
 
     @Override
@@ -42,7 +48,7 @@ public class ChatUsersDaoImpl implements ChatUsersDao {
 
     @Override
     public void update(ChatUser chatUser) {
-        getSession().update(chatUser);
+        getSession().saveOrUpdate(chatUser);
     }
 
     @Override
@@ -58,5 +64,4 @@ public class ChatUsersDaoImpl implements ChatUsersDao {
             session = sessionFactory.openSession();
         }
         return session;
-    }
-}
+    }}

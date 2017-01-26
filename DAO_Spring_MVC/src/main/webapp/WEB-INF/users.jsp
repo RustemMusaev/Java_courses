@@ -35,6 +35,8 @@
         <form:input path="age" />
         <input type="submit" value="add new user" />
     </form:form>
-
+    <form action="logout" method="GET">
+        <input type="submit" value="Logout">
+    </form>
 </body>
 </html>

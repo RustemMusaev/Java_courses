@@ -3,17 +3,13 @@ package spring.dao;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.SessionFactoryUtils;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import spring.dto.UserDto;
 import spring.models.Car;
 import spring.models.User;
 import org.hibernate.Session;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,20 +20,10 @@ public class UsersDaoJdbcBasedImpl implements UsersDao {
 
     private JdbcTemplate template;
 
-   //language=SQL
-    private static String SQL_FIND_CAR_BY_USER_ID="SELECT * FROM car WHERE user_id=?";
-    //language=SQL
-    private static String SQL_FIND_USER_BY_ID="SELECT * FROM group_user WHERE id=?";
-    //language=SQL
-    private static String SQL_FIND_ALL_USER="SELECT * FROM group_user";
-    //language=SQL
-    private static String SQL_FIND_ALL_CAR="SELECT * FROM car";
     //language=SQL
     private static String SQL_SAVE_USER ="INSERT INTO group_user(name,age) VALUES (?, ?);";
     //language=SQL
     private static String SQL_DELETE_USER = "DELETE FROM group_user WHERE id=?";
-    //language=SQL
-    private static String SQL_DELETE_USER_CARS = "DELETE FROM car WHERE user_id=?";
     //language=SQL
     private static String SQL_UPDATE_USER = "UPDATE group_user SET name=?, age=? WHERE id=?";
     @Autowired

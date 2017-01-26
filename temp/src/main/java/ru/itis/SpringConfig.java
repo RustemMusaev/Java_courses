@@ -1,4 +1,4 @@
-package ru.itis.config;
+package ru.itis;
 
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -7,14 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import ru.itis.dao.ChatUsersDao;
-import ru.itis.dao.ChatUsersDaoImpl;
-import ru.itis.model.Chat;
-import ru.itis.model.ChatUser;
-import ru.itis.model.Message;
-import ru.itis.model.Session;
 
 import javax.sql.DataSource;
 
@@ -30,17 +23,15 @@ public class SpringConfig {
     public SessionFactory sessionFactory(){
         LocalSessionFactoryBuilder builder=new LocalSessionFactoryBuilder(dataSource());
         builder.setProperty("hibernate.dialect","org.hibernate.dialect.PostgreSQL82Dialect");
-        builder.addAnnotatedClass(ChatUser.class);
-        builder.addAnnotatedClass(Chat.class);
-        //builder.addAnnotatedClass(Message.class);
-        //builder.addAnnotatedClass(Session.class);
+        builder.addAnnotatedClass(ru.itis.ChatUser.class);
+       // builder.addAnnotatedClass(Chat.class);
         return builder.buildSessionFactory();
     }
     @Bean
     public DataSource dataSource(){
         DriverManagerDataSource driverManagerDataSource=new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
-        driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/SimpleChat");
+        driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/temp");
         driverManagerDataSource.setUsername("maven_allow");
         driverManagerDataSource.setPassword("Qaz!23$56");
         return driverManagerDataSource;

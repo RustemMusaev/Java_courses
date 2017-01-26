@@ -2,8 +2,6 @@ package spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import spring.models.User;
@@ -15,6 +13,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
     //showUsers
     @GetMapping(value = "/users")
     @ResponseBody ModelAndView showUsers() {
