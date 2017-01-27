@@ -1,24 +1,23 @@
 package ru.itis.config;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import ru.itis.dao.ChatUsersDao;
-import ru.itis.dao.ChatUsersDaoImpl;
-import ru.itis.model.Chat;
-import ru.itis.model.ChatUser;
-import ru.itis.model.Message;
-import ru.itis.model.Session;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
+@EnableTransactionManagement
 //@EnableWebMvc
 @ComponentScan(basePackages = "ru.itis")
 public class SpringConfig {
@@ -26,15 +25,29 @@ public class SpringConfig {
     public ViewResolver viewResolver() {
         return new InternalResourceViewResolver("/WEB-INF/", ".jsp");
     }
+
     @Bean
-    public SessionFactory sessionFactory(){
-        LocalSessionFactoryBuilder builder=new LocalSessionFactoryBuilder(dataSource());
-        builder.setProperty("hibernate.dialect","org.hibernate.dialect.PostgreSQL82Dialect");
-        builder.addAnnotatedClass(ChatUser.class);
-        builder.addAnnotatedClass(Chat.class);
-        //builder.addAnnotatedClass(Message.class);
-        //builder.addAnnotatedClass(Session.class);
-        return builder.buildSessionFactory();
+    public LocalSessionFactoryBean sessionFactory(){
+        LocalSessionFactoryBean sessionFactory=new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource());
+        sessionFactory.setPackagesToScan(new String[] { "ru.itis.model" });
+        sessionFactory.setHibernateProperties(hibernateProperties());
+        return sessionFactory;
+    }
+    private Properties hibernateProperties() {
+        Properties properties = new Properties();
+        properties.put("hibernate.dialect","org.hibernate.dialect.PostgreSQL82Dialect");
+        properties.put("hibernate.show_sql", true);
+        properties.put("hibernate.format_sql", true);
+        return properties;
+    }
+
+    @Bean
+    @Autowired
+    public HibernateTransactionManager transactionManager(SessionFactory s) {
+        HibernateTransactionManager txManager = new HibernateTransactionManager();
+        txManager.setSessionFactory(s);
+        return txManager;
     }
     @Bean
     public DataSource dataSource(){
@@ -45,8 +58,5 @@ public class SpringConfig {
         driverManagerDataSource.setPassword("Qaz!23$56");
         return driverManagerDataSource;
     }
-    @Bean
-    public ChatUsersDao chatUsersDao(){
-        return new ChatUsersDaoImpl(sessionFactory());
-    }
+
 }

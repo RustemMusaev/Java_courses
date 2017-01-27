@@ -2,6 +2,7 @@ package ru.itis.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ru.itis.model.BaseModel;
+import ru.itis.model.Message;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ public class SessionDto{
     Integer id;
     String token;
     ChatUserDto chatUserDto;
-    Integer messageLastId;
+    Message message;
 
     public SessionDto() {
     }
@@ -19,7 +20,7 @@ public class SessionDto{
         this.id=builder.id;
         this.token = builder.token;
         this.chatUserDto = builder.chatUserDto;
-        this.messageLastId = builder.messageLastId;
+        this.message = builder.message;
     }
 
     public Integer getId() {
@@ -34,15 +35,15 @@ public class SessionDto{
         return chatUserDto;
     }
 
-    public Integer getMessage_last_id() {
-        return messageLastId;
+    public Message getMessage() {
+        return message;
     }
 
     public static class Builder {
         private Integer id;
         private String token;
         private ChatUserDto chatUserDto;
-        private Integer messageLastId;
+        private Message message;
 
         public Builder id(Integer id) {
             this.id = id;
@@ -59,8 +60,8 @@ public class SessionDto{
             return this;
         }
 
-        public Builder message_last_id(Integer messageLastId) {
-            this.messageLastId = messageLastId;
+        public Builder message(Message message) {
+            this.message = message;
             return this;
         }
 

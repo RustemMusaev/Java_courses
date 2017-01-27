@@ -14,14 +14,14 @@ import static ru.itis.converters.ChatUserToChatUserDtoConverter.convertChatUserD
 
 public class SessionToSessionDtoConverter {
     public static SessionDto convertSessionDtoWithoutChatUser(Session session) {
-       return new SessionDto.Builder().id(session.getId()).token(session.getToken()).message_last_id(session.getMessage_last_id()).build();
+       return new SessionDto.Builder().id(session.getId()).token(session.getToken()).message(session.getMessage()).build();
     }
     public static SessionDto convertSessionDtoWithChatUserWithChat(Session session) {
-        return new SessionDto.Builder().id(session.getId()).token(session.getToken()).message_last_id(session.getMessage_last_id())
+        return new SessionDto.Builder().id(session.getId()).token(session.getToken()).message(session.getMessage())
                 .chatUserDto(convertChatUserDtoWithChatDTO(session.getChatUser())).build();
     }
     public static SessionDto convertSessionDtoWithChatUserWithouChat(Session session) {
-        return new SessionDto.Builder().id(session.getId()).token(session.getToken()).message_last_id(session.getMessage_last_id())
+        return new SessionDto.Builder().id(session.getId()).token(session.getToken()).message(session.getMessage())
                 .chatUserDto(convertChatUserDtoWithoutChatDTO(session.getChatUser())).build();
     }
 

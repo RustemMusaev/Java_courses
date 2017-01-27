@@ -16,7 +16,7 @@ public class ChatToChatDtoConverter {
     public static ChatDto convertChatDtoWithChatUser(Chat chat) {
         ChatDto chatDto = new ChatDto.Builder().id(chat.getId()).name(chat.getName())
                 .chatUserDtoList(new ArrayList<ChatUserDto>()).build();
-        for (ChatUser chatUser:chat.getChatUserList()){
+        for (ChatUser chatUser:chat.getChatUserSet()){
             ChatUserDto chatUserDto= convertChatUserDtoWithoutChatDTO(chatUser);
             chatDto.getChatUserDtoList().add(chatUserDto);
         }

@@ -30,10 +30,13 @@ public class Message implements BaseModel {
         this.text = builder.text;
     }
 
+    public Message() {
+    }
+
 
     @Override
     public Integer getId() {
-        return null;
+        return id;
     }
 
     public Chat getChat() {

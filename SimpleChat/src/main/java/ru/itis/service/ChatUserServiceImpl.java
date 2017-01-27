@@ -3,12 +3,14 @@ package ru.itis.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itis.dao.ChatUsersDao;
 import ru.itis.model.ChatUser;
 
 import java.util.List;
 
-@Service
+@Service("chatUserService")
+@Transactional
 public class ChatUserServiceImpl implements ChatUserService {
 
     @Autowired
@@ -25,8 +27,8 @@ public class ChatUserServiceImpl implements ChatUserService {
     }
 
     @Override
-    public void save(ChatUser chatUser) {
-        chatUsersDao.save(chatUser);
+    public Integer save(ChatUser chatUser) {
+        return chatUsersDao.save(chatUser);
     }
 
     @Override
@@ -37,5 +39,10 @@ public class ChatUserServiceImpl implements ChatUserService {
     @Override
     public void delete(Integer id) {
         chatUsersDao.delete(id);
+    }
+
+    @Override
+    public void saveUserToChat(Integer userId, Integer chatId) {
+        chatUsersDao.saveUserToChat(userId,chatId);
     }
 }

@@ -1,11 +1,11 @@
-package ru.itis.dao;
+package ru.itis.service;
 
 import ru.itis.model.Chat;
 import ru.itis.model.ChatUser;
 
 import java.util.List;
 
-public interface ChatsDao {
+public interface ChatService {
     List<Chat> findAll();
     Chat find(Integer id);
     Integer save(Chat chat);

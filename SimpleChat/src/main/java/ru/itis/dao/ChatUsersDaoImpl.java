@@ -6,11 +6,13 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import ru.itis.model.Chat;
 import ru.itis.model.ChatUser;
 
 import java.util.List;
 
-@Repository
+@Repository("chatUsersDao")
 public class ChatUsersDaoImpl implements ChatUsersDao {
 
     private SessionFactory sessionFactory;
@@ -31,23 +33,27 @@ public class ChatUsersDaoImpl implements ChatUsersDao {
     }
 
     @Override
-    public void save(ChatUser chatUser) {
+    public Integer save(ChatUser chatUser) {
         getSession().saveOrUpdate(chatUser);
+        return chatUser.getId();
     }
 
     @Override
     public void delete(Integer id) {
         getSession().delete(find(id));
-    }
+        }
 
     @Override
     public void update(ChatUser chatUser) {
-        getSession().update(chatUser);
-    }
+        getSession().saveOrUpdate(chatUser);
+        }
 
     @Override
     public void saveUserToChat(Integer userId, Integer chatId) {
-
+        Chat chat=getSession().createQuery("FROM Chat chat where id = :id", Chat.class)
+                .setParameter("id", chatId).getSingleResult();
+        ChatUser chatUser=find(userId);
+       chatUser.getChatSet().add(chat);
     }
 
     private Session getSession() {
