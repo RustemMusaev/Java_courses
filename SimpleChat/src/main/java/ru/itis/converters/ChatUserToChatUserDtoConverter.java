@@ -12,7 +12,7 @@ import static ru.itis.converters.ChatToChatDtoConverter.convertChatDtoWithoutCha
 
 public class ChatUserToChatUserDtoConverter {
     public static ChatUserDto convertChatUserDtoWithoutChatDTO(ChatUser chatUser) {
-       return new ChatUserDto.Builder().id(chatUser.getId()).login(chatUser.getLogin()).password_hash(chatUser.getPassword_hash()).builder();
+       return new ChatUserDto.Builder().id(chatUser.getId()).login(chatUser.getLogin()).builder();
     }
     public static ChatUserDto convertChatUserDtoWithChatDTO(ChatUser chatUser) {
         ChatUserDto chatUserDto = new ChatUserDto.Builder().id(chatUser.getId()).login(chatUser.getLogin())

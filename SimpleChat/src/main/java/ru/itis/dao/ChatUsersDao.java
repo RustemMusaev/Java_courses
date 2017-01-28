@@ -12,4 +12,6 @@ public interface ChatUsersDao {
     void delete(Integer id);
     void update(ChatUser chatUser);
     void saveUserToChat(Integer userId, Integer chatId);
+    ChatUser findByLogin(String login);
+    public boolean isExistToken(String token);
 }

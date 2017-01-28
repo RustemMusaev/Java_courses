@@ -19,10 +19,6 @@ public class Session implements BaseModel{
     @JoinColumn(name = "chatuser_id")
     ChatUser chatUser;
 
-    @OneToOne
-    @JoinColumn(name = "message_last_id")
-    Message message;
-
     public Session() {
     }
 
@@ -30,7 +26,6 @@ public class Session implements BaseModel{
         this.id=builder.id;
         this.token = builder.token;
         this.chatUser = builder.chatUser;
-        this.message = builder.message;
     }
 
     public Integer getId() {
@@ -45,15 +40,10 @@ public class Session implements BaseModel{
         return chatUser;
     }
 
-    public Message getMessage() {
-        return message;
-    }
-
     public static class Builder {
         private Integer id;
         private String token;
         private ChatUser chatUser;
-        private Message message;
 
         public Builder id(Integer id) {
             this.id = id;
@@ -70,12 +60,7 @@ public class Session implements BaseModel{
             return this;
         }
 
-        public Builder message(Message message) {
-            this.message = message;
-            return this;
-        }
-
-        public Session build() {
+         public Session build() {
             return new Session(this);
         }
     }

@@ -11,7 +11,7 @@ import ru.itis.model.ChatUser;
 
 import java.util.List;
 
-@Service("chatService")
+@Service
 @Transactional
 public class ChatServiceImpl implements ChatService {
 

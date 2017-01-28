@@ -18,7 +18,7 @@ public class ChatUser implements BaseModel{
     private Integer id;
 
     @Access(AccessType.FIELD)
-    @Column(name = "login")
+    @Column(name = "login", unique = true, nullable = false)
     private String login;
 
     @Access(AccessType.FIELD)

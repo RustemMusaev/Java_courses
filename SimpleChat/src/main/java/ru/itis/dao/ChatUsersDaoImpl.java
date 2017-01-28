@@ -4,21 +4,22 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.itis.model.Chat;
 import ru.itis.model.ChatUser;
 
 import java.util.List;
 
-@Repository("chatUsersDao")
+@Repository("ChatUsersDao")
 public class ChatUsersDaoImpl implements ChatUsersDao {
 
     private SessionFactory sessionFactory;
     @Autowired
     public ChatUsersDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    public ChatUsersDaoImpl() {
     }
 
     @Override
@@ -54,6 +55,17 @@ public class ChatUsersDaoImpl implements ChatUsersDao {
                 .setParameter("id", chatId).getSingleResult();
         ChatUser chatUser=find(userId);
        chatUser.getChatSet().add(chat);
+    }
+
+    @Override
+    public ChatUser findByLogin(String login) {
+        return getSession().createQuery("FROM ChatUser chatuser where login = :login", ChatUser.class)
+                .setParameter("login", login).getSingleResult();
+    }
+
+    @Override
+    public boolean isExistToken(String token) {
+        return false;
     }
 
     private Session getSession() {

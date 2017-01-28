@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import ru.itis.model.Chat;
 
 import java.util.List;
-@Repository("chatsDao")
+@Repository("ChatsDao")
 public class ChatsDaoImpl implements ChatsDao {
 
     private SessionFactory sessionFactory;
@@ -16,6 +16,10 @@ public class ChatsDaoImpl implements ChatsDao {
     private ChatsDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory=sessionFactory;
     }
+
+    public ChatsDaoImpl() {
+    }
+
     @Override
     public List<Chat> findAll() {
         return getSession().createQuery("FROM Chat ").list();

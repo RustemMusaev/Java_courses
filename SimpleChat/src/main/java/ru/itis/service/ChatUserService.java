@@ -1,5 +1,7 @@
 package ru.itis.service;
 
+import ru.itis.dto.ChatUserDataForRegistrationDto;
+import ru.itis.dto.ChatUserDto;
 import ru.itis.model.ChatUser;
 
 import java.util.List;
@@ -11,4 +13,6 @@ public interface ChatUserService {
     void update(ChatUser chatUser);
     void delete(Integer id);
     void saveUserToChat(Integer userId, Integer chatId);
+    ChatUserDto registerUser (ChatUserDataForRegistrationDto chatUserDataForRegistrationDto);
+    String login(String password,String login);
 }
