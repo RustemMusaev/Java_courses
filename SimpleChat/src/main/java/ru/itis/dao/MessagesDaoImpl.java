@@ -44,8 +44,8 @@ public class MessagesDaoImpl implements MessagesDao {
     }
 
     @Override
-    public void update(Message chat) {
-        getSession().update(chat);
+    public void update(Message message) {
+        getSession().update(message);
     }
 
     @Override

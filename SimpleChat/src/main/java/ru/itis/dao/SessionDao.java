@@ -13,5 +13,6 @@ public interface SessionDao {
     void update(Session chat);
     boolean isExistsToken (String token);
     ChatUser findUserByToken (String token);
-    void updateToken(Integer user_id,String token);
+    void addToken(Integer user_id,String token);
+    void deleteSessionByToken(String token);
 }

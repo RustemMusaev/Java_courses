@@ -50,7 +50,7 @@ public class SessionDaoImpl implements SessionDao {
 
     @Override
     public boolean isExistsToken(String token) {
-        if (getSession().createQuery("FROM Session session where token = :token", Session.class)
+        if (getSession().createQuery("FROM Session session where session.token = :token", Session.class)
                 .setParameter("token", token).getSingleResult().equals(null)) {
             return false;
         } else return true;
@@ -61,16 +61,28 @@ public class SessionDaoImpl implements SessionDao {
         Session session=getSession().createQuery("FROM Session session where token = :token", Session.class)
                 .setParameter("token", token).getSingleResult();
         return getSession().createQuery("FROM ChatUser chatUser where id = :id", ChatUser.class)
-                .setParameter("id", session.getId()).getSingleResult();
+                .setParameter("id", session.getChatUser().getId()).getSingleResult();
     }
 
     @Override
-    public void updateToken(Integer user_id, String token) {
+    public void addToken(Integer user_id, String token) {
         ChatUser chatUser=getSession().createQuery("FROM ChatUser chatUser where id = :id", ChatUser.class)
                 .setParameter("id", user_id).getSingleResult();
-        Session sessionForSave=new Session.Builder().token(token)
-                .chatUser(chatUser).build();
-        save(sessionForSave);
+        if(getSession().createQuery("FROM Session session where session.chatUser.id = :user_id", Session.class)
+                .setParameter("user_id", user_id).getSingleResult()!=null){
+            Session session=getSession().createQuery("FROM Session session where session.chatUser.id = :user_id", Session.class)
+                    .setParameter("user_id", user_id).getSingleResult();
+            update(new Session.Builder().id(session.getId()).token(token).chatUser(chatUser).build());
+        } else {
+            save(new Session.Builder().token(token).chatUser(chatUser).build());
+        }
+    }
+
+    @Override
+    public void deleteSessionByToken(String token) {
+        Session session=getSession().createQuery("FROM Session session where session.token = :token", Session.class)
+                .setParameter("token", token).getSingleResult();
+        getSession().delete(session);
     }
 
     private org.hibernate.Session getSession() {

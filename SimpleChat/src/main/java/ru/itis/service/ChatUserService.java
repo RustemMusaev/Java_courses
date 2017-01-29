@@ -12,6 +12,7 @@ public interface ChatUserService {
     Integer save(ChatUser chatUser);
     void update(ChatUser chatUser);
     void delete(Integer id);
+    ChatUser findByLogin(String login);
     void saveUserToChat(Integer userId, Integer chatId);
     ChatUserDto registerUser (ChatUserDataForRegistrationDto chatUserDataForRegistrationDto);
     String login(String password,String login);

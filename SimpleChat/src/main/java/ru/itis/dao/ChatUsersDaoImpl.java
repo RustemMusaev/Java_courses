@@ -62,7 +62,6 @@ public class ChatUsersDaoImpl implements ChatUsersDao {
         return getSession().createQuery("FROM ChatUser chatuser where login = :login", ChatUser.class)
                 .setParameter("login", login).getSingleResult();
     }
-
     @Override
     public boolean isExistToken(String token) {
         return false;

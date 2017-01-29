@@ -14,6 +14,9 @@ public class MessageDto implements BaseModel {
     private ChatUserDto chatUserDto;
     private String text;
 
+    public MessageDto() {
+    }
+
     public MessageDto(Builder builder) {
         this.id= builder.id;
         this.chatDto = builder.chatDto;

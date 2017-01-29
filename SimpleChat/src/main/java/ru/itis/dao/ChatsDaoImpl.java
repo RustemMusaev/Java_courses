@@ -32,7 +32,8 @@ public class ChatsDaoImpl implements ChatsDao {
     @Override
     public Integer save(Chat chat) {
         getSession().save(chat);
-        return chat.getId();
+        return getSession().createQuery("FROM Chat chat where name = :name", Chat.class)
+                .setParameter("name", chat.getName()).getSingleResult().getId();
     }
 
     @Override

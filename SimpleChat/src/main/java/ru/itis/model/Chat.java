@@ -16,7 +16,7 @@ public class Chat implements BaseModel {
     private Integer id;
 
     @Access(AccessType.FIELD)
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)

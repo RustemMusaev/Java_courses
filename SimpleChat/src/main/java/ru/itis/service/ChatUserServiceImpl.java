@@ -59,6 +59,10 @@ public class ChatUserServiceImpl implements ChatUserService {
         chatUsersDao.saveUserToChat(userId,chatId);
     }
 
+    public ChatUser findByLogin(String login){
+        return chatUsersDao.findByLogin(login);
+    }
+
     @Override
     public ChatUserDto registerUser(ChatUserDataForRegistrationDto user) {
       ChatUser newUser = new ChatUser.Builder()
@@ -76,13 +80,11 @@ public class ChatUserServiceImpl implements ChatUserService {
     public String login(String password, String login) {
         // TODO: проверить, найден ли пользователь, проверка пароля!!!
         ChatUser registeredUser = chatUsersDao.findByLogin(login);
-        System.out.println(registeredUser.getLogin()+" / "+registeredUser.getPassword_hash() );
-        System.out.println(login+" / "+ password);
         System.out.println(encoder.matches(password, registeredUser.getPassword_hash()));
         if (password.equals("user2")) {
             String token = generator.generateToken();
 
-            sessionDao.updateToken(registeredUser.getId(), token);
+            sessionDao.addToken(registeredUser.getId(), token);
             return token;
         } else throw new IllegalArgumentException("Incorrect username or password");
     }
