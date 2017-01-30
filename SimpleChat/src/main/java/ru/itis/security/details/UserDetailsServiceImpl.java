@@ -6,10 +6,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import ru.itis.dao.ChatUsersDao;
-import ru.itis.dao.ChatsDao;
-import ru.itis.dao.SessionDao;
 import ru.itis.model.ChatUser;
+import ru.itis.service.ChatUserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +19,12 @@ import java.util.List;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private SessionDao sessionDao;
+    private ChatUserService chatUserService;
 
     public UserDetails loadUserByUsername(String token) throws UsernameNotFoundException {
-        if (sessionDao.isExistsToken(token)) {
-            ChatUser chatUser = sessionDao.findUserByToken(token);
+        if (chatUserService.isExistToken(token)) {
+            ChatUser chatUser = chatUserService.findByToken(token);
             List<GrantedAuthority> authorities = createGrantedAuthorities();
-
             return new UserDetailsImpl(chatUser.getLogin(), chatUser.getPassword_hash(), authorities);
         } else {
             return null;

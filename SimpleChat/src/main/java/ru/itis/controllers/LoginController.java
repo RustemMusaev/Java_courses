@@ -9,7 +9,6 @@ import ru.itis.dto.ChatUserDataForRegistrationDto;
 import ru.itis.dto.ChatUserDto;
 import ru.itis.model.ChatUser;
 import ru.itis.service.ChatUserService;
-import ru.itis.service.SessionService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +27,6 @@ public class LoginController {
 */
     @Autowired
     private ChatUserService chatUserService;
-    @Autowired
-    private SessionService sessionService;
 
     @PostMapping("/users")
     public ResponseEntity<ChatUserDto> signUp(@RequestBody ChatUserDataForRegistrationDto user) {
@@ -40,11 +37,15 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestHeader("password") String password,
                                         @RequestHeader("login") String login) {
-        String token = chatUserService.login(password, login);
-        ChatUserDto chatUserDto=convertChatUserDtoWithoutChatDTO(chatUserService.findByLogin(login));
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Auth-Token", token);
-        return new ResponseEntity<>(chatUserDto, headers, HttpStatus.OK);
+        if(chatUserService.isExistLogin(login)){
+            String token = chatUserService.login(password, login);
+            ChatUserDto chatUserDto=convertChatUserDtoWithoutChatDTO(chatUserService.findByLogin(login));
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Auth-Token", token);
+            return new ResponseEntity<>(chatUserDto, headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.SERVICE_UNAVAILABLE);
+        }
     }
 
     @GetMapping("/users")
@@ -56,12 +57,10 @@ public class LoginController {
         }
         return new ResponseEntity<>(chatUserDtoList, HttpStatus.ACCEPTED);
     }
-    @PostMapping("/logout")
+    @PostMapping("/singout")
     public ResponseEntity<Object> logout(@RequestHeader("Auth-Token") String token) {
-        sessionService.deleteSessionByToken(token);
-        ChatUserDto chatUserDto=convertChatUserDtoWithoutChatDTO(sessionService.findUserByToken(token));
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Auth-Token", token);
-        return new ResponseEntity<>(chatUserDto, headers, HttpStatus.OK);
+        ChatUserDto chatUserDto=convertChatUserDtoWithoutChatDTO(chatUserService.findByToken(token));
+        chatUserService.deleteToken(token);
+        return new ResponseEntity<>(chatUserDto, HttpStatus.OK);
     }
 }

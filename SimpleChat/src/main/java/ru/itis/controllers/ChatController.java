@@ -1,25 +1,21 @@
 package ru.itis.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.itis.dao.ChatsDao;
 import ru.itis.dto.ChatDto;
-import ru.itis.dto.ChatUserDataForRegistrationDto;
 import ru.itis.dto.ChatUserDto;
 import ru.itis.model.Chat;
 import ru.itis.model.ChatUser;
+import ru.itis.model.Message;
 import ru.itis.service.ChatService;
 import ru.itis.service.ChatUserService;
-import ru.itis.service.SessionService;
+import ru.itis.service.MessageService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import static ru.itis.converters.ChatToChatDtoConverter.convertChatDtoWithChatUser;
 import static ru.itis.converters.ChatToChatDtoConverter.convertChatDtoWithoutChatUser;
 import static ru.itis.converters.ChatUserToChatUserDtoConverter.convertChatUserDtoWithChatDTO;
 
@@ -38,8 +34,6 @@ MessageDto – на GET: {id-сообщения, text, name-пользовате
     private ChatService chatService;
     @Autowired
     private ChatUserService chatUserService;
-    @Autowired
-    private SessionService sessionService;
 
     @PostMapping("/chats")
     public ResponseEntity<ChatDto> addChat(@RequestBody ChatDto chatDtoName, @RequestHeader("Auth-Token") String token) {
@@ -56,9 +50,10 @@ MessageDto – на GET: {id-сообщения, text, name-пользовате
         }
         return new ResponseEntity<>(chatDtoList, HttpStatus.OK);
     }
+
     @PostMapping("/chats/{chat-id}/members")
     public ResponseEntity<ChatUserDto> addUserToChat(@PathVariable("chat-id") Integer chat_id, @RequestHeader("Auth-Token") String token) {
-        ChatUser chatUser=sessionService.findUserByToken(token);
+        ChatUser chatUser=chatUserService.findByToken(token);
         chatUserService.saveUserToChat(chatUser.getId(),chat_id);
         return new ResponseEntity<ChatUserDto>(convertChatUserDtoWithChatDTO(chatUser), HttpStatus.OK);
     }

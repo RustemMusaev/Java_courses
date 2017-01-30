@@ -31,6 +31,13 @@ public class ChatUser implements BaseModel{
             inverseJoinColumns = @JoinColumn (name = "chat_id"))
     private Set<Chat> chatSet=new HashSet<Chat>(0);
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "token_storage",
+            joinColumns=@JoinColumn(name="chatuser_id")
+    )
+    @Column(name="token")
+    private Set<String> token=new HashSet<>(0);
+
     public ChatUser() {
     }
 
@@ -39,6 +46,7 @@ public class ChatUser implements BaseModel{
         this.login = builder.login;
         this.password_hash = builder.password_hash;
         this.chatSet = builder.chatSet;
+        this.token=builder.token;
     }
 
     public Integer getId() {
@@ -57,11 +65,16 @@ public class ChatUser implements BaseModel{
         return chatSet;
     }
 
+    public Set<String> getToken() {
+        return token;
+    }
+
     public static class Builder {
         private Integer id;
         private String login;
         private String password_hash;
         private Set<Chat> chatSet;
+        private Set<String> token;
 
         public Builder id(Integer id) {
             this.id = id;
@@ -77,6 +90,10 @@ public class ChatUser implements BaseModel{
         }
         public Builder chatSet(Set<Chat> chatSet) {
             this.chatSet = chatSet;
+            return this;
+        }
+        public Builder token(Set<String> token) {
+            this.token = token;
             return this;
         }
 

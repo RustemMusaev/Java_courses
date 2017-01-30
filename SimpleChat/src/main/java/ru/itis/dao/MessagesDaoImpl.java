@@ -4,9 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.itis.model.Chat;
 import ru.itis.model.Message;
-import ru.itis.model.Session;
 
 import java.util.List;
 
@@ -50,7 +48,7 @@ public class MessagesDaoImpl implements MessagesDao {
 
     @Override
     public List<Message> findAllByChatId(Integer chatId) {
-        return getSession().createQuery("FROM Message message where chat = :id", Message.class)
+        return getSession().createQuery("FROM Message message where message.chat.id = :id", Message.class)
                 .setParameter("id", chatId).list();
     }
     private org.hibernate.Session getSession() {

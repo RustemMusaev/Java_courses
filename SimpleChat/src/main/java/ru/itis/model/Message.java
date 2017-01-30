@@ -11,7 +11,7 @@ public class Message implements BaseModel {
     @Column(name = "id")
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
