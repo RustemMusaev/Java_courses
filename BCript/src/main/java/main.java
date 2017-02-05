@@ -12,5 +12,18 @@ public class main {
             System.out.println(password_hash);
             System.out.println(encoder.encode("marsel"));
         }
+
+        class E{
+            E next;
+            Integer value;
+        }
+
+        while(list.next!=0)
+
+
+
+
+
+
     }
 }

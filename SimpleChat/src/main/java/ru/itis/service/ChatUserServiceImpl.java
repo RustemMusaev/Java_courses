@@ -26,7 +26,7 @@ public class ChatUserServiceImpl implements ChatUserService {
     @Autowired
     private TokenGenerator generator;
 
-    PasswordEncoder encoder=new BCryptPasswordEncoder();
+    private PasswordEncoder encoder=new BCryptPasswordEncoder();
 
     @Override
     public ChatUser find(Integer id) {
@@ -75,11 +75,18 @@ public class ChatUserServiceImpl implements ChatUserService {
     public void deleteToken(String token) {
         chatUsersDao.deleteToken(token);
     }
+
     @Override
     public ChatUserDto registerUser(ChatUserDataForRegistrationDto user) {
-        ChatUser newUser = new ChatUser.Builder().login(user.getLogin())
-                        .password_hash(encoder.encode(user.getPassword())).builder();
-        ChatUser savedUser =chatUsersDao.find(chatUsersDao.save(newUser));
+        String login=user.getLogin();
+        String psw=user.getPassword();
+        String pswhash=encoder.encode(psw);
+        ChatUser newUser = new ChatUser.Builder()
+                .login(login)
+                .password_hash(pswhash)
+                .builder();
+        int userId = chatUsersDao.save(newUser);
+        ChatUser savedUser =chatUsersDao.find(userId);
         return convertChatUserDtoWithoutChatDTO(savedUser);
     }
 
@@ -87,8 +94,7 @@ public class ChatUserServiceImpl implements ChatUserService {
     public String login(String password, String login) {
         // TODO: проверить, найден ли пользователь, проверка пароля!!!
         ChatUser registeredUser = chatUsersDao.findByLogin(login);
-        System.out.println(encoder.encode(password));
-        if (encoder.matches(password,registeredUser.getPassword_hash())) {
+       if (encoder.matches(password,registeredUser.getPassword_hash())) {
             String token = generator.generateToken();
             chatUsersDao.saveToken(registeredUser.getId(), token);
             return token;

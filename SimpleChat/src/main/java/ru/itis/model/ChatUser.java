@@ -1,11 +1,7 @@
 package ru.itis.model;
 
-import ru.itis.service.GenerateHashMd5;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -85,7 +81,7 @@ public class ChatUser implements BaseModel{
             return this;
         }
         public Builder password_hash(String password_hash) {
-            this.password_hash = GenerateHashMd5.crypt(password_hash);
+            this.password_hash = password_hash;
             return this;
         }
         public Builder chatSet(Set<Chat> chatSet) {

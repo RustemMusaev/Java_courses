@@ -1,6 +1,5 @@
 package ru.itis.dao;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -9,19 +8,19 @@ import org.springframework.stereotype.Repository;
 import ru.itis.model.Chat;
 import ru.itis.model.ChatUser;
 
-import java.util.List;
+import java.util.*;
 
 @Repository("ChatUsersDao")
 public class ChatUsersDaoImpl implements ChatUsersDao {
 
     private SessionFactory sessionFactory;
+
     @Autowired
     public ChatUsersDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
     public ChatUsersDaoImpl() {
     }
-    @Override
     public List<ChatUser> findAll() {
         return getSession().createQuery("FROM ChatUser").list();
     }
@@ -83,12 +82,7 @@ public class ChatUsersDaoImpl implements ChatUsersDao {
     }
 
     private Session getSession() {
-        Session session;
-        try {
-            session = sessionFactory.getCurrentSession();
-        } catch (HibernateException e) {
-            session = sessionFactory.openSession();
-        }
+        Session session = sessionFactory.getCurrentSession();
         return session;
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import ru.itis.config.SecurityConfig;
 
 import javax.sql.DataSource;
 
@@ -15,7 +16,7 @@ import javax.sql.DataSource;
 @ComponentScan("ru.itis.config")
 public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(SecurityConfig.class, args);
     }
 
 }

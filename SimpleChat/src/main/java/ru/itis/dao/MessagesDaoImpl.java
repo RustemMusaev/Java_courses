@@ -1,7 +1,8 @@
 package ru.itis.dao;
 
-import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.type.IntegerType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.itis.model.Message;
@@ -33,7 +34,16 @@ public class MessagesDaoImpl implements MessagesDao {
     @Override
     public Integer save(Message message) {
         getSession().save(message);
-        return message.getId();
+        Message mas=message;
+        Integer id=message.getId();
+        Integer chatid = message.getChat().getId();
+        Integer userid = message.getChatUser().getId();
+        getSession().createNativeQuery("UPDATE chatmember SET message_last_id=? WHERE chatuser_id=? AND chat_id=?")
+                .setParameter(1, id)
+                .setParameter(2, userid)
+                .setParameter(3, chatid)
+                .executeUpdate();
+        return id;
     }
 
     @Override
@@ -51,13 +61,24 @@ public class MessagesDaoImpl implements MessagesDao {
         return getSession().createQuery("FROM Message message where message.chat.id = :id", Message.class)
                 .setParameter("id", chatId).list();
     }
-    private org.hibernate.Session getSession() {
-        org.hibernate.Session session;
-        try {
-            session = sessionFactory.getCurrentSession();
-        } catch (HibernateException e) {
-            session = sessionFactory.openSession();
+
+    @Override
+    public List<Message> findNewByChatId(Integer chatId,Integer userId) {
+       Integer messageId =(Integer) getSession().createNativeQuery("SELECT * FROM chatmember WHERE chat_id=? AND chatuser_id=?")
+                .setParameter(1, chatId)
+                .setParameter(2, userId).addScalar("message_last_id", IntegerType.INSTANCE)
+                .getSingleResult();
+
+        if (messageId!=null){
+        return getSession().createQuery("FROM Message m WHERE m.chat.id = :chatId AND m.id > :messageId",Message.class)
+                    .setParameter("chatId",chatId).setParameter("messageId",messageId).list();
+        } else {
+            return findAllByChatId(chatId);
         }
+    }
+
+    private Session getSession() {
+        Session session = sessionFactory.getCurrentSession();
         return session;
     }
 }

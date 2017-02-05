@@ -14,7 +14,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UsersDaoJdbcBasedImpl implements UsersDao {
+@interface MyAnatathion{
+    String title();
+    int vqluie();
+}
+
+@MyAnatathion(title = "dfgdfg", vqluie = 2)
+public class UsersDaoJdbcBasedImpl implements UsersDao{
 
     private JdbcTemplate template;
     private Map<Integer,User> usersMap;

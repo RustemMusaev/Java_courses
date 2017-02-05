@@ -14,38 +14,52 @@ import ru.itis.service.ChatUserService;
 import ru.itis.service.MessageService;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
 import static ru.itis.converters.MessageToMessageDtoConverter.convertMessageDtoWithoutChatUserWithoutChat;
 
 @RestController
 public class MessageController {
-    /*
-•	Получить сообщения из чата: LONG Pooling GET /chats/{chat-id}/messages
-•	Поулчить все сообщения GET /chats/{chat-id}/messages?get=all
-•	Написать сообщение в чат: POST /chats/{chat-id}/messages
-MessageDto – на GET: {id-сообщения, text, name-пользователя}, в POST – только text
-*/
     @Autowired
     private MessageService messageService;
     @Autowired
     private ChatService chatService;
     @Autowired
     private ChatUserService chatUserService;
-
+/*Написать сообщение в чат: POST /chats/{chat-id}/messages
+MessageDto – на GET: {id-сообщения, text, name-пользователя}, в POST – только text
+*/
     @PostMapping("/chats/{chat-id}/messages")
     public ResponseEntity<MessageDto> messageToChat(@PathVariable("chat-id") Integer chat_id,
                                           @RequestBody MessageDto messageDto,@RequestHeader("Auth-Token") String token) {
         ChatUser chatUser=chatUserService.findByToken(token);
-        Message message=new Message.Builder().chat(chatService.find(chat_id)).chatUser(chatUser).text(messageDto.getText()).build();
+        Message message=new Message.Builder().chat(chatService.find(chat_id))
+                .chatUser(chatUser)
+                .text(messageDto.getText())
+                .build();
         messageService.save(message);
         MessageDto messageSend=convertMessageDtoWithoutChatUserWithoutChat(message);
         return new ResponseEntity<MessageDto>(messageSend, HttpStatus.OK);
     }
+ /*   Поулчить все сообщения GET /chats/{chat-id}/messages?get=all
+•*/
     @GetMapping("/chats/{chat-id}/messages")
-    public  ResponseEntity<List<MessageDto>> getAllMessage(@PathVariable("chat-id") Integer chat_id, @RequestHeader("Auth-Token") String token){
-        List<MessageDto> messageListDto=messageService.findAllByChatId(chat_id).stream()
-                .map(MessageToMessageDtoConverter::convertMessageDtoWithoutChatUserWithoutChat).collect(Collectors.toList());
-        return new ResponseEntity<List<MessageDto>>(messageListDto,HttpStatus.OK);
+    public  ResponseEntity<List<MessageDto>> getAllMessage(@PathVariable("chat-id") Integer chat_id,
+                                                           @RequestParam("get") String get,@RequestHeader("Auth-Token") String token) {
+        if (get.equals("all")) {
+            List<MessageDto> messageListDto = messageService.findAllByChatId(chat_id).stream()
+                    .map(MessageToMessageDtoConverter::convertMessageDtoWithoutChatUserWithoutChat).collect(Collectors.toList());
+            return new ResponseEntity<List<MessageDto>>(messageListDto, HttpStatus.OK);
+        } else if (get.equals("new")) {
+            List<MessageDto> messageListDto = messageService.findNewByChatId(chat_id,chatUserService.findByToken(token).getId()).stream()
+                    .map(MessageToMessageDtoConverter::convertMessageDtoWithoutChatUserWithoutChat).collect(Collectors.toList());
+            return new ResponseEntity<List<MessageDto>>(messageListDto, HttpStatus.OK);
+        } else {
+            List<MessageDto> messageListDto = messageService.findAllByChatId(chat_id).stream()
+                    .map(MessageToMessageDtoConverter::convertMessageDtoWithoutChatUserWithoutChat).collect(Collectors.toList());
+            return new ResponseEntity<List<MessageDto>>(messageListDto, HttpStatus.OK);
+        }
     }
 }

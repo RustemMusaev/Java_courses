@@ -14,4 +14,5 @@ public interface MessageService {
     void delete(Integer id);
     void update(Message message);
     List<Message> findAllByChatId(Integer chatId);
+    List<Message> findNewByChatId(Integer chatId,Integer userId);
 }

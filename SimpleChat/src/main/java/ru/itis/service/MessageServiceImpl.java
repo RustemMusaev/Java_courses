@@ -45,4 +45,9 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> findAllByChatId(Integer chatId) {
         return messagesDao.findAllByChatId(chatId);
     }
+
+    @Override
+    public List<Message> findNewByChatId(Integer chatId, Integer userId) {
+        return messagesDao.findNewByChatId(chatId,userId);
+    }
 }

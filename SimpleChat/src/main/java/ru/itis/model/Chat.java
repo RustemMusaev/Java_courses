@@ -35,7 +35,7 @@ public class Chat implements BaseModel {
     }
 
     public Integer getId() {
-        return null;
+        return id;
     }
 
     public String getName() {

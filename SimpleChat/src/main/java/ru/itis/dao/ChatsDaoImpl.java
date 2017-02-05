@@ -46,12 +46,7 @@ public class ChatsDaoImpl implements ChatsDao {
         getSession().update(chat);
     }
     private Session getSession() {
-        Session session;
-        try {
-            session = sessionFactory.getCurrentSession();
-        } catch (HibernateException e) {
-            session = sessionFactory.openSession();
-        }
+        Session session = sessionFactory.getCurrentSession();
         return session;
     }
 }
