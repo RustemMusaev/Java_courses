@@ -14,8 +14,11 @@ import ru.itis.service.ChatUserService;
 import ru.itis.service.MessageService;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import static ru.itis.converters.ChatToChatDtoConverter.convertChatDtoWithChatUser;
 import static ru.itis.converters.ChatToChatDtoConverter.convertChatDtoWithoutChatUser;
 import static ru.itis.converters.ChatUserToChatUserDtoConverter.convertChatUserDtoWithChatDTO;
 
@@ -41,13 +44,16 @@ MessageDto – на GET: {id-сообщения, text, name-пользовате
     }
     /*  получить список всех чатов GET /chats, приходит массив ChatDto {id-чата, name-название чата}*/
     @GetMapping("/chats")
-    public ResponseEntity<List<ChatDto>> getChat() {
+    public ResponseEntity<List<Chat>> getChat() {
         List<Chat> chatList=chatService.findAll();
         List<ChatDto> chatDtoList=new ArrayList<>();
         for (Chat chat:chatList){
-            chatDtoList.add(convertChatDtoWithoutChatUser(chat));
+            chat.getChatUserSet().clear();
+            //chatDtoList.add(convertChatDtoWithoutChatUser(chat));
         }
-        return new ResponseEntity<>(chatDtoList, HttpStatus.OK);
+        ChatDto chatDto=new ChatDto.Builder().id(22).name("ert").build();
+        //convertChatDtoWithoutChatUser(chatService.find(11));
+        return new ResponseEntity<>(chatList, HttpStatus.OK);
     }
 /*Зайти в существующий чат: POST /chats/{chat-id}/members, тело запроса пустое. В ответ приходит 200 – если все хорошо.
 */
@@ -57,6 +63,13 @@ MessageDto – на GET: {id-сообщения, text, name-пользовате
         chatUserService.saveUserToChat(chatUser.getId(),chat_id);
         return new ResponseEntity<ChatUserDto>(convertChatUserDtoWithChatDTO(chatUser), HttpStatus.OK);
     }
-
-
+    /*Покинуть чат*/
+    @DeleteMapping("/chats/{chat-id}/members")
+    public ResponseEntity deleteUserToChat(@PathVariable("chat-id") Integer chat_id, @RequestHeader("Auth-Token") String token) {
+        ChatUser chatUser=chatUserService.findByToken(token);
+        Set<Chat> chatList=chatUser.getChatSet();
+        chatList.remove(chatService.find(chat_id));
+        ChatUser chatUser1=chatUserService.findByToken(token);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }

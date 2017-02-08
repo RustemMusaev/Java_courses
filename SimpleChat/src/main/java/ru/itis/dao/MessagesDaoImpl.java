@@ -70,8 +70,18 @@ public class MessagesDaoImpl implements MessagesDao {
                 .getSingleResult();
 
         if (messageId!=null){
-        return getSession().createQuery("FROM Message m WHERE m.chat.id = :chatId AND m.id > :messageId",Message.class)
-                    .setParameter("chatId",chatId).setParameter("messageId",messageId).list();
+            List<Message> messageList=getSession().createQuery("FROM Message m WHERE m.chat.id = :chatId AND m.chatUser.id = :chatuserId AND m.id > :messageId",Message.class)
+                    .setParameter("chatId",chatId).setParameter("messageId",messageId).setParameter("chatuserId",userId).list();
+            Integer size=messageList.size();
+            if (size>=1) {
+                Integer lastId=messageList.get(size-1).getId();
+                getSession().createNativeQuery("UPDATE chatmember SET message_last_id=? WHERE chatuser_id=? AND chat_id=?")
+                        .setParameter(1, lastId)
+                        .setParameter(2, userId)
+                        .setParameter(3, chatId)
+                        .executeUpdate();
+            }
+            return messageList;
         } else {
             return findAllByChatId(chatId);
         }

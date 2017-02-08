@@ -44,6 +44,9 @@ public class TokenAuthFilter extends GenericFilterBean {
     private boolean isNotRequiringProtection(HttpServletRequest request) {
         return request.getRequestURI().startsWith("/users") && request.getMethod().equals("POST")
                 || request.getRequestURI().endsWith("favicon.ico")
-                || request.getRequestURI().startsWith("/login") && request.getMethod().equals("POST");
+                || request.getRequestURI().startsWith("/login") && request.getMethod().equals("POST")
+                || request.getRequestURI().startsWith("/chat/info")
+                || request.getRequestURI().endsWith("websocket")
+                ;
     }
 }

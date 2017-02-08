@@ -41,6 +41,7 @@ public class LoginController {
             String token = chatUserService.login(password, login);
             ChatUserDto chatUserDto=convertChatUserDtoWithoutChatDTO(chatUserService.findByLogin(login));
             HttpHeaders headers = new HttpHeaders();
+            headers.add("Access-Control-Expose-Headers", "Auth-Token");
             headers.add("Auth-Token", token);
             return new ResponseEntity<>(chatUserDto, headers, HttpStatus.OK);
         } else {

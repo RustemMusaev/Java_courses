@@ -4,6 +4,8 @@ import antlr.debug.MessageAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.converters.MessageToMessageDtoConverter;
 import ru.itis.dto.MessageDto;
@@ -28,11 +30,13 @@ public class MessageController {
     private ChatService chatService;
     @Autowired
     private ChatUserService chatUserService;
+    @Autowired
+    SimpMessagingTemplate template;
 /*Написать сообщение в чат: POST /chats/{chat-id}/messages
 MessageDto – на GET: {id-сообщения, text, name-пользователя}, в POST – только text
 */
     @PostMapping("/chats/{chat-id}/messages")
-    public ResponseEntity<MessageDto> messageToChat(@PathVariable("chat-id") Integer chat_id,
+    public void messageToChat(@PathVariable("chat-id") Integer chat_id,
                                           @RequestBody MessageDto messageDto,@RequestHeader("Auth-Token") String token) {
         ChatUser chatUser=chatUserService.findByToken(token);
         Message message=new Message.Builder().chat(chatService.find(chat_id))
@@ -41,7 +45,7 @@ MessageDto – на GET: {id-сообщения, text, name-пользовате
                 .build();
         messageService.save(message);
         MessageDto messageSend=convertMessageDtoWithoutChatUserWithoutChat(message);
-        return new ResponseEntity<MessageDto>(messageSend, HttpStatus.OK);
+        template.convertAndSend("/topic/"+chat_id+"/messages",messageSend);
     }
  /*   Поулчить все сообщения GET /chats/{chat-id}/messages?get=all
 •*/

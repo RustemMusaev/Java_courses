@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>Chat WebSocket</title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/sockjs-client/0.3.4/sockjs.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.2/stomp.min.js"></script>
+    <script src="chatScript.js" defer></script>
+    <script type="text/javascript" src="jquery-3.1.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles1.css">
+    
+</head>
+<body>
+<div>
+    <div>
+		Registration<br />
+        <input type="text" id="loginReg" placeholder="Choose a login"/>
+		<input type="text" id="passwordReg" placeholder="Choose a password"/>
+    </div>
+    <br />
+    <div>
+        <button id="connect" onclick="registration();">registration</button>
+    </div>
+	<br />
+	<div>
+		Authorization<br />
+        <input type="text" id="login" placeholder="Choose a login"/>
+		<input type="text" id="password" placeholder="Choose a password"/>
+    </div>
+    <br />
+	<div>
+		 <button id="authorization" onclick="authorization();">authorization</button>
+         <button id="logout" onclick="logout();">logout</button>
+    	</div>
+    
+    <br />
+    <div>
+  <!--      <input type="text" id="text" placeholder="Write a message..."/>
+        <button id="sendMessage" onclick="getchats();">Send</button>
+        <p id="response"></p>-->
+    </div>
+</div>
+<div id="menu">
+        <button id="showChats" onclick="getchats();">Показать чаты</button><br />
+        <input type="text" id="chatName" placeholder="Введите название чата"/>
+        <button id="addChat" onclick="addChat();">Добавить чат</button>
+        <div id="chats" style="visibility: hidden;">Select chat : </div>
+    </div>
+<div id="chatText" style="visibility: hidden;">
+</div>
+</body>
+</html>
