@@ -20,6 +20,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
+import static ru.itis.converters.MessageToMessageDtoConverter.convertMessageDtoWithChatUserWithoutChat;
 import static ru.itis.converters.MessageToMessageDtoConverter.convertMessageDtoWithoutChatUserWithoutChat;
 
 @RestController
@@ -44,7 +45,7 @@ MessageDto – на GET: {id-сообщения, text, name-пользовате
                 .text(messageDto.getText())
                 .build();
         messageService.save(message);
-        MessageDto messageSend=convertMessageDtoWithoutChatUserWithoutChat(message);
+        MessageDto messageSend=convertMessageDtoWithChatUserWithoutChat(message);
         template.convertAndSend("/topic/"+chat_id+"/messages",messageSend);
     }
  /*   Поулчить все сообщения GET /chats/{chat-id}/messages?get=all

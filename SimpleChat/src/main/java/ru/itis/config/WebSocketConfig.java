@@ -1,4 +1,4 @@
-package ru.itis.stomp;
+package ru.itis.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

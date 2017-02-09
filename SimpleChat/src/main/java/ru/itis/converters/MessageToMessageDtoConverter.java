@@ -12,7 +12,7 @@ public class MessageToMessageDtoConverter {
     }
     public static MessageDto convertMessageDtoWithChatUserWithoutChat(Message message) {
         return new MessageDto.Builder().id(message.getId()).text(message.getText())
-                .chatDto(convertChatDtoWithoutChatUser(message.getChat())).build();
+                .chatUserDto(convertChatUserDtoWithoutChatDTO(message.getChatUser())).build();
     }
     public static MessageDto convertMessageDtoWithoutChatUserWithChat(Message message) {
         return new MessageDto.Builder().id(message.getId()).text(message.getText())

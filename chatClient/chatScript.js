@@ -9,8 +9,16 @@
                 });
             });
         }
+        function disconnect() {
+            if(stompClient != null) {
+                stompClient.disconnect();
+            }
+            setConnected(false);
+            console.log("Disconnected");
+        }
         function showMessageOutput(messageOutput, id) {
-            var text="\n"+messageOutput.text;
+		    console.log(messageOutput);
+            var text="\n"+messageOutput.chatUserDto.login+" say: "+messageOutput.text;
             $("textarea#ExampleMessage"+id+"").append(text);
         }
         function registration(){
@@ -43,6 +51,7 @@
             }
 			}
         function logout(){
+           // localStorage.setItem("token","null");
             var request = new XMLHttpRequest();
             request.open("POST","http://localhost:8080/singout",true);
             request.setRequestHeader("Auth-Token",localStorage.getItem("token"));
@@ -61,7 +70,7 @@
                 dataType: 'json',
                 success: function(data) {
                     for(var i = 0; i < data.length; i++){
-                        $("#chats").append("<br /><button onclick=\"enterToChat("+data[i].id+")\">Insert to "+data[i].name+"</button> " +
+                        $("#chats").append("<br><button onclick=\"enterToChat("+data[i].id+")\">Insert to "+data[i].name+"</button> " +
                             "<button onclick=\"logoutToChat("+data[i].id+")\">Logout to "+data[i].name+"</button>");
                     }
                 }
@@ -78,12 +87,12 @@
                     'Content-Type': 'application/json' },
                 dataType: "json",
                     success: function () {
-                    $("#chatText").append("<br /><textarea rows='10' cols='50' id='ExampleMessage"+id+"' >You insert chat id = "+id+"</textarea>" +
-                            "<button onclick=\"getMessages("+id+",1)\">Get All Messages</button>" +
+                    $("#chatText").append("<div id='chat"+id+"'><textarea rows='10' cols='50' id='ExampleMessage"+id+"' >You insert chat id = "+id+"</textarea>" +
+                            "<br /><button onclick=\"getMessages("+id+",1)\">Get All Messages</button>" +
                             "<button onclick=\"getMessages("+id+",2)\">Get New Messages</button> "+
-                            "<button onclick=\"logoutToChat()\">logoutToChat</button> " +
-                        "<br /><input type='text' id='textMessages' placeholder='Write a message....'/>"+
-                        "<button id='sendMessage' onclick='sendMessage("+id+")'>Send</button>");
+                            "<button onclick=\"logoutToChat("+id+")\">logoutToChat</button> " +
+                        "<br /><input type='text' id='textMessages"+id+"' placeholder='Write a message....'/>"+
+                        "<button id='sendMessage' onclick='sendMessage("+id+")'>Send</button></div>");
                     }
                });
                 connect(id);
@@ -113,8 +122,9 @@
                 }
             });
         }
-        function logoutToChat() {
-            $("#chatText").empty();
+        function logoutToChat(id) {
+            $("#chat"+id+"").remove();
+            disconnect();
         }
         function addChat(){
             var name = document.getElementById('chatName').value;
@@ -131,7 +141,7 @@
             getchats();
         }
         function sendMessage(id) {
-            var textMessage = document.getElementById('textMessages').value;
+            var textMessage = document.getElementById("textMessages"+id+"").value;
             var request = $.ajax({
                 url: "http://localhost:8080/chats/"+id+"/messages",
                 type: "POST",
