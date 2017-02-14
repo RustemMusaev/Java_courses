@@ -28,6 +28,9 @@ public class ChatUserServiceImpl implements ChatUserService {
 
     private PasswordEncoder encoder=new BCryptPasswordEncoder();
 
+    public ChatUserServiceImpl() {
+    }
+
     @Override
     public ChatUser find(Integer id) {
         return chatUsersDao.find(id);

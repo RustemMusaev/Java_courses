@@ -26,13 +26,13 @@ public class ChatsDaoImpl implements ChatsDao {
     }
     @Override
     public Chat find(Integer id) {
-        return getSession().createQuery("FROM Chat chat where id = :id", Chat.class)
+        return getSession().createQuery("FROM Chat chat where chat.id = :id", Chat.class)
                 .setParameter("id", id).getSingleResult();
     }
     @Override
     public Integer save(Chat chat) {
         getSession().save(chat);
-        return getSession().createQuery("FROM Chat chat where name = :name", Chat.class)
+        return getSession().createQuery("FROM Chat chat where chat.name = :name", Chat.class)
                 .setParameter("name", chat.getName()).getSingleResult().getId();
     }
 

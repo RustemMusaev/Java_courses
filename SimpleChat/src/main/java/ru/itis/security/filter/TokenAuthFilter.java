@@ -24,7 +24,6 @@ public class TokenAuthFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        System.out.println(httpServletRequest.getRequestURI());
         try {
             String headerValue = httpServletRequest.getHeader(header);
 

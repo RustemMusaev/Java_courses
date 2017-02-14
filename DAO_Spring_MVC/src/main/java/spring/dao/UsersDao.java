@@ -12,4 +12,5 @@ public interface UsersDao {
     Integer update(User user);
     Integer delete(Integer id);
     List<Car> getUserCars(Integer id);
+
 }

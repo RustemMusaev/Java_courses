@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:annotation-config/>
+    <bean id="simpleBean"
+          class="ru.itis.theory.beans.SimpleBean"
+    destroy-method="destroyMyBean">
+        <property name="intValue" value="10"/>
+        <property name="stringValue" value="Marsel"/>
+    </bean>
+
+    <context:property-placeholder location="ru.itis/jdbc.properties"/>
+    <context:component-scan base-package="ru.itis"/>
+    <bean class="ru.itis.theory.postprocessors.SecondBeanPostProcessor"/>
+    <bean class="ru.itis.theory.postprocessors.FirstBeanPostProcessor"/>
+    <bean class="ru.itis.theory.postprocessors.MyBeanFactoryPostProcessor"/>
+    <bean class="ru.itis.theory.postprocessors.MyBeanDefinitionRegistryPostProcessor"/>
+</beans>

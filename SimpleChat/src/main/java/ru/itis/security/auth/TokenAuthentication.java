@@ -14,10 +14,6 @@ public class TokenAuthentication extends AbstractAuthenticationToken {
         this.token = token;
     }
 
-    public TokenAuthentication(Collection<? extends GrantedAuthority> authorities, String token) {
-        super(authorities);
-        this.token = token;
-    }
 
     public Object getCredentials() {
         return this.getAuthorities();

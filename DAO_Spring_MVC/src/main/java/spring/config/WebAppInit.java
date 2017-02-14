@@ -26,7 +26,7 @@ protected Class<?>[] getRootConfigClasses() {
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/","*"};
+        return new String[]{"/"};
     }
 
     @Override
