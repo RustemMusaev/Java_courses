@@ -1,12 +1,22 @@
 package ru.itis.server;
 
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.itis.config.SpringConfig;
+import ru.itis.server.services.AutoService;
+import ru.itis.server.services.AutoServiceImpl;
+import ru.itis.server.services.UserService;
+import ru.itis.server.services.UserServiceImpl;
+
 import javax.xml.ws.Endpoint;
 
-/**
- * Created by musaevrr on 14.02.2017.
- */
 public class Publisher {
     public static void main(String[] args) {
-        Endpoint.publish("http://localhost:7878/ws/hello", new WebSerberImpl());
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        UserService userService = context.getBean(UserServiceImpl.class);
+        AutoService autoService = context.getBean(AutoServiceImpl.class);
+        Endpoint.publish("http://localhost:1234/ws/user", userService);
+        Endpoint.publish("http://localhost:1234/ws/auto", autoService);
     }
 }
