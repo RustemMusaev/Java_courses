@@ -16,12 +16,9 @@ import ru.itis.service.ChatUserService;
 import ru.itis.service.MessageService;
 
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
 import static ru.itis.converters.MessageToMessageDtoConverter.convertMessageDtoWithChatUserWithoutChat;
-import static ru.itis.converters.MessageToMessageDtoConverter.convertMessageDtoWithoutChatUserWithoutChat;
 
 @RestController
 public class MessageController {

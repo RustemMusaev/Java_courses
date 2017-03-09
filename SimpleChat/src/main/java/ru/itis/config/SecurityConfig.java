@@ -75,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         DriverManagerDataSource driverManagerDataSource=new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
         driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/SimpleChat");
-        driverManagerDataSource.setUsername("maven_allow");
+        driverManagerDataSource.setUsername("postgres");
         driverManagerDataSource.setPassword("Qaz!23$56");
         return driverManagerDataSource;
     }
