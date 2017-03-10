@@ -34,6 +34,13 @@ public class NewsController {
     @Autowired
     SimpMessagingTemplate template;
 
+    @GetMapping(value = "/login")
+    @ResponseBody
+    ModelAndView index() {
+        ModelAndView modelAndView = new ModelAndView("loginpage");
+        return modelAndView;
+    }
+
     @GetMapping("/news")
     public ResponseEntity<List<ArticleDto>> getAllMessages(@RequestParam("pageNumber") Integer pageNumber, @RequestParam("count") Integer count) {
             Page<Article> page = articleService.getPageNews(pageNumber,count);

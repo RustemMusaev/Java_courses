@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My News</title>
+    <script src="sockjs.min.js"></script>
+    <script src="stomp.min.js"></script>
+    <script src="clientScript.js" defer></script>
+    <script type="text/javascript" src="jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="jquery.form.js"></script>
+    <link   rel="stylesheet" href="style.css" type="text/css">
+
+</head>
+<body>
+<hr/>
+<form id="data" method="POST" enctype="multipart/form-data">
+    File to upload:
+    <input type="file" name="file"><hr/>
+    <input type="text" name="title" required placeholder="Enter a title"/>
+    <input type="text" name="message" required placeholder="Enter a message"/>
+    <input type="submit" value="Upload">
+</form>
+<hr/>
+<div>
+    <button onclick="showNews(10);">show10LatesNews</button>
+    <button onclick="showNews(20);">show20LatesNews</button>
+    <button onclick="showNews(50);">show50LatesNews</button>
+</div>
+<div id="page" style="visibility: hidden;"></div>
+<div id="lastNews" style="visibility: hidden;"></div>
+</body>
+</html>

@@ -15,6 +15,27 @@
 	        $("#chatText").append("<br><div style='border: solid 1px red'>Title: "+messageOutput.title+"<br>Message: "+messageOutput.message+"<br>Date: "+messageOutput.date+"</div>");
         }
 
+        $("form#data").submit(function(){
+
+            var formData = new FormData($(this)[0]);
+
+            $.ajax({
+                url: window.location.pathname,
+                type: 'POST',
+                data: formData,
+                async: false,
+                success: function (data) {
+                    alert(data)
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+
+            return false;
+        });
+
+
         function showNews(count) {
             if (stompClient == null) {
                connect();

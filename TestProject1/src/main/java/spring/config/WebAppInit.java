@@ -23,8 +23,8 @@ protected Class<?>[] getRootConfigClasses() {
         return new String[]{"/"};
     }
 
-    @Override
-    protected Filter[] getServletFilters() {
-        return new Filter[]{new LoginFilter()};
-    }
+//    @Override
+  //  protected Filter[] getServletFilters() {
+  //      return new Filter[]{new LoginFilter()};
+  //  }
 }
