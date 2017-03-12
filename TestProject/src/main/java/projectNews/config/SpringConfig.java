@@ -1,4 +1,4 @@
-package spring.config;
+package projectNews.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,16 +10,18 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
 
 @Configuration
 @EnableWebMvc
-@EnableJpaRepositories("spring.repository")
-@ComponentScan(basePackages = "spring")
+@EnableJpaRepositories("projectNews.repository")
+@ComponentScan(basePackages = "projectNews")
 @EnableTransactionManagement
 public class SpringConfig {
     @Bean
@@ -44,7 +46,7 @@ public class SpringConfig {
 
         localContainerEntityManagerFactoryBean.setDataSource(dataSource());
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter());
-        localContainerEntityManagerFactoryBean.setPackagesToScan("spring.models");
+        localContainerEntityManagerFactoryBean.setPackagesToScan("projectNews.models");
         return localContainerEntityManagerFactoryBean;
     }
     @Bean
@@ -55,5 +57,14 @@ public class SpringConfig {
         driverManagerDataSource.setUsername("postgres");
         driverManagerDataSource.setPassword("postgres");
         return driverManagerDataSource;
+    }
+    @Bean
+    public MultipartResolver multipartResolver() {
+        org.springframework.web.multipart.commons.CommonsMultipartResolver multipartResolver = new org.springframework.web.multipart.commons.CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(1000000);
+        return multipartResolver;
+    }
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        //registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/");
     }
 }

@@ -1,7 +1,7 @@
-package spring.converter;
+package projectNews.converter;
 
-import spring.dto.ArticleDto;
-import spring.models.Article;
+import projectNews.dto.ArticleDto;
+import projectNews.models.Article;
 
 public class ArticleToArticleDtoConverter {
     public static ArticleDto convertArticleDtoWithoutId(Article article) {

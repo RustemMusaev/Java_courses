@@ -1,4 +1,4 @@
-package spring.dto;
+package projectNews.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

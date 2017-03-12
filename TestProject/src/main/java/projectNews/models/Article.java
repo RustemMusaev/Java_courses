@@ -1,4 +1,4 @@
-package spring.models;
+package projectNews.models;
 
 import javax.persistence.*;
 
