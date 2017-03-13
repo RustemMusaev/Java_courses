@@ -6,7 +6,7 @@
         <title>News</title>
         <meta charset="utf-8">
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-        <script type="text/javascript" src="<c:url value="/WEB-INF/script.js"/>"></script>
+        <script type="text/javascript" src="./script.js"></script>
     </head>
 <body>
     <a href="/users/count/10">   - select 10 publication from page -   </a>  ||
