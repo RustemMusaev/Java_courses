@@ -1,4 +1,4 @@
-CREATE DATABASE "News1"
+CREATE DATABASE "News"
   WITH OWNER = postgres
        ENCODING = 'UTF8'
        TABLESPACE = pg_default

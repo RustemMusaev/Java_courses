@@ -75,10 +75,11 @@ public class NewsController {
     }
 
     /**
-     *
-     * @param imageName
-     * @param response
-     * @return
+     * This method using for download image for article for display client page. Each image save as relative path to picture fail.
+     * For download image, method takes her relative path and makes files to path and send to client page.
+     * @param imageName - relative path to saves image
+     * @param response - answer containing image file.
+     * @return updated data for client page
      * @throws Exception
      */
     @GetMapping(value = "/getImage/{imageName}")
@@ -115,18 +116,21 @@ public class NewsController {
         return "redirect:/news";
     }
     /**
-     *
-     * @param articleDto
-     * @param file
-     * @return
+     *This method is used for add new Article for database.His get input param of client page(use ModelAttribute) and optional get file.
+     * Default model ArticleDto contains not empty field "title" and "message". Field "date" create before save object to database
+     * using abstract class Calendar and method SimpleDateFormat.class. If input file is not emply, create param "fileName" using current
+     * server date and create new Article for save to database, else crete object without file. Then on client page upload updated data.
+     * @param articleDto - model for get to client page FORM
+     * @param file - optional attribute for Article object
+     * @return updated data for client page
      */
     @PostMapping(value = "/news", produces = "text/plain;charset=UTF-8")
     public String addNews(@ModelAttribute("articleDto") ArticleDto articleDto, @RequestParam("file") MultipartFile file) {
         Article article;
         Date date = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00")).getTime();
-        String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
         if (!file.isEmpty()) {
-             article = new Article.Builder()
+            String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
+            article = new Article.Builder()
                     .title(correctTitle(articleDto.getTitle()))
                     .date(String.valueOf(date))
                     .message(correctMessage(articleDto.getMessage()))

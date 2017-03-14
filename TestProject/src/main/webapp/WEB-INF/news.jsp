@@ -104,7 +104,7 @@
         <form action="news" method="post" enctype="multipart/form-data">
             Inset Title : <input type="text" name="title" charset="utf-8" required="required" placeholder="Enter a title"/>
             Insert image for news : <input type="file" name="file" />
-            <textarea class="text" cols="80" rows ="5" name="message" required="required">Enter text this(max 500 simbol) ..</textarea>
+            <textarea class="text" cols="80" rows ="5" name="message" required="required" placeholder="Enter text this(max 500 simbol) .."></textarea>
             <br><input type="submit" value="add news" />
         </form>
     </div>
