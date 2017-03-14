@@ -2,6 +2,10 @@ package ru.rustem.models;
 
 import javax.persistence.*;
 
+/**
+ * This Entity for mapping on table in database. For create exemplar fo class, used Builder().
+ * Param "id" create when object insert to table.
+ */
 @Entity
 @Table(name = "news")
 public class Article {

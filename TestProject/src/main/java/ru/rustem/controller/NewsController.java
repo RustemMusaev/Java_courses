@@ -22,17 +22,25 @@ import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This controller processed all client request, who redirect LoginFilter
+ */
 @Controller
 public class NewsController {
     @Autowired
     private ArticleServiceImpl articleService;
-
     private Integer currentPage = 1;
     private Integer countLine = 10;
-
-    @GetMapping(value = {"/users"})
+    /**
+     * This method processed request "/news","/", method=GET.
+     * He create ModelandView for transfer of data on client page. He install to view name, call getPageNews method for pagination
+     * data of database,set value current Page for client page, set value count rows for client page, convert result in
+     * database request in ArticleDto.
+     * @return ModelandView - collection output data and name view jsp to download fo client
+     */
+    @GetMapping(value = {"/news","/"})
     @ResponseBody ModelAndView showNews() {
-        ModelAndView modelAndView = new ModelAndView("users");
+        ModelAndView modelAndView = new ModelAndView("news");
         Page<Article> page = articleService.getPageNews(currentPage, countLine);
         List<Integer> listPageCount = new ArrayList<>();
         listPageCount.add(0,currentPage);
@@ -45,19 +53,34 @@ public class NewsController {
         modelAndView.addObject("listPageCount", listPageCount);
         return modelAndView;
     }
-
+    /**
+     * This method processed request "/404", method=GET. This method processed fail request, who do not filter control
+     * @return ModelandView - collection output data and name view jsp to download fo client
+     */
     @GetMapping(value = "/404")
     @ResponseBody ModelAndView errorPage() {
         ModelAndView modelAndView = new ModelAndView("404");
         return modelAndView;
     }
-
-    @GetMapping(value = "/users/{currentPage}")
+    /**
+     *This method is used for select number page of result. He processed Get reuest "/news/{currentPage}" where
+     * {currentPage} is the page, which select cleint. His new pagination of data in database and output to client page
+     * @param setPage - number of page, who select client for view
+     * @return redirect on url "/news", call method showNews, for display result on select page
+     */
+    @GetMapping(value = "/news/{currentPage}")
     public String selectPage(@PathVariable("currentPage") Integer setPage) {
         currentPage = setPage;
-        return "redirect:/users";
+        return "redirect:/news";
     }
 
+    /**
+     *
+     * @param imageName
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @GetMapping(value = "/getImage/{imageName}")
     public String showImage(@PathVariable("imageName") String imageName, HttpServletResponse response) throws Exception {
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
@@ -76,26 +99,37 @@ public class NewsController {
         responseOutputStream.write(imgByte);
         responseOutputStream.flush();
         responseOutputStream.close();
-        return "redirect:/users";
+        return "redirect:/news";
     }
 
-    @GetMapping(value = "/users/count/{countLine}")
+    /**
+     * This method is used for select count rows for pagination. He processed Get reuest "/news/count/{countLine}" where
+     * {countLine} is the count rows, which select cleint. His new pagination of data in database and output to client page
+      * @param setCountLine
+     * @return
+     */
+    @GetMapping(value = "/news/count/{countLine}")
     public String selectCountLine(@PathVariable("countLine") Integer setCountLine) {
         countLine = setCountLine;
         currentPage = 1;
-        return "redirect:/users";
+        return "redirect:/news";
     }
-
-    @PostMapping(value = "/users", produces = "text/plain;charset=UTF-8")
+    /**
+     *
+     * @param articleDto
+     * @param file
+     * @return
+     */
+    @PostMapping(value = "/news", produces = "text/plain;charset=UTF-8")
     public String addNews(@ModelAttribute("articleDto") ArticleDto articleDto, @RequestParam("file") MultipartFile file) {
         Article article;
         Date date = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00")).getTime();
         String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
         if (!file.isEmpty()) {
              article = new Article.Builder()
-                    .title(articleDto.getTitle())
+                    .title(correctTitle(articleDto.getTitle()))
                     .date(String.valueOf(date))
-                    .message(articleDto.getMessage())
+                    .message(correctMessage(articleDto.getMessage()))
                     .picture(fileName)
                     .build();
             articleService.save(article);
@@ -105,16 +139,36 @@ public class NewsController {
                 stream.write(bytes);
                 stream.close();
             } catch (Exception e) {
-                 return "Вам не удалось загрузить " + fileName + " => " + e.getMessage();
+                 return "Download error " + fileName + " => " + e.getMessage();
             }
         } else {
             article = new Article.Builder()
-                    .title(articleDto.getTitle())
+                    .title(correctTitle(articleDto.getTitle()))
                     .date(String.valueOf(date))
-                    .message(articleDto.getMessage())
+                    .message(correctMessage(articleDto.getMessage()))
                     .build();
             articleService.save(article);
         }
-        return "redirect:/users";
+        return "redirect:/news";
+    }
+    /**
+     * This assistant method, who test field "title" on correct before writing to database.
+     * @param title - String param for writting object Article to database
+     * @return "title" if his length < 60 characters, or return first 60 characters of "title"
+     */
+    private String correctTitle(String title){
+        if (title.length() > 60) {
+            return (String) title.subSequence(0,59);
+        } else return title;
+    }
+    /**
+     * This assistant method, who test field "message" on correct before writing to database.
+     * @param message - String param for writting object Article to database
+     * @return "message" if his length < 500 characters, or return first 500 characters of "message"
+     */
+    private String correctMessage(String message){
+        if (message.length() > 500) {
+            return (String) message.subSequence(0,499);
+        } else return message;
     }
 }

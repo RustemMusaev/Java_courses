@@ -2,6 +2,10 @@ package ru.rustem.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * This Model use for transformation Article for transfer on client page. This different
+ * param "id" does not exist
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ArticleDto {
 

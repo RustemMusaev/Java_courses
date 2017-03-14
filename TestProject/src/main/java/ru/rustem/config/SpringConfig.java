@@ -43,7 +43,6 @@ public class SpringConfig {
     LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean =
                 new LocalContainerEntityManagerFactoryBean();
-
         localContainerEntityManagerFactoryBean.setDataSource(dataSource());
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter());
         localContainerEntityManagerFactoryBean.setPackagesToScan("ru.rustem.models");
@@ -64,7 +63,4 @@ public class SpringConfig {
         multipartResolver.setMaxUploadSize(1000000);
         return multipartResolver;
     }
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/");
-    }
-}
+ }
