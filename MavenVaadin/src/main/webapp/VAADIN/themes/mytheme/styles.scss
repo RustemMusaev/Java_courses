@@ -1,0 +1,21 @@
+@import "mytheme.scss";
+@import "addons.scss";
+
+// This file prefixes all rules with the theme name to avoid causing conflicts with other themes.
+// The actual styles should be defined in mytheme.scss
+.mytheme {
+  @include addons;
+  @include mytheme;
+}
+.divClass {
+  border-style: outset;
+  height: 300px;
+  width: 200px;
+}
+
+.buttomClass {
+  border-style: outset;
+  height: 50px;
+  width: 150px;
+}
+
