@@ -36,11 +36,12 @@ public class LoginFilter implements Filter {
           throws IOException, ServletException {
       HttpServletRequest request = (HttpServletRequest) servletRequest;
       HttpServletResponse response = (HttpServletResponse) servletResponse;
+      System.out.println(request.getRequestURI());
       if (isLoginHtml(request)) {
           filterChain.doFilter(servletRequest, servletResponse);
       } else {
           System.out.println("BAD REQUEST");
-          response.sendRedirect("/404");
+          response.sendRedirect("/TestProject/404");
       }
   }
 
@@ -51,11 +52,12 @@ public class LoginFilter implements Filter {
      * or starts with "/users/", "/getImage/" then the method returns true, otherwise false
      */
    private boolean isLoginHtml(HttpServletRequest request) {
-      return request.getRequestURI().equals("/")
-              || request.getRequestURI().equals("/404")
-              || request.getRequestURI().equals("/news")
-              || request.getRequestURI().startsWith("/news/")
-              || request.getRequestURI().startsWith("/getImage/");
+      return request.getRequestURI().equals("/TestProject")
+              || request.getRequestURI().equals("/TestProject/404")
+              || request.getRequestURI().equals("/")
+              || request.getRequestURI().equals("/TestProject/news")
+              || request.getRequestURI().startsWith("/TestProject/news/")
+              || request.getRequestURI().startsWith("/TestProject/getImage/");
     }
     public void destroy() {
     }

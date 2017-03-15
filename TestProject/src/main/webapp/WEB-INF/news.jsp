@@ -91,17 +91,17 @@
     </head>
 <body>
     <div class="countRows">
-        <a class="colums" href="/news/count/10">10 publication</a><a href="/news/count/20">20 publication</a>        <a href="/news/count/50">50 publication</a>
+        <a class="colums" href="/TestProject/news/count/10">10 publication</a><a href="/TestProject/news/count/20">20 publication</a>        <a href="/TestProject/news/count/50">50 publication</a>
     </div>
     <hr>
     <div class="pageCount">SELECT PAGE(currentPage: <c:out value="${requestScope.listPageCount[0]}" />) :
         <c:forEach var="i" begin="1" end="${requestScope.listPageCount[1]}">
-            <a href="/news/${i}">${i} </a>
+            <a href="/TestProject/news/${i}">${i} </a>
         </c:forEach>
     </div>
     <hr>
     <div class="form">
-        <form action="news" method="post" enctype="multipart/form-data">
+        <form action="/TestProject/news" method="post" enctype="multipart/form-data">
             Inset Title : <input type="text" name="title" charset="utf-8" required="required" placeholder="Enter a title"/>
             Insert image for news : <input type="file" name="file" />
             <textarea class="text" cols="80" rows ="5" name="message" required="required" placeholder="Enter text this(max 500 simbol) .."></textarea>
@@ -133,7 +133,7 @@
                     <c:choose>
                         <c:when test="${articleDtoList.picture != null}">
                             <div class="image" id="image">
-                                <img src="/getImage/${articleDtoList.picture}" alt="/getImage/${articleDtoList.picture}.jpg">
+                                <img src="/TestProject/getImage/${articleDtoList.picture}" alt="/TestProject/getImage/${articleDtoList.picture}.jpg">
                             </div>
                         </c:when>
                     </c:choose>

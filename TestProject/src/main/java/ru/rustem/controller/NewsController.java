@@ -38,7 +38,7 @@ public class NewsController {
      * database request in ArticleDto.
      * @return ModelandView - collection output data and name view jsp to download fo client
      */
-    @GetMapping(value = {"/news","/"})
+    @GetMapping(value = {"/TestProject/news","/TestProject"})
     @ResponseBody ModelAndView showNews() {
         ModelAndView modelAndView = new ModelAndView("news");
         Page<Article> page = articleService.getPageNews(currentPage, countLine);
@@ -57,7 +57,7 @@ public class NewsController {
      * This method processed request "/404", method=GET. This method processed fail request, who do not filter control
      * @return ModelandView - collection output data and name view jsp to download fo client
      */
-    @GetMapping(value = "/404")
+    @GetMapping(value = "/TestProject/404")
     @ResponseBody ModelAndView errorPage() {
         ModelAndView modelAndView = new ModelAndView("404");
         return modelAndView;
@@ -68,10 +68,10 @@ public class NewsController {
      * @param setPage - number of page, who select client for view
      * @return redirect on url "/news", call method showNews, for display result on select page
      */
-    @GetMapping(value = "/news/{currentPage}")
+    @GetMapping(value = "/TestProject/news/{currentPage}")
     public String selectPage(@PathVariable("currentPage") Integer setPage) {
         currentPage = setPage;
-        return "redirect:/news";
+        return "redirect:/TestProject/news";
     }
 
     /**
@@ -82,7 +82,7 @@ public class NewsController {
      * @return updated data for client page
      * @throws Exception
      */
-    @GetMapping(value = "/getImage/{imageName}")
+    @GetMapping(value = "/TestProject/getImage/{imageName}")
     public String showImage(@PathVariable("imageName") String imageName, HttpServletResponse response) throws Exception {
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
         try {
@@ -100,7 +100,7 @@ public class NewsController {
         responseOutputStream.write(imgByte);
         responseOutputStream.flush();
         responseOutputStream.close();
-        return "redirect:/news";
+        return "redirect:/TestProject/news";
     }
 
     /**
@@ -109,11 +109,11 @@ public class NewsController {
       * @param setCountLine
      * @return
      */
-    @GetMapping(value = "/news/count/{countLine}")
+    @GetMapping(value = "/TestProject/news/count/{countLine}")
     public String selectCountLine(@PathVariable("countLine") Integer setCountLine) {
         countLine = setCountLine;
         currentPage = 1;
-        return "redirect:/news";
+        return "redirect:/TestProject/news";
     }
     /**
      *This method is used for add new Article for database.His get input param of client page(use ModelAttribute) and optional get file.
@@ -124,7 +124,7 @@ public class NewsController {
      * @param file - optional attribute for Article object
      * @return updated data for client page
      */
-    @PostMapping(value = "/news", produces = "text/plain;charset=UTF-8")
+    @PostMapping(value = "/TestProject/news", produces = "text/plain;charset=UTF-8")
     public String addNews(@ModelAttribute("articleDto") ArticleDto articleDto, @RequestParam("file") MultipartFile file) {
         Article article;
         Date date = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00")).getTime();
@@ -153,7 +153,7 @@ public class NewsController {
                     .build();
             articleService.save(article);
         }
-        return "redirect:/news";
+        return "redirect:/TestProject/news";
     }
     /**
      * This assistant method, who test field "title" on correct before writing to database.
