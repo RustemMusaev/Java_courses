@@ -1,38 +1,37 @@
 package ru.rustem;
 
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.xml.sax.SAXException;
-import ru.rustem.config.SpringConfig;
-import ru.rustem.dao.TestDao;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
 import java.io.IOException;
-import java.util.List;
-
-import static ru.rustem.AllMethods.createXMLfile.createXMLfile;
-import static ru.rustem.AllMethods.insertAndSelectForDb.insertAndSelectForDb;
-import static ru.rustem.AllMethods.parseXMLtoSumAttribute.parseXMLtoSumAttribute;
-import static ru.rustem.AllMethods.transformXmlWithXstl.transformXmlWithXstl;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Program {
-    public static void main(String[] args) throws TransformerException, ParserConfigurationException, IOException, SAXException {
-        int count = 200;
-        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        TestDao testDao = (TestDao) context.getBean("TestDao");
+
+    public static final String XML_FILE_TO_WRITE = "\\JavaProject\\Java_courses\\TestProjectMag\\1.xml";
+    public static final String XML_FILE_TO_READ = "\\JavaProject\\Java_courses\\TestProjectMag\\2.xml";
+    public static final String XSLT_TEMPLATE = "\\JavaProject\\Java_courses\\TestProjectMag\\style.xslt";
+    public static final String PROPERTIES_FILE_NAME = "\\JavaProject\\Java_courses\\TestProjectMag\\src\\main\\resources\\contex.properties";
+
+    public static void main(String[] args) throws IOException, SAXException {
+        int count = 100;
+        System.out.println("Enter the count ( >0 ) :");
+        Scanner in = new Scanner(System.in);
+        try {
+            if (in.nextInt() > 0 ) {
+                count = in.nextInt();
+            } else {
+                System.out.println("You entered an incorrect argument, by default count = " + count);
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("You entered an incorrect argument, by default count = " + count);
+        }
+        MainBean mainBean = new MainBean();
+        mainBean.setCount(count);
+        mainBean.setPropertiesFileName(PROPERTIES_FILE_NAME);
         long startTime = System.nanoTime();
-        List<Integer> list = insertAndSelectForDb(testDao, count);
-        createXMLfile(list);
-        transformXmlWithXstl();
-        parseXMLtoSumAttribute();
+        mainBean.start();
         long finishTime = System.nanoTime();
-        System.out.println((finishTime-startTime)/1000000000);
+        System.out.println("time = "+(finishTime-startTime)/1000000000);
      }
-
-
-
-
-
 }

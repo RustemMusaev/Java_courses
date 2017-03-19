@@ -1,4 +1,4 @@
-package ru.rustem.AllMethods;
+package ru.rustem.allMethods;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -6,13 +6,17 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-public class transformXmlWithXstl {
+import static ru.rustem.Program.XML_FILE_TO_READ;
+import static ru.rustem.Program.XML_FILE_TO_WRITE;
+import static ru.rustem.Program.XSLT_TEMPLATE;
+
+public class TransformXmlWithXstl {
     public static void transformXmlWithXstl() throws TransformerException {
         TransformerFactory factory = TransformerFactory.newInstance();
-        StreamSource xslStream = new StreamSource("D:\\JavaProject\\Java_courses\\TestProjectMag\\style.xslt");
+        StreamSource xslStream = new StreamSource(XSLT_TEMPLATE);
         Transformer transformer = factory.newTransformer(xslStream);
-        StreamSource in = new StreamSource("D:\\JavaProject\\Java_courses\\TestProjectMag\\1.xml");
-        StreamResult out = new StreamResult("D:\\JavaProject\\Java_courses\\TestProjectMag\\2.xml");
+        StreamSource in = new StreamSource(XML_FILE_TO_WRITE);
+        StreamResult out = new StreamResult(XML_FILE_TO_READ);
         transformer.transform(in, out);
     }
 }

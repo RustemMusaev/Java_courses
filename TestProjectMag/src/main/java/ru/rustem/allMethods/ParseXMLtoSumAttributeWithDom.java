@@ -1,4 +1,4 @@
-package ru.rustem.AllMethods;
+package ru.rustem.allMethods;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -9,10 +9,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
-public class parseXMLtoSumAttribute {
+import static ru.rustem.Program.XML_FILE_TO_READ;
+
+public class ParseXMLtoSumAttributeWithDom {
     public static void parseXMLtoSumAttribute(){
         try {
-            File inputFile = new File("D:\\JavaProject\\Java_courses\\TestProjectMag\\2.xml");
+            File inputFile = new File(XML_FILE_TO_READ);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);

@@ -1,4 +1,4 @@
-package ru.rustem.AllMethods;
+package ru.rustem.allMethods;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -14,8 +14,10 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.List;
 
-public class createXMLfile {
-    public static void createXMLfile(List<Integer> list) {
+import static ru.rustem.Program.XML_FILE_TO_WRITE;
+
+public class CreateXMLfileWithDom {
+    public static void createXMLfileWithDom(List<Integer> list) {
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -27,18 +29,18 @@ public class createXMLfile {
                 Element entry = doc.createElement("entry");
                 rootElement.appendChild(entry);
                 Element field = doc.createElement("field");
-                field.appendChild(doc.createTextNode(+list.get(i)+" field"));
+                field.appendChild(doc.createTextNode(String.valueOf(list.get(i))));
                 entry.appendChild(field);
             }
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("D:\\JavaProject\\Java_courses\\TestProjectMag\1.xml"));
+            StreamResult result = new StreamResult(new File(XML_FILE_TO_WRITE));
             transformer.transform(source, result);
           } catch (ParserConfigurationException pce) {
-            pce.printStackTrace();
+            System.out.println("DocumentBuilder cannot be created which satisfies the configuration requested");
         } catch (TransformerException tfe) {
-            tfe.printStackTrace();
+            System.out.println("an unrecoverable error occurs during the course of the transformation");
         }
     }
 }
