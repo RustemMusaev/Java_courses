@@ -8,10 +8,10 @@ import java.util.Scanner;
 
 public class Program {
 
-    public static final String XML_FILE_TO_WRITE = "\\JavaProject\\Java_courses\\TestProjectMag\\1.xml";
-    public static final String XML_FILE_TO_READ = "\\JavaProject\\Java_courses\\TestProjectMag\\2.xml";
-    public static final String XSLT_TEMPLATE = "\\JavaProject\\Java_courses\\TestProjectMag\\style.xslt";
-    public static final String PROPERTIES_FILE_NAME = "\\JavaProject\\Java_courses\\TestProjectMag\\src\\main\\resources\\contex.properties";
+    public static final String XML_FILE_TO_WRITE = "\\JavaProject\\Java_courses\\XmlToXsltConvert\\1.xml";
+    public static final String XML_FILE_TO_READ = "\\JavaProject\\Java_courses\\XmlToXsltConvert\\2.xml";
+    public static final String XSLT_TEMPLATE = "\\JavaProject\\Java_courses\\XmlToXsltConvert\\style.xslt";
+    public static final String PROPERTIES_FILE_NAME = "\\JavaProject\\Java_courses\\XmlToXsltConvert\\src\\main\\resources\\contex.properties";
 
     public static void main(String[] args) throws IOException, SAXException {
         int count = 100;

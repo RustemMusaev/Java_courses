@@ -12,9 +12,9 @@
     <xsl:template match="entry">
         <entry>
             <xsl:attribute name="field">
-		        <xsl:value-of select="field"/>
-		    </xsl:attribute>
+                <xsl:value-of select="field"/>
+            </xsl:attribute>
         </entry>
     </xsl:template>
-	
+
 </xsl:stylesheet>

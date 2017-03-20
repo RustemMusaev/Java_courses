@@ -7,7 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-
+/**
+ * This class implement all method TestDao interface. In constructor object transmitted name of properties file.
+ * Method getConnection() use this file for return creating connection on database. Each method use SQL request for obtains results.
+ * findAll() method open connection, using SQL request get row on table and add her to List<Integer>. When all rows are processed, method
+ * return this list as result. After close connection.
+ * deleteAll() method after delete all rows in table, checks count of delete rows. If count of delete rows is null, then table was empty.
+ * save() method input parametr count rows for insert to table in database. After open connection method prepared statemet using all
+ * data and after insert this informathion on table.
+ */
 public class TestDaoImpl implements TestDao{
 
     private Connection connection;

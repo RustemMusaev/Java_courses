@@ -10,6 +10,11 @@ import java.util.List;
 
 import static ru.rustem.Program.XML_FILE_TO_WRITE;
 
+/**
+ * This Class use to create xml file with used abstract XMLOutputFactory.class. Static method create new instance abstract class.
+ * After create file, and open stream to formating xml file. in this stream write encoding and version value. After write root element ans using a cycle
+ * write child element and his value.The end steam flush and close to finish add file.
+ */
 public class CreateXMLfileWithXMLStreamWriter {
     public static void createXMLfileWithXMLStreamWriter(List<Integer> list) {
         XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
