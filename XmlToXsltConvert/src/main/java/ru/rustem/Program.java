@@ -3,6 +3,7 @@ package ru.rustem;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -33,5 +34,5 @@ public class Program {
         mainBean.start();
         long finishTime = System.nanoTime();
         System.out.println("time = "+(finishTime-startTime)/1000000000);
-     }
+    }
 }
