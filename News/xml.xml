@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<request_detail>
+    <client_info>
+        <ip-address>127.0.0.1</ip-address>
+        <user-agent>Apache-HttpClient/4.5.2 (Java/1.8.0_112-release)</user-agent>
+    </client_info>
+    <pparameters method="GET">
+        <numeric_parameters>
+            <data name="param1">44.11111</data>
+            <data name="param4">0.657567</data>
+        </numeric_parameters>
+        <string_parameters>
+            <data name="param2">sdrfsdf</data>
+            <data name="param3">345,g</data>
+        </string_parameters>
+        <resData><data name="34345345">4444444444444444</data></resData>
+    </pparameters>
+</request_detail>
