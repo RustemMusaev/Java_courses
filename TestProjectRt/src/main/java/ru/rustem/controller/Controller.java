@@ -3,26 +3,28 @@ package ru.rustem.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.WebRequest;
 import ru.rustem.model.*;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
+/**
+ * This class is an controller, which handle requests
+ */
 @RestController
 public class Controller {
-
-    @PostMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<String> returnXml(HttpServletRequest request) {
-        System.out.println(request.getRequestURI());
-        System.out.println(request.getParameterMap());
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
+    /**
+     * This method handle "http://localhost:8080/xml" request
+     * @param param - all parameters request
+     * @param request - client request
+     * @return valid Xml file
+     */
+    @RequestMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<ModelXml> returnXml(@RequestParam Map<String,String> param, HttpServletRequest request) {
         List<XmlData> numericParameters = new LinkedList<>();
         List<XmlData> stringParameters = new LinkedList<>();
@@ -66,6 +68,10 @@ public class Controller {
         return new ResponseEntity<>(modelXml, HttpStatus.OK);
     }
 
+    /**
+     * This method input string and split[",","."]. If result is two string,
+     * cheks every string on numeric parameter
+     */
     public boolean valueIsStringParametrs(String value) {
         String[] strings = value.split("[.,,]");
         System.out.println(strings.length);
@@ -78,6 +84,11 @@ public class Controller {
         }
     }
 
+    /**
+     * This metod check input string on numeric parameter, check all char is number
+     * @param string
+     * @return true if string is numeric parameter, else return false
+     */
     public boolean stringIsNumeric(String string) {
         if (string.length() > 10) return false;
         String[] strings = string.split("");

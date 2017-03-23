@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>MusaevRustem</groupId>
-    <artifactId>News</artifactId>
+    <groupId>ru.MusaevRustem</groupId>
+    <artifactId>TestProjectRt</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <build>
@@ -23,7 +23,7 @@
     <properties>
         <spring.version>4.3.7.RELEASE</spring.version>
         <hibernate.version>5.1.4.Final</hibernate.version>
-   </properties>
+    </properties>
     <dependencies>
         <!-- Postgresql -->
         <dependency>
@@ -85,4 +85,6 @@
             <version>${hibernate.version}</version>
         </dependency>
     </dependencies>
+
+
 </project>
