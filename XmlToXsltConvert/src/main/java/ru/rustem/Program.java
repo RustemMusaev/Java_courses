@@ -14,13 +14,14 @@ public class Program {
     public static final String XSLT_TEMPLATE = "\\JavaProject\\Java_courses\\XmlToXsltConvert\\style.xslt";
     public static final String PROPERTIES_FILE_NAME = "\\JavaProject\\Java_courses\\XmlToXsltConvert\\src\\main\\resources\\contex.properties";
 
-    public static void main(String[] args) throws IOException, SAXException {
+    public static void main(String[] args){
         int count = 100;
         System.out.println("Enter the count ( >0 ) :");
         Scanner in = new Scanner(System.in);
+        int i = in.nextInt();
         try {
-            if (in.nextInt() > 0 ) {
-                count = in.nextInt();
+            if (i > 0 ) {
+                count = i;
             } else {
                 System.out.println("You entered an incorrect argument, by default count = " + count);
             }

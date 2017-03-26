@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.rustem.model.*;
+import ru.rustem.xml.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
@@ -25,47 +25,47 @@ public class Controller {
      * @return valid Xml file
      */
     @RequestMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ModelXml> returnXml(@RequestParam Map<String,String> param, HttpServletRequest request) {
-        List<XmlData> numericParameters = new LinkedList<>();
-        List<XmlData> stringParameters = new LinkedList<>();
+    public ResponseEntity<RequestDetail> returnXml(@RequestParam Map<String,String> param, HttpServletRequest request) {
+        List<ParameterElement> numericParameters = new LinkedList<>();
+        List<ParameterElement> stringParameters = new LinkedList<>();
         System.out.println(request.getRequestURI());
 
         for (Map.Entry<String, String> entry : param.entrySet()) {
             if (valueIsStringParametrs(entry.getValue())) {
-                XmlData xmlDataString = new XmlData();
-                xmlDataString.setName(entry.getKey());
-                xmlDataString.setValue(entry.getValue());
-                stringParameters.add(xmlDataString);
+                ParameterElement parameterElementString = new ParameterElement();
+                parameterElementString.setName(entry.getKey());
+                parameterElementString.setValue(entry.getValue());
+                stringParameters.add(parameterElementString);
             } else {
-                XmlData xmlDataNumeric = new XmlData();
-                xmlDataNumeric.setName(entry.getKey());
-                xmlDataNumeric.setValue(entry.getValue());
-                numericParameters.add(xmlDataNumeric);
+                ParameterElement parameterElementNumeric = new ParameterElement();
+                parameterElementNumeric.setName(entry.getKey());
+                parameterElementNumeric.setValue(entry.getValue());
+                numericParameters.add(parameterElementNumeric);
             }
         }
 
-        ModelXml modelXml = new ModelXml();
+        RequestDetail requestDetail = new RequestDetail();
         ClientInfo clientInfo = new ClientInfo();
         String browserName = request.getHeader("User-Agent");
         String ipAdd = request.getRemoteAddr();
         clientInfo.setIpAddress(ipAdd);
         clientInfo.setUserAgent(browserName);
-        modelXml.setClientInfo(clientInfo);
+        requestDetail.setClientInfo(clientInfo);
 
         Parametrs parametrs = new Parametrs();
 
-        ResData resDataNumeric = new ResData();
-        resDataNumeric.setData(numericParameters);
-        parametrs.setNumericHashMap(resDataNumeric);
+        Parameter parameterNumeric = new Parameter();
+        parameterNumeric.setParameter(numericParameters);
+        parametrs.setNumericHashMap(parameterNumeric);
 
-        ResData resDataString = new ResData();
-        resDataString.setData(stringParameters);
-        parametrs.setStringHashMap(resDataString);
+        Parameter parameterString = new Parameter();
+        parameterString.setParameter(stringParameters);
+        parametrs.setStringHashMap(parameterString);
 
         parametrs.setRequestMethod(request.getMethod());
 
-        modelXml.setParametrs(parametrs);
-        return new ResponseEntity<>(modelXml, HttpStatus.OK);
+        requestDetail.setParametrs(parametrs);
+        return new ResponseEntity<>(requestDetail, HttpStatus.OK);
     }
 
     /**
