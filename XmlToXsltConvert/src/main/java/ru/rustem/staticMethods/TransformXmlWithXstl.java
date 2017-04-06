@@ -1,6 +1,7 @@
 package ru.rustem.staticMethods;
 
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
@@ -14,12 +15,19 @@ import static ru.rustem.Program.*;
  * output file to result stream, using creting rule.
  */
 public class TransformXmlWithXstl {
-    public static void transformXmlWithXstl() throws TransformerException {
+    public static void transformXmlWithXstl() {
         TransformerFactory factory = TransformerFactory.newInstance();
         StreamSource xslStream = new StreamSource(XSLT_TEMPLATE);
-        Transformer transformer = factory.newTransformer(xslStream);
+        Transformer transformer = null;
         StreamSource in = new StreamSource(XML_FILE_TO_WRITE);
         StreamResult out = new StreamResult(XML_FILE_TO_READ);
-        transformer.transform(in, out);
+        try {
+            transformer = factory.newTransformer(xslStream);
+            transformer.transform(in, out);
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 }

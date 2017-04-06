@@ -41,7 +41,7 @@ public class MainBean {
         try {
             transformXmlWithXstl();
         } catch (TransformerException e) {
-            System.out.println("TransformerException");;
+            System.out.println("TransformerException");
         }
         parseXMLtoSumWithXMLStreamReader();
     }

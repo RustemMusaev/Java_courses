@@ -31,7 +31,7 @@ public class ParseXMLtoSumAttributeWithDom {
             }
             System.out.println(count);
         } catch (Exception e) {
-            e.printStackTrace();
+            new RuntimeException("file not parse");
         }
     }
 }
