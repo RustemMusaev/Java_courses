@@ -13,12 +13,9 @@
 </head>
 <body onload="isLogin()">
 <h2>Online Chat</h2>
-<button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-    Popover on right
-</button>
 <div id="buttons-hbox">
     <button onclick="document.getElementById('id01').style.display='block'" id="singUpButton">Sign Up</button>
-    <button onclick="document.getElementById('id02').style.display='block'" id="createUserButton">Create a new user</button>
+    <button onclick="document.getElementById('id03').style.display='block'" id="reg">Create a new user</button>
 </div>
 <br>
 <div id="id01" class="modal">
@@ -27,10 +24,9 @@
         <div class="container">
             <label><b>login</b></label>
             <input type="text" placeholder="Enter Email" id="username" name="username" required>
-
             <label><b>Password</b></label>
             <input type="password" placeholder="Enter Password" id="pwd" name="pwd" required>
-
+            <span id="uploaderror" class="error" style="color: #f44336"></span>
             <div class="clearfix">
                 <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
                 <button type="submit" id="sigUpButtom" class="signupbtn">Sign Up</button>
@@ -38,31 +34,33 @@
         </div>
     </form>
 </div>
-<div id="id02" class="modal">
-    <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
-        <form:form modelAttribute="userRegistration" action="/registration" method="post" class="modal-content animate" enctype="multipart/form-data" id="userRegistration">
+<div id="id03" class="modal">
+    <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">×</span>
+    <form class="modal-content animate" enctype="multipart/form-data" id="regform" onsubmit="return false;">
         <div class="container">
-            <form:label path="login">login</form:label>
-            <form:input required="login" path="login" />
-            <form:label path="password">password</form:label>
-            <form:input required="password" path="password" />
-            <form:label path="name">name</form:label>
-            <form:input required="name" path="name" />
-            <form:label path="surname">surname</form:label>
-            <form:input required="surname" path="surname" />
-            <form:label path="phone">phone</form:label>
-            <form:input required="phone" path="phone" />
-            <form:label path="email">email</form:label>
-            <form:input required="email" path="email" />
-            Select profile file<form:input type="file" path="file" />
+            <label><b>login</b></label>
+            <input type="text" name="login" placeholder="Enter login"required/><br/><br/>
+            <label><b>password</b></label>
+            <input type="password" name="password" placeholder="Enter Password" required/><br/><br/>
+            <label><b>name</b></label>
+            <input type="text" name="name"  placeholder="Enter name" required/><br/><br/>
+            <label><b>surname</b></label>
+            <input type="text" name="surname" placeholder="Enter surname" required/><br/><br/>
+            <label><b>phone(10 char)</b></label>
+            <input type="text" name="phone" placeholder="Enter phone" required/><br/><br/>
+            <label><b>email</b></label>
+            <input type="text" name="email" placeholder="Enter email" required/><br/><br/>
+            Select profile file<input type="file" name="myfile"/><br/><br/>
+            <span id="createErrorMessage" class="error" style="color: #f44336"></span>
             <div class="clearfix">
-                <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-                <button type="submit" class="signupbtn" id="regButtom">Create a new user</button>
+                <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Cancel</button>
+                <button type="submit" class="signupbtn" id="regButtomnew">Create a new user</button>
             </div>
         </div>
-    </form:form>
+    </form>
 </div>
 <div id="chat"></div>
 <div id="usersStatus"></div>
+<div id="users"></div>
 </body>
 </html>

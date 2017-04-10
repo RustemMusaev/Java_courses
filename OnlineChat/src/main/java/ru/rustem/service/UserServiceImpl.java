@@ -72,5 +72,13 @@ public class UserServiceImpl implements UserService {
     public User findUserByToken(String token) {
         return userDao.findUserByToken(token);
     }
+
+    @Override
+    public boolean emailIsCorrect(String email) {
+        for (User user : userDao.findAll()) {
+            if (user.getEmail().equals(email)) return false;
+        }
+        return true;
+    }
 }
 

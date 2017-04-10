@@ -14,6 +14,5 @@ public interface UserService {
     Integer loginUser(UserLogin userLogin);
     String findTokenByUserId(Integer id);
     User findUserByToken(String token);
-
-
+    boolean emailIsCorrect(String string);
 }

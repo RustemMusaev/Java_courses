@@ -12,11 +12,8 @@ public class UserInfo {
     private String photo;
     private String phone;
     private String email;
-
     public UserInfo() {
     }
-
-
     public String getLogin() {
         return login;
     }

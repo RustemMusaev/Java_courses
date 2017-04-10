@@ -80,7 +80,6 @@ public class Controller {
             template.convertAndSend("/topic/users",userInfoList);
         }
     }
-
     @GetMapping(value = "/")
     @ResponseBody ModelAndView homePage() {
         ModelAndView modelAndView = new ModelAndView("loginpage");
@@ -121,7 +120,6 @@ public class Controller {
             return new ResponseEntity<UserLogin>(userLogin, HttpStatus.OK);
         }
     }
-
     @PostMapping(value = "/login")
     public ResponseEntity<String> loginUser(@RequestBody UserLogin userLogin) {
         Set<User> users = userService.findAll();
@@ -164,6 +162,34 @@ public class Controller {
             userService.save(user);
         }
         return modelAndView;
+    }
+    @PostMapping(value = "/registration1")
+    public ResponseEntity registerUser1(@ModelAttribute UserRegistration userRegistration, @RequestParam("myfile") MultipartFile multipartFile) {
+        if (!userService.loginIsCorrect(userRegistration.getLogin())) {
+            return new ResponseEntity("this login is used", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        if (!userService.emailIsCorrect(userRegistration.getEmail())) {
+            return new ResponseEntity("this email is used", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        User user = userRegistrationToUserConverter(userRegistration);
+        if (!multipartFile.isEmpty()) {
+            Date date = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00")).getTime();
+            String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
+            try {
+                byte[] bytes = multipartFile.getBytes();
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("D:/temp/") +
+                        "/img/" + fileName + ".jpg"));
+                stream.write(bytes);
+                stream.close();
+                user.setPhoto(fileName);
+                userService.save(user);
+            } catch (Exception e) {
+                return new ResponseEntity("don't save image", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } else {
+            userService.save(user);
+        }
+       return new ResponseEntity("use succes create", HttpStatus.OK);
     }
     private void validateImage(MultipartFile image) {
         if (!image.getContentType().equals("image/jpeg")) {

@@ -1,14 +1,14 @@
-// Get the modal
 var modal1 = document.getElementById('id01');
-var modal2 = document.getElementById('id02');
+var modal3 = document.getElementById('id03');
 var stompClient;
-// When the user clicks anywhere outside of the modal, close it
+var users;
+var statusBar = $('#users');
 window.onclick = function(event) {
     if (event.target == modal1) {
         modal1.style.display = "none";
     }
-    if (event.target == modal2) {
-        modal2.style.display = "none";
+    if (event.target == modal3) {
+        modal3.style.display = "none";
     }
 }
 function connect() {
@@ -36,16 +36,20 @@ function disconnect() {
 function sendMessage() {
     var textMessage = document.getElementById("textMessages").value;
     console.log(textMessage);
-    $.ajax({
-        url: "/chats/messages",
-        type: "POST",
-        headers : {
-            "Auth-Token": localStorage.getItem("token"),
-            'Accept': 'application/json',
-            'Content-Type': 'application/json' },
-        dataType: "json",
-        data: JSON.stringify({'message':textMessage}),
-    });
+    if(textMessage != undefined) {
+        $.ajax({
+            url: "/chats/messages",
+            type: "POST",
+            headers : {
+                "Auth-Token": localStorage.getItem("token"),
+                'Accept': 'application/json',
+                'Content-Type': 'application/json' },
+            dataType: "json",
+            data: JSON.stringify({'message':textMessage}),
+        });
+    } else {
+        ocument.getElementById("textMessages")
+    }
 }
 function sendStatus(status) {
     console.log("status " + status);
@@ -63,33 +67,35 @@ function sendStatus(status) {
 }
 function showMessageOutput(messageOutput) {
     console.log(messageOutput);
-    var text="\n "+messageOutput.login+" say: "+messageOutput.text;
-    $("textarea#ExampleMessage").append(text);
+    var text="<p><span class='author'>"+messageOutput.login+"</span> say: "+messageOutput.text+"</p>";
+    $("#ExampleMessage").append(text);
     document.getElementById('ExampleMessage').scrollTop = 9999;
 }
 function showUsersStatus(userStatus) {
     console.log(userStatus);
     $("#usersStatus").empty();
     if(userStatus != undefined) {
+        users = userStatus;
         for (var i = 0; i < userStatus.length; i++) {
             var text = "\n " + userStatus[i].login + " say: " + userStatus[i].name;
             console.log(text);
             var login = userStatus[i].login;
-            $("#usersStatus").append("<div style='border: double' id='user'> user "+login +" online "+
+            $("#usersStatus").append("<div onmouseover='showUser()' style='border: double' data-id='"+i+"' class='tags' data-id='i'> user "+login +" online "+
                 "<div class='span'>" +
                 "<p>"+userStatus[i].name + " name</p>" +
                 "<p>"+userStatus[i].surname + " surname</p>" +
-                "<p>"+userStatus[i].email + " email</p>" +
-                "<p>"+userStatus[i].photo + " photo</p>" +
-                "<p>"+userStatus[i].phone + " phone</p>"+
                 "</div></div><br>");
             $(".span").hide();
         }
     }
 }
+function showUser() {
+    var data = $(this).attr("data-id");
+    console.log(data);
+    $(this).firstChild.show();
+}
 function login() {
     var data = {};
-  //  checkCookie();
     data["username"] = $("#username").val();
     data["pwd"] = $("#pwd").val();
     $.ajax({
@@ -105,14 +111,14 @@ function login() {
             console.log(data);
             console.log(textStatus);
             console.log(response);
-            document.getElementById('id01').style.display='none';
+            modal1.style.display='none';
             $("#singUpButton").hide();
             $("#createUserButton").hide();
             $("#buttons-hbox").append("<button id='signOut' onclick='logout()'>Sign out</button>");
-            $("#chat").append("<div><textarea rows='10' cols='50' id='ExampleMessage' >"+data["username"]+" insert chat id = </textarea>" +
+            $("#chat").append("<div><div class='showMessages' id='ExampleMessage' ><p>"+data["username"]+" login chat</p></div>" +
                 "<br /><button onclick='showAllMessages()'>Show last Messages</button>" +
                 "<br /><button onclick='clearMessages()'>Clear Messages</button>"+
-                "<br /><input type='text' id='textMessages' placeholder='Write a message.....'/>"+
+                "<br /><input type='text' id='textMessages' placeholder='Write a message.....' required/>"+
                 "<button onclick='sendMessage()'>Send message</button></div>");
 
             var cookietoSet=response.getResponseHeader("Auth-Token");
@@ -129,7 +135,7 @@ function login() {
             showUsersStatus();
         },
         error: function (e) {
-            //   document.getElementById('id01').style.display='none';
+            $("#uploaderror").text("incorrect login or password");
             console.log("ERROR");
         }
     });
@@ -149,7 +155,7 @@ function logout() {
     $("#usersStatus").empty();
 }
 $("#userRegistration").submit(function()  {
-    document.getElementById('id02').style.display='none';
+   // document.getElementById('id02').style.display='none';
 });
 function isLogin() {
     var username = getCookie("Auth-Token");
@@ -211,7 +217,7 @@ function showAllMessages() {
             console.log(data);
             $("#ExampleMessage").empty();
             for(var i = 0; i < data.length; i++){
-                var text="\n "+data[i].login+" say: "+data[i].text;
+                var text="<p><span class='author'>"+messageOutput.login+"</span> say: "+messageOutput.text+"</p>";
                 $("#ExampleMessage").append(text);
             }
             document.getElementById('ExampleMessage').scrollTop = 9999;
@@ -224,9 +230,57 @@ function showAllMessages() {
 function clearMessages() {
     $("#ExampleMessage").empty();
 }
-$('#usersStatus').on('mouseover', '#user', function() {
+$("[data-id]").on('hover',function () {
+    console.log("rrr")
+    var id = this.data('id');
+    statusBar.find('#name').innerHTML(users[id].name);
+    statusBar.find('#surname').innerHTML(users[id].surname);
+});
+$(".tags").mouseover(function() {
+    alert(this.id);
+});
+$('[data-id]').on('mouseover', '.tags', function() {
+    console.log("hello");
     $('.span').show();
 });
-$('#usersStatus').on('mouseout', '#user', function() {
-    $('.span').hide();
+$("#regform").submit(function (event) {
+    if (validate()) {
+        var form = $('#regform')[0];
+        var oMyForm = new FormData(form);
+        oMyForm.append("myfile", $('input[type=file]')[0].files[0]);
+        $.ajax({
+            url: '/registration1',
+            data: oMyForm,
+            dataType: 'text',
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function(data, textStatus, response){
+                modal3.style.display='none';
+                console.log("done create user");
+                alert(data);
+            },
+            error : function(data, textStatus, response) {
+                $("#createErrorMessage").text(data.responseText);
+            }
+        });
+    }
 });
+function validate() {
+    var email = $('#id03').find('input[name="email"]').val();
+    var phone = $('#id03').find('input[name="phone"]').val();
+
+    var emailFilter = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
+    var phoneFilter = /([0-9])/;
+
+    if (!emailFilter.test(email)) {
+        console.log("email " + email);
+        return false;
+    }
+    if (!phoneFilter.test(phone) || phone.length!=10) {
+        console.log("phone " + phone);
+        return false;
+    }
+
+    return true;
+}
