@@ -1,6 +1,6 @@
 package ru.rustem.controller;
 
-import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -8,7 +8,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 import ru.rustem.converter.MessageToMessageDtoConverter;
 import ru.rustem.dao.MessageDao;
 import ru.rustem.dto.*;
@@ -16,17 +15,19 @@ import ru.rustem.model.Message;
 import ru.rustem.model.User;
 import ru.rustem.service.UserService;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static ru.rustem.converter.MessageToMessageDtoConverter.messageToMessageDtoConverter;
 import static ru.rustem.converter.UserRegistrationToUserConverter.userRegistrationToUserConverter;
 import static ru.rustem.converter.UserToUserInfoConverter.userToUserInfoConverter;
 
@@ -41,52 +42,71 @@ public class Controller {
     @Autowired
     SimpMessagingTemplate template;
 
-    private Set<UserInfo> usersOnline = new HashSet<>();//sinhronaize
+    private static final Logger log = Logger.getLogger(Controller.class);
+
+    private Set<UserInfo> usersOnline = new HashSet<>();
 
     @PostMapping("/chats/messages")
     public void messageToChat(@RequestBody Message message, HttpServletRequest request) {
         String token = getCookie(request);
-        if (token!=null) {
+        if (token != null) {
             User user = userService.findUserByToken(token);
             message.setUser(user);
+            Date date = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00")).getTime();
+            String dateMessage = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+            message.setDate(dateMessage);
             messageDao.save(message);
-            MessageDto messageDto = new MessageDto();
-            messageDto.setText(message.getMessage());
-            messageDto.setLogin(message.getUser().getLogin());
-            template.convertAndSend("/topic/messages",messageDto);
+            if (log.isInfoEnabled()) {
+                log.info("user id = " + user.getId() + " send message id " + message.getId() + " text : " + message.getMessage());
+            }
+            MessageDto messageDto = messageToMessageDtoConverter(message);
+            template.convertAndSend("/topic/messages", messageDto);
         }
     }
+
     @PostMapping("/chats/users")
-    public void userStatus(@RequestBody UserStatus userStatus, HttpServletRequest request) {
+    @ResponseBody
+    public HttpStatus userStatus(HttpServletRequest request) {
         String token = getCookie(request);
+        String status = request.getParameter("STATUS");
         List<UserInfo> userInfoList = new LinkedList<>();
         UserInfo userInfo;
-        if (userStatus.getStatus().equals("online") && (token != null)) {
+        if ((UserStatus.valueOf("ONLINE").toString().equals(status)) && (token != null)) {
             User user = userService.findUserByToken(token);
             userInfo = userToUserInfoConverter(user);
             usersOnline.add(userInfo);
             userInfoList = new ArrayList<UserInfo>(usersOnline);
             System.out.println(userInfoList);
-            template.convertAndSend("/topic/users",userInfoList);
-        } else if (userStatus.getStatus().equals("offline")) {
+            if (log.isInfoEnabled()) {
+                log.info("user id = " + user.getId() + " is online");
+            }
+            template.convertAndSend("/topic/users", userInfoList);
+            return HttpStatus.OK;
+        } else if (UserStatus.OFFLINE.toString().equals(status) && (token != null)) {
             User user = userService.findUserByToken(token);
             userInfo = userToUserInfoConverter(user);
             usersOnline.remove(userInfo);
             userInfoList = new ArrayList<UserInfo>(usersOnline);
             System.out.println(userInfoList);
-            template.convertAndSend("/topic/users",userInfoList);
+            if (log.isInfoEnabled()) {
+                log.info("user id = " + user.getId() + " is offline");
+            }
+            template.convertAndSend("/topic/users", userInfoList);
+            return HttpStatus.OK;
         } else {
             System.out.println(userInfoList);
-            template.convertAndSend("/topic/users",userInfoList);
+            template.convertAndSend("/topic/users", userInfoList);
+            return HttpStatus.BAD_REQUEST;
         }
     }
-    @GetMapping(value = "/")
-    @ResponseBody ModelAndView homePage() {
+
+    @GetMapping({"/","/OnlineChat"})
+    public ModelAndView homePage() {
         ModelAndView modelAndView = new ModelAndView("loginpage");
-        modelAndView.addObject("userRegistration",new UserRegistration());
         return modelAndView;
     }
-    @GetMapping(value = "/messages")
+
+    @GetMapping(value = "/OnlineChat/messages")
     public ResponseEntity<List<MessageDto>> updateHosting() {
         List<Message> messageList = messageDao.findAll();
         if (!messageList.isEmpty()) {
@@ -99,11 +119,12 @@ public class Controller {
             return new ResponseEntity<List<MessageDto>>((MultiValueMap<String, String>) null, HttpStatus.NO_CONTENT);
         }
     }
-    @PostMapping(value = "/login1")
+
+    @PostMapping(value = "/OnlineChat/login")
     public ResponseEntity<UserLogin> updateHosting(@RequestBody UserLogin userLogin, HttpServletRequest request) {
-        String cookieValue = getCookie(request) ;
-        System.out.println("cookie = "+cookieValue);
-        Integer userId = null;
+        String cookieValue = getCookie(request);
+        System.out.println("cookie = " + cookieValue);
+        Integer userId;
         if (cookieValue == null || cookieValue.equals("null")) {
             userId = userService.loginUser(userLogin);
             if (userId != null) {
@@ -112,116 +133,93 @@ public class Controller {
                 headers.add("Access-Control-Expose-Headers", "Auth-Token");
                 headers.setContentType(MediaType.APPLICATION_JSON);
                 headers.add("Auth-Token", token);
+                if (log.isInfoEnabled()) {
+                    log.info("user id = " + userId + " is login, new cookie");
+                }
                 return new ResponseEntity<UserLogin>(userLogin, headers, HttpStatus.OK);
             } else
                 return new ResponseEntity<UserLogin>((UserLogin) null, HttpStatus.SERVICE_UNAVAILABLE);
         } else {
             userId = userService.findUserByToken(cookieValue).getId();
+            if (log.isInfoEnabled()) {
+                log.info("user id = " + userId + " is login, old cookie");
+            }
             return new ResponseEntity<UserLogin>(userLogin, HttpStatus.OK);
         }
     }
-    @PostMapping(value = "/login")
-    public ResponseEntity<String> loginUser(@RequestBody UserLogin userLogin) {
-        Set<User> users = userService.findAll();
-        Integer userId = userService.loginUser(userLogin);
-        if(userId!=null){
-            User user = userService.find(userId);
-            String token = userService.findTokenByUserId(userId);
-            HttpHeaders headers = new HttpHeaders();
-         //   headers.add("Access-Control-Expose-Headers", "Auth-Token");
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("Auth-Token", token);
-            return new ResponseEntity<String>(String.valueOf(users),headers, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<String>(String.valueOf(users), HttpStatus.SERVICE_UNAVAILABLE);
-        }
-    }
-    @PostMapping(value = "/registration")
-    public ModelAndView registerUser(@ModelAttribute("userRegistration") UserRegistration userRegistration) {
-        ModelAndView modelAndView = new ModelAndView("loginpage");
-        modelAndView.addObject("userRegistration",new UserRegistration());
-        if (!userService.loginIsCorrect(userRegistration.getLogin())) {
-            return modelAndView;
-        }
-        User user = userRegistrationToUserConverter(userRegistration);
-        if (!userRegistration.getFile().isEmpty()) {
-            Date date = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00")).getTime();
-            String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
-            try {
-                byte[] bytes = userRegistration.getFile().getBytes();
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(servletContext.getRealPath("/") +
-                        "/img/" + fileName + ".jpg")));
-                stream.write(bytes);
-                stream.close();
-                user.setPhoto(fileName);
-                userService.save(user);
-            } catch (Exception e) {
-                return modelAndView;//
-            }
-        } else {
-            userService.save(user);
-        }
-        return modelAndView;
-    }
-    @PostMapping(value = "/registration1")
+
+    @PostMapping(value = "/OnlineChat/registration")
     public ResponseEntity registerUser1(@ModelAttribute UserRegistration userRegistration, @RequestParam("myfile") MultipartFile multipartFile) {
-        if (!userService.loginIsCorrect(userRegistration.getLogin())) {
+        if (userService.loginIsCorrect(userRegistration.getLogin())) {
+            if (log.isInfoEnabled()) {
+                log.info("registration error, login is used : " + userRegistration.getLogin());
+            }
             return new ResponseEntity("this login is used", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        if (!userService.emailIsCorrect(userRegistration.getEmail())) {
+        if (userService.emailIsCorrect(userRegistration.getEmail())) {
+            if (log.isInfoEnabled()) {
+                log.info("registration error, email is used : " + userRegistration.getEmail());
+            }
             return new ResponseEntity("this email is used", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         User user = userRegistrationToUserConverter(userRegistration);
         if (!multipartFile.isEmpty()) {
-            Date date = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00")).getTime();
-            String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
             try {
-                byte[] bytes = multipartFile.getBytes();
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("D:/temp/") +
-                        "/img/" + fileName + ".jpg"));
-                stream.write(bytes);
-                stream.close();
-                user.setPhoto(fileName);
+                saveImage(user, multipartFile);
                 userService.save(user);
             } catch (Exception e) {
+                log.error("don't save image : ", e);
                 return new ResponseEntity("don't save image", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } else {
             userService.save(user);
         }
-       return new ResponseEntity("use succes create", HttpStatus.OK);
-    }
-    private void validateImage(MultipartFile image) {
-        if (!image.getContentType().equals("image/jpeg")) {
-            throw new RuntimeException("Only JPG images are accepted");
+        if (log.isInfoEnabled()) {
+            log.info("crreate new user (id): " + user.getId());
         }
+        return new ResponseEntity("use succes create", HttpStatus.OK);
     }
-    private void saveImage(String filename, MultipartFile image) throws RuntimeException, IOException {
-        try {
-            File file = new File(servletContext.getRealPath("/") + "/" + filename);
 
-            FileUtils.writeByteArrayToFile(file, image.getBytes());
-            System.out.println("Go to the location:  " + file.toString()
-                    + " on your computer and verify that the image has been stored.");
-        } catch (IOException e) {
-            throw e;
-        }
+    private void saveImage(User user, MultipartFile image) throws IOException {
+        Date date = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00")).getTime();
+        String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
+        byte[] bytes = image.getBytes();
+        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("../upload/"+fileName + ".jpg")));
+        stream.write(bytes);
+        stream.close();
+        user.setPhoto(fileName);
     }
-    public String getCookie(HttpServletRequest request){
-        String cookieName=null;
-        // получаем все куки
+
+    public String getCookie(HttpServletRequest request) {
+        String cookieName = null;
         Cookie[] cookies = request.getCookies();
-        // есди куки непустые
-        if(cookies !=null){
-            // идем по всем кукам
-            for(Cookie cookie : cookies){
-                // если у нас печенька с атрибутом user совпала
-                if(cookie.getName().equals("Auth-Token")) {
-                    // сохраняем значение в переменную userName
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("Auth-Token")) {
                     cookieName = cookie.getValue();
                 }
             }
-        } return cookieName;
+        }
+        return cookieName;
     }
-
+    @GetMapping(value = "/OnlineChat/getImage/{imageName}")
+    public String showImage(@PathVariable("imageName") String imageName, HttpServletResponse response) throws Exception {
+        ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
+        try {
+            BufferedImage image = ImageIO.read(new File("../upload/"+imageName+".jpg"));
+            ImageIO.write(image, "jpeg", jpegOutputStream);
+        } catch (IllegalArgumentException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+        byte[] imgByte = jpegOutputStream.toByteArray();
+        response.setHeader("Cache-Control", "no-store");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.setContentType("img/jpeg");
+        ServletOutputStream responseOutputStream = response.getOutputStream();
+        responseOutputStream.write(imgByte);
+        responseOutputStream.flush();
+        responseOutputStream.close();
+        return "redirect:/";
+    }
 }

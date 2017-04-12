@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable{
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Access(AccessType.FIELD)
@@ -35,17 +35,27 @@ public class User implements Serializable{
     @Access(AccessType.FIELD)
     @Column(name = "email")
     private String email;
-    @OneToMany(cascade=CascadeType.ALL,mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Message> messages = new HashSet<>();
-    @Access(AccessType.FIELD)
-    @Column(name = "lastmessageid")
-    private Integer lastMessageId;
+
     @Access(AccessType.FIELD)
     @Column(name = "token")
     private String token;
 
 
     public User() {
+    }
+
+    public User(String login, String passwordHash, String name, String surname, String photo, String phone, String email, Set<Message> messages, String token) {
+        this.login = login;
+        this.passwordHash = passwordHash;
+        this.name = name;
+        this.surname = surname;
+        this.photo = photo;
+        this.phone = phone;
+        this.email = email;
+        this.messages = messages;
+        this.token = token;
     }
 
     public Integer getId() {
@@ -118,14 +128,6 @@ public class User implements Serializable{
 
     public void setMessages(Set<Message> messages) {
         this.messages = messages;
-    }
-
-    public Integer getLastMessageId() {
-        return lastMessageId;
-    }
-
-    public void setLastMessageId(Integer lastMessageId) {
-        this.lastMessageId = lastMessageId;
     }
 
     public String getToken() {

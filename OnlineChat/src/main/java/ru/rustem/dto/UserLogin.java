@@ -25,7 +25,6 @@ public class UserLogin {
     }
 
 
-
     public UserLogin() {
     }
 }

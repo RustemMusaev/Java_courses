@@ -4,6 +4,9 @@ package ru.rustem.converter;
 import ru.rustem.dto.UserInfo;
 import ru.rustem.model.User;
 
+/**
+ * Create information user to send all client(without password and id)
+ */
 public class UserToUserInfoConverter {
     public static UserInfo userToUserInfoConverter(User user) {
         UserInfo userInfo = new UserInfo();

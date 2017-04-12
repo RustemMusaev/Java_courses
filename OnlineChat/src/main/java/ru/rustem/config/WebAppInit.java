@@ -1,9 +1,8 @@
 package ru.rustem.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-import ru.rustem.LoginFilter;
+import ru.rustem.utils.LoginFilter;
 
 import javax.servlet.Filter;
 
@@ -28,6 +27,6 @@ public class WebAppInit extends AbstractAnnotationConfigDispatcherServletInitial
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
-        return new Filter[]{ characterEncodingFilter, new LoginFilter() };
+        return new Filter[]{characterEncodingFilter, new LoginFilter()};
     }
 }

@@ -12,8 +12,10 @@ public class UserInfo {
     private String photo;
     private String phone;
     private String email;
+
     public UserInfo() {
     }
+
     public String getLogin() {
         return login;
     }
@@ -73,6 +75,7 @@ public class UserInfo {
         result = 31 * result + login.hashCode();
         return result;
     }
+
     @Override
     public boolean equals(Object object) {
         if (object == this) return true;

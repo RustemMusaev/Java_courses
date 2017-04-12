@@ -28,7 +28,9 @@
             <input type="password" placeholder="Enter Password" id="pwd" name="pwd" required>
             <span id="uploaderror" class="error" style="color: #f44336"></span>
             <div class="clearfix">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                    Cancel
+                </button>
                 <button type="submit" id="sigUpButtom" class="signupbtn">Sign Up</button>
             </div>
         </div>
@@ -39,21 +41,23 @@
     <form class="modal-content animate" enctype="multipart/form-data" id="regform" onsubmit="return false;">
         <div class="container">
             <label><b>login</b></label>
-            <input type="text" name="login" placeholder="Enter login"required/><br/><br/>
+            <input type="text" name="login" placeholder="Enter login" required/><br/><br/>
             <label><b>password</b></label>
             <input type="password" name="password" placeholder="Enter Password" required/><br/><br/>
             <label><b>name</b></label>
-            <input type="text" name="name"  placeholder="Enter name" required/><br/><br/>
+            <input type="text" name="name" placeholder="Enter name" required/><br/><br/>
             <label><b>surname</b></label>
             <input type="text" name="surname" placeholder="Enter surname" required/><br/><br/>
             <label><b>phone(10 char)</b></label>
             <input type="text" name="phone" placeholder="Enter phone" required/><br/><br/>
             <label><b>email</b></label>
             <input type="text" name="email" placeholder="Enter email" required/><br/><br/>
-            Select profile file<input type="file" name="myfile"/><br/><br/>
+            Select profile file<input type="file" id="myfile" name="myfile"/><br/><br/>
             <span id="createErrorMessage" class="error" style="color: #f44336"></span>
             <div class="clearfix">
-                <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Cancel</button>
+                <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">
+                    Cancel
+                </button>
                 <button type="submit" class="signupbtn" id="regButtomnew">Create a new user</button>
             </div>
         </div>

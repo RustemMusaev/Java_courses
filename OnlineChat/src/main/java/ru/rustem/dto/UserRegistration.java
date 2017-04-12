@@ -1,7 +1,5 @@
 package ru.rustem.dto;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class UserRegistration {
     private String login;
     private String password;
@@ -9,7 +7,6 @@ public class UserRegistration {
     private String surname;
     private String phone;
     private String email;
-    private MultipartFile file;
 
     public UserRegistration() {
     }
@@ -60,13 +57,5 @@ public class UserRegistration {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    public void setFile(MultipartFile file) {
-        this.file = file;
     }
 }
