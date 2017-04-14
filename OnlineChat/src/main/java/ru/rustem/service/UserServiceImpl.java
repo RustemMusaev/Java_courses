@@ -3,6 +3,7 @@ package ru.rustem.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.rustem.dao.MessageDao;
 import ru.rustem.dao.UserDao;
 import ru.rustem.dto.UserLogin;
 import ru.rustem.model.User;

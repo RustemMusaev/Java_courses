@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface MessageDao {
     Integer save(Message message);
-
+    List<Message> findAnyParam(String name, String cat, String min, String max);
     List<Message> findAll();
 }
