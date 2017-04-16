@@ -6,10 +6,12 @@ input[type=text] {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
 form div {
     width: 20%;
     display: inline-block;
 }
+
 input[type=submit] {
     width: auto;
     background-color: #4CAF50;
@@ -20,31 +22,41 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
 }
+
 input[type=submit]:hover {
     background-color: #45a049;
 }
+
 div {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
 }
+
 body {
     width: 80%;
     margin: auto;
 }
+
 table {
     border-collapse: collapse;
     width: 100%;
 }
+
 th, td {
     text-align: left;
     padding: 8px;
 }
-tr:nth-child(even){background-color: #f2f2f2}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
 th {
     background-color: #4CAF50;
     color: white;
 }
+
 span {
     color: red;
 }

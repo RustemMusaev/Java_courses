@@ -1,14 +1,12 @@
 package ru.rustem.config;
 
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -17,14 +15,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
-@EnableJpaRepositories("ru.rustem.repository")
 @ComponentScan(basePackages = "ru.rustem")
 @EnableTransactionManagement
 public class SpringConfig extends WebMvcConfigurerAdapter {
-    int PERIOD_ONE_MONTH = 60*60*24*30;
+
+    int PERIOD_ONE_MONTH = 60 * 60 * 24 * 30;
+    private String PROPERTIES_FILE_NAME = "D:\\JavaProject\\Java_courses\\PriceProject\\src\\main\\resources\\application.properties";
+
     @Bean
     public ViewResolver viewResolver() {
         return new InternalResourceViewResolver("/WEB-INF/", ".jsp");
@@ -35,32 +38,44 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(PERIOD_ONE_MONTH);
         registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(PERIOD_ONE_MONTH);
     }
+
     @Bean
-    PlatformTransactionManager transactionManager() {
-        return new JpaTransactionManager(entityManagerFactory().getObject());
-    }
-    @Bean
-    HibernateJpaVendorAdapter hibernateJpaVendorAdapter() {
-        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        adapter.setShowSql(true);
-        return adapter;
-    }
-    @Bean
-    LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean =
-                new LocalContainerEntityManagerFactoryBean();
-        localContainerEntityManagerFactoryBean.setDataSource(dataSource());
-        localContainerEntityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter());
-        localContainerEntityManagerFactoryBean.setPackagesToScan("ru.rustem.model");
-        return localContainerEntityManagerFactoryBean;
-    }
-    @Bean
-    public DataSource dataSource(){
-        DriverManagerDataSource driverManagerDataSource=new DriverManagerDataSource();
-        driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
-        driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/PriceProject");
-        driverManagerDataSource.setUsername("postgres");
-        driverManagerDataSource.setPassword("postgres");
+    public DataSource dataSource() {
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileInputStream(PROPERTIES_FILE_NAME));
+        } catch (IOException e) {
+            System.out.println("Properties file don't input");
+        }
+        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+        driverManagerDataSource.setDriverClassName(properties.getProperty("db.driver"));
+        driverManagerDataSource.setUrl(properties.getProperty("db.url"));
+        driverManagerDataSource.setUsername(properties.getProperty("db.user"));
+        driverManagerDataSource.setPassword(properties.getProperty("db.pwd"));
         return driverManagerDataSource;
+    }
+
+    @Bean
+    public HibernateTransactionManager transactionManager(SessionFactory s) {
+        HibernateTransactionManager txManager = new HibernateTransactionManager();
+        txManager.setSessionFactory(s);
+        return txManager;
+    }
+
+    @Bean
+    public LocalSessionFactoryBean sessionFactory() {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource());
+        sessionFactory.setPackagesToScan(new String[]{"ru.rustem.model"});
+        sessionFactory.setHibernateProperties(hibernateProperties());
+        return sessionFactory;
+    }
+
+    private Properties hibernateProperties() {
+        Properties properties = new Properties();
+        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        properties.put("hibernate.show_sql", true);
+        properties.put("hibernate.format_sql", true);
+        return properties;
     }
 }

@@ -1,12 +1,13 @@
 package ru.rustem.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-@Table(name = "cat")
-public class Category {
+@Table(name = "categorys")
+public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Access(AccessType.FIELD)

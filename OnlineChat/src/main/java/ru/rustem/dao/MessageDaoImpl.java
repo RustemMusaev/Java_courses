@@ -45,7 +45,7 @@ public class MessageDaoImpl implements MessageDao {
         if (min != null) {
             cr.add(Restrictions.gt("id", Integer.parseInt(min)));
         }
-        if (max != null) {
+     /*   if (max != null) {
             cr.add(Restrictions.lt("id", Integer.parseInt(max)));
         }
         if (name != null) {
@@ -53,7 +53,7 @@ public class MessageDaoImpl implements MessageDao {
         }
         if (cat != null) {
             cr.createCriteria("user").add(Restrictions.ilike("name",cat));
-        }
+        }*/
         List results = cr.list();
         return results;
     }

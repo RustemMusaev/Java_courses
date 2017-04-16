@@ -103,6 +103,7 @@ public class Controller {
     @GetMapping({"/","/OnlineChat"})
     public ModelAndView homePage() {
         ModelAndView modelAndView = new ModelAndView("loginpage");
+        messageDao.findAnyParam("1","1","1","1");
         return modelAndView;
     }
 

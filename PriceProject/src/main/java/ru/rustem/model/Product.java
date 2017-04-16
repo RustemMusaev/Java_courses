@@ -1,11 +1,12 @@
 package ru.rustem.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
-@Table(name = "prod")
-public class Product {
+@Table(name = "products")
+public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Access(AccessType.FIELD)
