@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <title>Title</title>
+</head>
+<body>
+<p>
+    <a class="buttonSignOut" wicket:id="close" href="#">close</a>
+</p>
+<table cellspacing="0" class="dataview">
+    <tbody>
+    <tr>
+        <th>id</th>
+        <th>user</th>
+        <th>product</th>
+        <th>date</th>
+        <th>price</th>
+        <th>count</th>
+    </tr>
+    <tr wicket:id="simple">
+        <td><span wicket:id="id"/></td>
+        <td><span wicket:id="user"/></td>
+        <td><span wicket:id="product"/></td>
+        <td><span wicket:id="date"/></td>
+        <td><span wicket:id="price"/></td>
+        <td><span wicket:id="count"/></td>
+    </tr>
+    </tbody>
+</table>
+
+<div wicket:id="navigator"></div>
+</body>
+</html>

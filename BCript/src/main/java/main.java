@@ -1,6 +1,12 @@
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import static java.lang.StrictMath.pow;
+
 
 public class main {
     public static void main(String[] args) {
@@ -13,4 +19,14 @@ public class main {
             System.out.println(encoder.encode("marsel"));
         }
 }
+    public  static class A{
+        void er(){
+
+        };
+    }
+    public static class B extends A{
+        void er(){
+
+        };
+    }
 }

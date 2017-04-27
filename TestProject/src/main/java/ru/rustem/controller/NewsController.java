@@ -142,7 +142,7 @@ public class NewsController {
                 BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("../upload/"+fileName + ".jpg")));
                 stream.write(bytes);
                 stream.close();
-            } catch (Exception e) {
+            } catch (Exception e || NullPointerException ee) {
                  return "Download error " + fileName + " => " + e.getMessage();
             }
         } else {

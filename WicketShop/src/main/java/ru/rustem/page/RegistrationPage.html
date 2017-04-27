@@ -1,0 +1,44 @@
+<html xmlns:wicket="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Registration Form</title>
+    <link rel="stylesheet" type="text/css" href="styleReg.css"/>
+</head>
+<body>
+<div class="parent">
+    <div class="block">
+        <p wicket:id="feedback">feedbackmessages will be put here</p>
+        <form wicket:id="regForm">
+            <fieldset>
+                <legend>Fill your details</legend>
+                <p>
+                    Registration Date : <span wicket:id="regDateId"></span><br/>
+                </p>
+                <p>
+                    <span>login: </span>
+                </p>
+                <p>
+                    <label>length 5-15 char</label>:
+                    <input wicket:id="login" type="text" required/><br/>
+                </p>
+                <p>
+                    <span>password: </span>
+                </p>
+                <p>
+                    <label>1 digit, 1 lower, 1 upper, 1 symbol "@#$%", from 6 to 20</label>:
+                    <input wicket:id="password" type="password"/><br/>
+                </p>
+                <p>
+                    <span>confim password: </span>
+                </p>
+                <p>
+                    <input wicket:id="cpassword" type="password"/><br/>
+                </p>
+                <p>
+                    <input type="submit" name="Submit" value="Submit"/>
+                </p>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>

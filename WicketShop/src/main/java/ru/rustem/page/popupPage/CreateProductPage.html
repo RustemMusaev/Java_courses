@@ -1,0 +1,23 @@
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>Wicket Examples - linkomatic</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+
+<form class="createProduct" wicket:id="userForm">
+    <h2>Please input field</h2>
+    <p>
+        <label>Name</label>:
+        <input wicket:id="addName" type="text" required/>
+        <label>Description</label>:
+        <input wicket:id="addDescription" type="text" required/>
+        <label>Price</label>:
+        <input wicket:id="addPrice" type="text" required/>
+        <label>Count</label>:
+        <input wicket:id="addCount" type="text" required/>
+        <input type="submit" value="Create Product"/>
+    </p>
+</form>
+</body>
+</html>
