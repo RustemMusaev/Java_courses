@@ -1,5 +1,7 @@
 package ru.rustem.service;
 
+import org.apache.log4j.Logger;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.rustem.dao.ProductDao;
@@ -18,6 +20,8 @@ public class TransactionServiceImpl implements TransactionService {
     private TransactionDao transactionDao;
     @Autowired
     private ProductDao productDao;
+
+    private static final Logger log = Logger.getLogger(TransactionServiceImpl.class);
 
     public TransactionServiceImpl() {
     }
@@ -44,8 +48,19 @@ public class TransactionServiceImpl implements TransactionService {
         if (transaction.getId() != null) {
             product.setCount(product.getCount() - 1);
             productDao.save(product);
-            return product.getId();
+            return product.getCount();
         }
         return null;
+    }
+
+    @Override
+    public void buyProduct(Product product) {
+        if (product.getCount() > 0) synchronized (product) {
+            User user = (User) AuthenticatedWebSession.get().getAttribute("userToSession");
+            Integer count = shop(product, user);
+            if (count != null && log.isInfoEnabled()) {
+                    log.info("User = "+ user.getLogin() +"buy product id = " + product.getId());
+            }
+        }
     }
 }

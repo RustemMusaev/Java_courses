@@ -32,7 +32,7 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class SpringConfig extends WebMvcConfigurerAdapter {
     int PERIOD_ONE_MONTH = 60 * 60 * 24 * 30;
-    
+
     @Bean
     public Filter hiddenHttpMethodFilter() {
         HiddenHttpMethodFilter filter = new HiddenHttpMethodFilter();

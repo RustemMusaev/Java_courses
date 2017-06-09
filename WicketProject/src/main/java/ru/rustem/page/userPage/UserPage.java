@@ -23,7 +23,6 @@ public class UserPage extends UserActionPage {
 
     public UserPage() {
         List<Product> products = productService.findAll();
-        System.out.println(products.toString());
         DataView<Product> dataView = new DataView<Product>("pageable", new ProductDataProvider(productService)) {
             private static final long serialVersionUID = 1L;
 

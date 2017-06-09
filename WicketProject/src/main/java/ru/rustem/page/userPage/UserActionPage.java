@@ -1,7 +1,5 @@
 package ru.rustem.page.userPage;
 
-import org.apache.log4j.Logger;
-import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
@@ -11,17 +9,14 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import ru.rustem.model.Product;
-import ru.rustem.model.User;
 import ru.rustem.page.basePage.BasePage;
 import ru.rustem.service.TransactionService;
 
 @AuthorizeInstantiation("USER")
 public class UserActionPage extends BasePage {
-    private Product selected;
+    private Product selectedProduct;
     @SpringBean
     private TransactionService transactionService;
-
-    private static final Logger log = Logger.getLogger(UserActionPage.class);
 
     public UserActionPage() {
         add(new BookmarkablePageLink("signOut", LogoutPage.class));
@@ -29,13 +24,7 @@ public class UserActionPage extends BasePage {
     }
 
     public String getSelectedContactLabel() {
-        if (selected == null) {
-            return "Select product";
-        } else {
-            if (selected.getCount() > 0) {
-                return "Buy the product : name = " + selected.getId() + " , price=" + selected.getPrice();
-            } else return "This position is Empty ";
-        }
+        return productIsSelect(selectedProduct);
     }
 
     class ProductPanel extends Panel {
@@ -44,28 +33,29 @@ public class UserActionPage extends BasePage {
             add(new Link("selectP") {
                 @Override
                 public void onClick() {
-                    selected = (Product) getParent().getDefaultModelObject();
-                    if (selected.getCount() > 0) {
-                        User user = (User) AuthenticatedWebSession.get().getAttribute("userToSession");
-                        Integer count = transactionService.shop(selected, user);
-                        if (count != null) {
-                            selected.setCount(count);
-                            if (log.isInfoEnabled()) {
-                                log.info("User = "+ user.getLogin() +"buy product id = " + selected.getId());
-                            }
-                        }
-                    }
+                    selectedProduct = (Product) getParent().getDefaultModelObject();
+                    transactionService.buyProduct(selectedProduct);
                 }
             });
         }
     }
 
-    public Product getSelected() {
-        return selected;
+    public Product getSelectedProduct() {
+        return selectedProduct;
     }
 
-    public void setSelected(Product selected) {
+    public void setSelectedProduct(Product product) {
         addStateChange();
-        this.selected = selected;
+        this.selectedProduct = product;
+    }
+
+    public String productIsSelect(Product product) {
+        if (product == null) {
+            return "Select product";
+        }
+        if (product.getCount() > 0) {
+            return "Buy the product : name = " + product.getId() + " , price=" + product.getPrice();
+        } else
+            return "This position is Empty ";
     }
 }

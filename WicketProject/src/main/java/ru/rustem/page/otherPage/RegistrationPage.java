@@ -1,4 +1,4 @@
-package ru.rustem.page;
+package ru.rustem.page.otherPage;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
@@ -13,13 +13,10 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.PatternValidator;
 import ru.rustem.model.RegUser;
-import ru.rustem.model.User;
 import ru.rustem.service.UserService;
 import ru.rustem.validator.UserNameValidator;
 
 import java.util.Date;
-
-import static ru.rustem.config.MyAuthenticatedWebSession.ENCODER;
 
 public class RegistrationPage extends WebPage {
     //1 digit, 1 lower, 1 upper, 1 symbol "@#$%", from 6 to 20
@@ -45,8 +42,7 @@ public class RegistrationPage extends WebPage {
         form = new Form<Void>("regForm") {
             public void onSubmit() {
                 if (userService.loginIsCorrect(regUser.getLogin())) {
-                    User user = new User(regUser.getLogin(), ENCODER.encode(regUser.getPassword()), "USER");
-                    userService.save(user);
+                    userService.save(regUser);
                     setResponsePage(HomePage.class);
                 }
             }

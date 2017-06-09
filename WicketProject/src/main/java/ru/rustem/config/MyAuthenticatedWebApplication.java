@@ -6,8 +6,8 @@ import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ru.rustem.page.HomePage;
-import ru.rustem.page.SignInPage;
+import ru.rustem.page.otherPage.HomePage;
+import ru.rustem.page.otherPage.SignInPage;
 
 public class MyAuthenticatedWebApplication extends AuthenticatedWebApplication {
 

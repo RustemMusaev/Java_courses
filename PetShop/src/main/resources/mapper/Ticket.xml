@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Ticket">
+
+    <resultMap id="result" type="Ticket">
+        <result property="id" column="id"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="result">
+        SELECT * FROM tickets;
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="result">
+        SELECT * FROM tickets WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="Ticket" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tickets (email, phone, status) VALUES (#{email}, #{phone}, #{status});
+    </insert>
+
+    <update id="update" parameterType="Ticket">
+        UPDATE tickets
+        SET email = #{email} , phone = #{phone} , status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE from tickets WHERE id = #{id}
+    </delete>
+</mapper>

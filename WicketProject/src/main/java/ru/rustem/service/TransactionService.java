@@ -12,4 +12,6 @@ public interface TransactionService {
     Integer save(Transaction transaction);
 
     Integer shop(Product product, User user);
+
+    void buyProduct(Product product);
 }

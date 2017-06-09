@@ -1,4 +1,4 @@
-package ru.rustem.page;
+package ru.rustem.page.otherPage;
 
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;

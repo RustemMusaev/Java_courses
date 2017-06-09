@@ -146,7 +146,7 @@ public class AdminPage extends BasePage {
                 public void onSubmit() {
                     Product product = (Product) ActionPanel.this.getDefaultModelObject();
                     info("Removed  " + product);
-                    boolean qwe = productService.delete(product);
+                    productService.delete(product);
                 }
             };
             removeLink.setDefaultFormProcessing(false);
