@@ -1,40 +1,32 @@
+<%@ page import="ru.rustem.model.Ticket" %>
+<%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Test Project</title>
+    <%@ page contentType="text/html; charset=UTF-8" %>
     <link rel="stylesheet" href="/ext-all.css" type="text/css" />
-    <script src="/ext-all.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/script.js" type="text/javascript"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/theme-classic/resources/theme-classic-all.css" rel="stylesheet" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/ext-all.js"></script>
+    <script src="<c:url value="/js/ext-all.js" />" defer></script>
     <script type="text/javascript">
         Ext.onReady(function() {
-           var myData = [
-                ['3m Co', 71.72, 0.02,  0.03,  '9/1 12:00am'],
-                ['Alcoa Inc', 29.01, 0.42,  1.47,  '9/1 12:00am'],
-                //..................
-                ['Verizon Communications', 35.57, 0.39,  1.11,  '9/1 12:00am'],
-                ['Wal-Mart Stores, Inc.', 45.45, 0.73,  1.63,  '9/1 12:00am']
-            ];
-
             Ext.define('Ticket',{
                 extend : 'Ext.data.Model',
                 fields: ['id','email','phone','status']
             });
-            var proxy = new Ext.data.proxy.Ajax({
-                model : 'Ticket',
-                url: 'http://localhost:8181/tickets',
-                reader: 'json'
-            });
-            var store = Ext.create('Ext.data.Store', {
-                model : 'Ticket',
-                proxy: {
-                    type: 'ajax',
-                    url: 'http://localhost:8181/tickets'
+
+             var store = Ext.create('Ext.data.Store', {
+                 model : 'Ticket',
+                 proxy: {
+                     type: 'ajax',
+                     url: '/tickets',
+                     reader: {
+                         type: 'json',
+                         root: 'data'
+                     }
                  },
-                autoLoad: true
+                 autoLoad: true
             });
 
             var grid = Ext.create('Ext.grid.Panel', {

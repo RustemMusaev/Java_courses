@@ -28,6 +28,6 @@ public class WebAppInit extends AbstractAnnotationConfigDispatcherServletInitial
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
-        return new Filter[]{new HiddenHttpMethodFilter(), new LoginFilter()};
+        return new Filter[]{new HiddenHttpMethodFilter(), new WebFilter()};
     }
 }

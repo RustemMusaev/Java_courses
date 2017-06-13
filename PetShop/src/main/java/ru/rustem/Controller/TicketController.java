@@ -1,39 +1,42 @@
-package ru.rustem.Controller;
+package ru.rustem.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.rustem.DAO.TicketDAO;
-import ru.rustem.MyBatisConnectionFactory;
 import ru.rustem.model.Ticket;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 public class TicketController {
 
-    TicketDAO ticketDAO = new TicketDAO(MyBatisConnectionFactory.getSqlSessionFactory());
+    @Autowired
+    TicketDAO ticketDAO;
 
     @RequestMapping(value = "/tickets", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, List<Ticket>> findAll(){
-        Map<String, List<Ticket>> tickets = new HashMap<String, List<Ticket>>();
-        tickets.put("tickets", ticketDAO.selectAll());
-        return tickets;
+    public List<Ticket> findAll11() {
+        return ticketDAO.selectAll();
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home(Map<String, Object> model) {
+        List<Ticket> tickets = ticketDAO.selectAll();
+        model.put("tickets", tickets);
+        return "client";
     }
 
     @RequestMapping(value = "/ticket/add", method = RequestMethod.POST)
     @ResponseBody
-    public int save(@RequestBody Ticket ticket){
+    public int save(@RequestBody Ticket ticket) {
         return ticketDAO.insert(ticket);
     }
 
     @RequestMapping(value = "/ticket/update", method = RequestMethod.PUT)
     @ResponseBody
-    public Ticket update(@RequestBody Ticket ticket){
+    public Ticket update(@RequestBody Ticket ticket) {
         Integer id = ticket.getId();
         ticketDAO.update(ticket);
         return ticketDAO.selectById(id);
@@ -41,7 +44,7 @@ public class TicketController {
 
     @RequestMapping(value = "/ticket/delete/{id}")
     @ResponseBody
-    public boolean delete(@PathVariable("id") Integer id){
+    public boolean delete(@PathVariable("id") Integer id) {
         return ticketDAO.delete(id);
     }
 }

@@ -1,8 +1,5 @@
 package ru.rustem.model;
 
-/**
- * Created by musaevrr on 07.06.2017.
- */
 public class Ticket {
     private Integer id;
     private String email;

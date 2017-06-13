@@ -11,15 +11,18 @@
 
     <properties>
         <spring.version>3.2.18.RELEASE</spring.version>
+        <mybatis.version>3.4.4</mybatis.version>
+        <postgres.version>9.4.1207</postgres.version>
+        <servlet.version>3.1.0</servlet.version>
+        <jackson.version>2.4.1</jackson.version>
     </properties>
-
 
     <dependencies>
         <!-- Mybatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.4.4</version>
+            <version>${mybatis.version}</version>
         </dependency>
         <!-- Spring -->
         <dependency>
@@ -41,25 +44,31 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.4.1207</version>
+            <version>${postgres.version}</version>
+        </dependency>
+        <!-- Servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>${servlet.version}</version>
         </dependency>
+        <!-- Jackson -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.4.1</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.4.1.1</version>
+            <version>${jackson.version}</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -81,6 +90,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
