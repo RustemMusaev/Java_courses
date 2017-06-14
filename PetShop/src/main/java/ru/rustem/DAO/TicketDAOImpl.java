@@ -17,7 +17,6 @@ public class TicketDAOImpl implements TicketDAO {
         this.sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();
     }
 
-    @SuppressWarnings("unchecked")
     public List<Ticket> selectAll() {
         List<Ticket> list = null;
         SqlSession session = sqlSessionFactory.openSession();

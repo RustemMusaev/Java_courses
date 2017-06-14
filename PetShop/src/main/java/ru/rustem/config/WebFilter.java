@@ -1,6 +1,5 @@
 package ru.rustem.config;
 
-
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.*;
@@ -20,7 +19,7 @@ public class WebFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        filterChain.doFilter(servletRequest, response);
+        filterChain.doFilter(request, response);
     }
 
     public void destroy() {

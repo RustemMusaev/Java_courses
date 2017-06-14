@@ -17,7 +17,7 @@ public class TicketController {
 
     @RequestMapping(value = "/tickets", method = RequestMethod.GET)
     @ResponseBody
-    public List<Ticket> findAll11() {
+    public List<Ticket> findAll() {
         return ticketDAO.selectAll();
     }
 

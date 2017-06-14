@@ -23,10 +23,10 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(PERIOD_ONE_MONTH);
-        registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(PERIOD_ONE_MONTH);
-        registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(PERIOD_ONE_MONTH);
+        registry.addResourceHandler("/js/**").addResourceLocations("WEB-INF/js/").setCachePeriod(PERIOD_ONE_MONTH);
+        registry.addResourceHandler("/css/**").addResourceLocations("WEB-INF/css").setCachePeriod(PERIOD_ONE_MONTH);
     }
 
 }
