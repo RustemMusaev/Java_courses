@@ -1,9 +1,10 @@
-package ru.rustem.DAO;
+package ru.rustem.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.rustem.config.MyBatisConnectionFactory;
+
 import ru.rustem.model.Ticket;
 
 import java.util.List;
@@ -11,16 +12,16 @@ import java.util.List;
 @Component
 public class TicketDAOImpl implements TicketDAO {
 
-    private SqlSessionFactory sqlSessionFactory = null;
+    private SqlSessionFactory sqlSessionFactory;
 
-    public TicketDAOImpl() {
-        this.sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();
+    @Autowired
+    public TicketDAOImpl(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 
     public List<Ticket> selectAll() {
         List<Ticket> list = null;
         SqlSession session = sqlSessionFactory.openSession();
-
         try {
             list = session.selectList("Ticket.selectAll");
         } finally {

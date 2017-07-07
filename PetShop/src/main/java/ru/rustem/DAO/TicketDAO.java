@@ -1,4 +1,4 @@
-package ru.rustem.DAO;
+package ru.rustem.dao;
 
 
 import ru.rustem.model.Ticket;
