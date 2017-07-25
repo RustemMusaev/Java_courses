@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class CreateXMLfileWithXMLStreamWriter {
-    public final String XML_FILE_TO_WRITE = "D:\\1.xml";
+    public final String XML_FILE_TO_WRITE = "Data.xml";
 
     public void createXMLfileWithXMLStreamWriter(List<Point> list) throws XMLStreamException {
         XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
@@ -19,9 +19,9 @@ public class CreateXMLfileWithXMLStreamWriter {
         try {
             xmlStreamWriter = xmlOutputFactory.createXMLStreamWriter(new FileWriter(XML_FILE_TO_WRITE));
         } catch (XMLStreamException e) {
-            e.printStackTrace();
+            new RuntimeException("Error XMLStreamWriter ");
         } catch (IOException e) {
-            e.printStackTrace();
+            new RuntimeException("Error create file = " + XML_FILE_TO_WRITE);
         }
         xmlStreamWriter.writeStartDocument("UTF-8", "1.0");
         xmlStreamWriter.writeStartElement("points");

@@ -1,6 +1,5 @@
 package com.mySampleApplication.server.parse;
 
-
 import com.mySampleApplication.server.model.Point;
 
 import javax.xml.stream.XMLInputFactory;
@@ -14,23 +13,23 @@ import java.util.List;
 
 public class ParseXMLWithXMLStreamReader {
 
-    public static final String XML_FILE_TO_READ = "D:\\1.xml";
+    public static final String XML_FILE_TO_READ = "Data.xml";
 
-    public static List<Point> ParseXMLWithXMLStreamReader() {
+    public List<Point> ParseXMLWithXMLStreamReader() {
         CreateXMLfileWithXMLStreamWriter createXMLfileWithXMLStreamWriter = new CreateXMLfileWithXMLStreamWriter();
         try {
             createXMLfileWithXMLStreamWriter.createXMLfileWithXMLStreamWriter(generatePoints());
         } catch (XMLStreamException e) {
-            e.printStackTrace();
+            new RuntimeException("Error createXMLfileWithXMLStreamWriter(generate file) = " + XML_FILE_TO_READ);
         }
         XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
         XMLStreamReader parser = null;
         try {
             parser = xmlInputFactory.createXMLStreamReader(new FileInputStream(XML_FILE_TO_READ));
         } catch (XMLStreamException e) {
-            e.printStackTrace();
+            new RuntimeException("Error xmlInputFactory");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            new RuntimeException("Error open(file not found) file = " + XML_FILE_TO_READ);;
         }
         List<Point> pointList = new ArrayList<>();
         Point point = null;
@@ -39,10 +38,8 @@ public class ParseXMLWithXMLStreamReader {
             while (true) {
                 switch (event) {
                     case XMLStreamConstants.START_DOCUMENT:
-                        System.out.println("Start Document.");
                         break;
                     case XMLStreamConstants.START_ELEMENT:
-                        System.out.println("Start Element: " + parser.getName() + "");
                         if (String.valueOf(parser.getName()).equals("point")) {
                             point = new Point();
                             point.setId(Integer.parseInt(parser.getAttributeValue(0)));
@@ -50,26 +47,18 @@ public class ParseXMLWithXMLStreamReader {
                         if (point != null) {
                             createPoint(point, parser);
                         }
-
-                        // for(int i = 0, n = parser.getAttributeCount(); i < n; ++i)
-                        //      System.out.println("Attribute i="+i+ ": " + parser.getAttributeName(i)
-                        //                + "=" + parser.getAttributeValue(i));
-                        //   break;
                     case XMLStreamConstants.CHARACTERS:
                         if (parser.isWhiteSpace())
                             break;
-                        //      System.out.println("Text: " + parser.getText());
                         break;
                     case XMLStreamConstants.END_ELEMENT:
                         System.out.println("End Element:" + parser.getName());
                         if (String.valueOf(parser.getName()).equals("point")) {
                             pointList.add(point);
-                            System.out.println(pointList);
                             point = null;
                         }
                         break;
                     case XMLStreamConstants.END_DOCUMENT:
-                        System.out.println("End Document.");
                         break;
                 }
                 if (!parser.hasNext())
@@ -77,17 +66,18 @@ public class ParseXMLWithXMLStreamReader {
                 event = parser.next();
             }
         } catch (XMLStreamException e) {
-            e.printStackTrace();
+            new RuntimeException("Error parser.hasNext");
         } finally {
             try {
                 parser.close();
             } catch (XMLStreamException e) {
-                e.printStackTrace();
+                new RuntimeException("Error close parser");
             }
         }
         return pointList;
     }
-    public static void createPoint(Point point, XMLStreamReader parser) throws XMLStreamException {
+
+    private void createPoint(Point point, XMLStreamReader parser) throws XMLStreamException {
         String name = String.valueOf(parser.getName());
         if (name.equals("name")) {
             point.setName(parser.getElementText());
@@ -108,22 +98,24 @@ public class ParseXMLWithXMLStreamReader {
             point.setServices(Integer.parseInt(parser.getElementText()));
         }
     }
-    public static List<Point> generatePoints() {
+
+    private List<Point> generatePoints() {
         List<Point> points = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Point point = new Point();
-            point.setId(i+1);
+            point.setId(i + 1);
             point.setCountry(generateCountry());
             point.setAddress(point.getCountry() + " street");
             point.setName(point.getCountry() + " name");
-            point.setCity(point.getCountry()+ " city");
+            point.setCity(point.getCountry() + " city");
             point.setPhone(generatePhone());
             point.setServices(generateService());
             points.add(point);
         }
         return points;
     }
-    public static String generatePhone() {
+
+    private String generatePhone() {
         StringBuilder phone = new StringBuilder();
         phone.append((int) (Math.random() * 10)).append((int) (Math.random() * 10)).append((int) (Math.random() * 10))
                 .append((int) (Math.random() * 10)).append((int) (Math.random() * 10)).append((int) (Math.random() * 10))
@@ -131,7 +123,8 @@ public class ParseXMLWithXMLStreamReader {
                 .append((int) (Math.random() * 10));
         return String.valueOf(phone);
     }
-    public static int generateService() {
+
+    private int generateService() {
         int count = (int) (Math.random() * 10);
         if (count == 0 || count == 1 || count == 2 || count == 3) {
             return 0;
@@ -142,7 +135,8 @@ public class ParseXMLWithXMLStreamReader {
         }
         return count;
     }
-    public static String generateCountry(){
+
+    private String generateCountry() {
         List<String> countries = new ArrayList<>();
         countries.add("Afghanistan");
         countries.add("Albania");

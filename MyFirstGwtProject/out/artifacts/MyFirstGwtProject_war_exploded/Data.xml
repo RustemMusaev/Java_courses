@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<points>
+    <point id="1">
+        <name>Azerbaijan name</name>
+        <city>Azerbaijan city</city>
+        <country>Azerbaijan</country>
+        <address>Azerbaijan street</address>
+        <phone>0133850995</phone>
+        <services>1</services>
+    </point>
+    <point id="2">
+        <name>Albania name</name>
+        <city>Albania city</city>
+        <country>Albania</country>
+        <address>Albania street</address>
+        <phone>0210603102</phone>
+        <services>0</services>
+    </point>
+    <point id="3">
+        <name>Azerbaijan name</name>
+        <city>Azerbaijan city</city>
+        <country>Azerbaijan</country>
+        <address>Azerbaijan street</address>
+        <phone>5331402490</phone>
+        <services>1</services>
+    </point>
+    <point id="4">
+        <name>Bolivia name</name>
+        <city>Bolivia city</city>
+        <country>Bolivia</country>
+        <address>Bolivia street</address>
+        <phone>1326700462</phone>
+        <services>1</services>
+    </point>
+    <point id="5">
+        <name>Andorra name</name>
+        <city>Andorra city</city>
+        <country>Andorra</country>
+        <address>Andorra street</address>
+        <phone>7229440592</phone>
+        <services>1</services>
+    </point>
+    <point id="6">
+        <name>Congo name</name>
+        <city>Congo city</city>
+        <country>Congo</country>
+        <address>Congo street</address>
+        <phone>6642581225</phone>
+        <services>0</services>
+    </point>
+    <point id="7">
+        <name>Cocos Islands name</name>
+        <city>Cocos Islands city</city>
+        <country>Cocos Islands</country>
+        <address>Cocos Islands street</address>
+        <phone>5524318425</phone>
+        <services>1</services>
+    </point>
+    <point id="8">
+        <name>Croatia name</name>
+        <city>Croatia city</city>
+        <country>Croatia</country>
+        <address>Croatia street</address>
+        <phone>2613680339</phone>
+        <services>2</services>
+    </point>
+    <point id="9">
+        <name>Azerbaijan name</name>
+        <city>Azerbaijan city</city>
+        <country>Azerbaijan</country>
+        <address>Azerbaijan street</address>
+        <phone>2128618460</phone>
+        <services>0</services>
+    </point>
+    <point id="10">
+        <name>Bahrain name</name>
+        <city>Bahrain city</city>
+        <country>Bahrain</country>
+        <address>Bahrain street</address>
+        <phone>4431555447</phone>
+        <services>0</services>
+    </point>
+</points>

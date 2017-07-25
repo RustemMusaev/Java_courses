@@ -24,24 +24,19 @@ public class MySampleApplication implements EntryPoint {
     private Button searchCity = new Button("searchCity");
     private Button searchPoint = new Button("searchPoint");
     private Button searchCountry = new Button("searchCountry");
-    private Button reloadData = new Button("reload Data");
+    private Button reloadButton = new Button("reload Data");
     private List<PointDto> pointDtos = new ArrayList<>();
 
     public void onModuleLoad() {
-        listBox = new ListBox();
-        listBox.addItem("input");
-        listBox.addItem("output");
-        listBox.addItem("input and output");
-        listBox.setItemSelected(0, true);
-        listBox.setStyleName("suggestBox");
+        addListBox();
 
-        reloadData.setStyleName("button");
-        RootPanel.get("buttoms").add(reloadData);
-        RootPanel.get("listBox").add(listBox);
+        reloadButton.setStyleName("button");
+        RootPanel.get("buttoms").add(reloadButton);
+
         searchCountry.setStyleName("button");
         RootPanel.get("listBox").add(searchCountry);
 
-        reloadData.addClickHandler(new ClickHandler() {
+        reloadButton.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 MySampleApplicationService.App.getInstance().reloadDataBase(new AsyncCallback<Void>() {
@@ -143,6 +138,7 @@ public class MySampleApplication implements EntryPoint {
             }
         });
     }
+
     private MultiWordSuggestOracle getCity(int t, String value) {
         MultiWordSuggestOracle citys = new MultiWordSuggestOracle();
         MySampleApplicationService.App.getInstance().getCitys(t, value, new AsyncCallback<List<String>>() {
@@ -160,18 +156,30 @@ public class MySampleApplication implements EntryPoint {
         });
         return citys;
     }
+
     private MultiWordSuggestOracle getCountries(int count) {
         MultiWordSuggestOracle countries = new MultiWordSuggestOracle();
-        MySampleApplicationService.App.getInstance().getCountrys(count, new AsyncCallback<List<String>>() {
+        MySampleApplicationService.App.getInstance().getCountries(count, new AsyncCallback<List<String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert("ERROR");
             }
+
             @Override
             public void onSuccess(List<String> result) {
                 countries.addAll(result);
             }
         });
         return countries;
+    }
+
+    private void addListBox(){
+        listBox = new ListBox();
+        listBox.addItem("input");
+        listBox.addItem("output");
+        listBox.addItem("input and output");
+        listBox.setItemSelected(0, true);
+        listBox.setStyleName("suggestBox");
+        RootPanel.get("listBox").add(listBox);
     }
 }

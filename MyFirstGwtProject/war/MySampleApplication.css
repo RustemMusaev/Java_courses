@@ -3,13 +3,16 @@ h1 {
     font-weight: bold;
     text-align: center;
 }
+
 body {
     width: 60%;
     margin: auto;
 }
+
 p {
     font-family: "Times New Roman", sans-serif;
 }
+
 .button {
     padding: 5px 5px;
     font-size: 20px;
@@ -23,18 +26,24 @@ p {
     box-shadow: 0 4px #999;
     margin-left: 5px;
 }
-.button:hover {background-color: #3e8e41}
+
+.button:hover {
+    background-color: #3e8e41
+}
+
 .button:active {
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
 }
+
 div {
     font-family: "Times New Roman", sans-serif;
     margin: auto;
     text-align: center;
     padding: 10px;
 }
+
 .suggestBox {
     width: 60%;
     padding: 12px 20px;
@@ -44,6 +53,7 @@ div {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
 .label {
     text-align: left;
     font-size: 14px;

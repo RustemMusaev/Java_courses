@@ -4,15 +4,14 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.mySampleApplication.client.MySampleApplicationService;
 import com.mySampleApplication.client.model.PointDto;
 import com.mySampleApplication.server.model.Point;
+import com.mySampleApplication.server.parse.ParseXMLWithXMLStreamReader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mySampleApplication.server.parse.ParseXMLWithXMLStreamReader.ParseXMLWithXMLStreamReader;
-
 public class MySampleApplicationServiceImpl extends RemoteServiceServlet implements MySampleApplicationService {
 
-    static List<Point> points = ParseXMLWithXMLStreamReader();
+    private static List<Point> points = new ParseXMLWithXMLStreamReader().ParseXMLWithXMLStreamReader();
 
     @Override
     public List<String> getCitys(int service, String country) {
@@ -42,11 +41,11 @@ public class MySampleApplicationServiceImpl extends RemoteServiceServlet impleme
     @Override
     public void reloadDataBase() {
         points = null;
-        points = ParseXMLWithXMLStreamReader();
+        points = new ParseXMLWithXMLStreamReader().ParseXMLWithXMLStreamReader();
     }
 
     @Override
-    public List<String> getCountrys(int service) {
+    public List<String> getCountries(int service) {
         List<String> countries = new ArrayList<>();
         for (Point p : points) {
             if (p.getServices() == service) {

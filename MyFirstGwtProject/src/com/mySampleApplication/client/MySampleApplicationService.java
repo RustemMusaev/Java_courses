@@ -9,7 +9,7 @@ import java.util.List;
 
 @RemoteServiceRelativePath("MySampleApplicationService")
 public interface MySampleApplicationService extends RemoteService {
-    List<String> getCountrys(int services);
+    List<String> getCountries(int services);
 
     List<String> getCitys(int services, String country);
 
