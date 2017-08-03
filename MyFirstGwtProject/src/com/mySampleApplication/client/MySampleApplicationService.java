@@ -17,7 +17,7 @@ public interface MySampleApplicationService extends RemoteService {
 
     void reloadDataBase();
 
-    public static class App {
+    class App {
         private static MySampleApplicationServiceAsync ourInstance = GWT.create(MySampleApplicationService.class);
 
         public static synchronized MySampleApplicationServiceAsync getInstance() {

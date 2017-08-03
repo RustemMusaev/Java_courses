@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class CreateXMLfileWithXMLStreamWriter {
-    public final String XML_FILE_TO_WRITE = "Data.xml";
+    public final String XML_FILE_TO_WRITE = "../Data.xml";
 
     public void createXMLfileWithXMLStreamWriter(List<Point> list) throws XMLStreamException {
         XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();

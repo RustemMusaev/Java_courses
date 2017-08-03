@@ -26,6 +26,8 @@ public class MySampleApplication implements EntryPoint {
     private Button searchCountry = new Button("searchCountry");
     private Button reloadButton = new Button("reload Data");
     private List<PointDto> pointDtos = new ArrayList<>();
+    private List<String> listCity = new ArrayList<>();
+    private List<String> listPoint = new ArrayList<>();
 
     public void onModuleLoad() {
         addListBox();
@@ -44,6 +46,7 @@ public class MySampleApplication implements EntryPoint {
                     public void onFailure(Throwable caught) {
                         Window.alert("error reload Data");
                     }
+
                     @Override
                     public void onSuccess(Void result) {
                         Window.alert("reload OK");
@@ -77,66 +80,102 @@ public class MySampleApplication implements EntryPoint {
             public void onClick(ClickEvent event) {
                 RootPanel.get("city").clear();
                 RootPanel.get("tablePoint").clear();
-                county = suggestBox.getValue();
-                MultiWordSuggestOracle oracle = (getCity(t, county));
-                suggestCity = new SuggestBox(oracle);
-                suggestCity.setStyleName("suggestBox");
-                Label label = new Label("Select City");
-                label.setStyleName("label");
-                RootPanel.get("city").add(label);
-                RootPanel.get("city").add(suggestCity);
-                searchPoint.setStyleName("button");
-                RootPanel.get("city").add(searchPoint);
+                if (listCity.contains(String.valueOf(suggestBox.getValue()))) {
+                    county = suggestBox.getValue();
+                    MultiWordSuggestOracle oracle = (getCity(t, county));
+                    suggestCity = new SuggestBox(oracle);
+                    suggestCity.setStyleName("suggestBox");
+                    Label label = new Label("Select City");
+                    label.setStyleName("label");
+                    RootPanel.get("city").add(label);
+                    RootPanel.get("city").add(suggestCity);
+                    searchPoint.setStyleName("button");
+                    RootPanel.get("city").add(searchPoint);
+                } else {
+                    Window.alert("select correct value");
+                }
             }
         });
         searchPoint.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 RootPanel.get("tablePoint").clear();
-                city = suggestCity.getValue();
-                MySampleApplicationService.App.getInstance().getPointDto(t, county, city, new AsyncCallback<List<PointDto>>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        Window.alert("err Point downloads");
-                    }
-
-                    @Override
-                    public void onSuccess(List<PointDto> result) {
-                        for (PointDto p : result) {
-                            pointDtos.add(p);
+                if (listPoint.contains(String.valueOf(suggestCity.getValue()))) {
+                    city = suggestCity.getValue();
+                    MySampleApplicationService.App.getInstance().getPointDto(t, county, city, new AsyncCallback<List<PointDto>>() {
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            Window.alert("err Point downloads");
                         }
-                        CellTable<PointDto> cellTable = new CellTable<>();
-                        TextColumn<PointDto> columnName = new TextColumn<PointDto>() {
-                            @Override
-                            public String getValue(PointDto object) {
-                                return object.getName();
-                            }
-                        };
-                        cellTable.addColumn(columnName, "Name");
 
-                        TextColumn<PointDto> columnPhone = new TextColumn<PointDto>() {
-                            @Override
-                            public String getValue(PointDto object) {
-                                return object.getPhone();
-                            }
-                        };
-                        cellTable.addColumn(columnPhone, "Phone");
+                        @Override
+                        public void onSuccess(List<PointDto> result) {
+                            pointDtos.addAll(result);
 
-                        TextColumn<PointDto> columnAdress = new TextColumn<PointDto>() {
-                            @Override
-                            public String getValue(PointDto object) {
-                                return object.getAddress();
-                            }
-                        };
-                        cellTable.addColumn(columnAdress, "Adress");
-                        cellTable.setRowCount(pointDtos.size(), true);
-                        cellTable.setRowData(0, pointDtos);
-                        pointDtos = new ArrayList<>();
-                        RootPanel.get("tablePoint").add(cellTable);
-                    }
-                });
+                            // CellTable<PointDto> cellTable = new CellTable<>();
+                            /*TextColumn<PointDto> columnName = new TextColumn<PointDto>() {
+                                @Override
+                                public String getValue(PointDto object) {
+                                    return object.getName();
+                                }
+                            };
+                            cellTable.addColumn(columnName, "Name");
+
+                            TextColumn<PointDto> columnPhone = new TextColumn<PointDto>() {
+                                @Override
+                                public String getValue(PointDto object) {
+                                    return object.getPhone();
+                                }
+                            };
+                            cellTable.addColumn(columnPhone, "Phone");
+
+                            TextColumn<PointDto> columnAdress = new TextColumn<PointDto>() {
+                                @Override
+                                public String getValue(PointDto object) {
+                                    return object.getAddress();
+                                }
+                            };
+                            cellTable.addColumn(columnAdress, "Adress");
+                            cellTable.setRowCount(pointDtos.size(), true);
+                            cellTable.setRowData(0, pointDtos);
+                            pointDtos = new ArrayList<>();*/
+                            RootPanel.get("tablePoint").add(createCellTable(pointDtos));
+                        }
+                    });
+                } else {
+                    Window.alert("select correct value");
+                }
             }
         });
+    }
+
+    private CellTable<PointDto> createCellTable(List<PointDto> result) {
+        CellTable<PointDto> cellTable = new CellTable<>();
+        TextColumn<PointDto> columnName = new TextColumn<PointDto>() {
+            @Override
+            public String getValue(PointDto object) {
+                return object.getName();
+            }
+        };
+        cellTable.addColumn(columnName, "Name");
+        TextColumn<PointDto> columnPhone = new TextColumn<PointDto>() {
+            @Override
+            public String getValue(PointDto object) {
+                return object.getPhone();
+            }
+        };
+        cellTable.addColumn(columnPhone, "Phone");
+        TextColumn<PointDto> columnAdress = new TextColumn<PointDto>() {
+            @Override
+            public String getValue(PointDto object) {
+                return object.getAddress();
+            }
+        };
+        cellTable.addColumn(columnAdress, "Adress");
+        cellTable.setRowCount(result.size(), true);
+        cellTable.setRowData(0, result);
+        pointDtos.clear();
+        return cellTable;
     }
 
     private MultiWordSuggestOracle getCity(int t, String value) {
@@ -149,9 +188,9 @@ public class MySampleApplication implements EntryPoint {
 
             @Override
             public void onSuccess(List<String> result) {
-                for (String s : result) {
-                    citys.add(s);
-                }
+                listPoint = result;
+                citys.addAll(result);
+
             }
         });
         return citys;
@@ -167,13 +206,14 @@ public class MySampleApplication implements EntryPoint {
 
             @Override
             public void onSuccess(List<String> result) {
+                listCity = result;
                 countries.addAll(result);
             }
         });
         return countries;
     }
 
-    private void addListBox(){
+    private void addListBox() {
         listBox = new ListBox();
         listBox.addItem("input");
         listBox.addItem("output");

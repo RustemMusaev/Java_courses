@@ -10,7 +10,8 @@
     <set-property name="gwt.logging.enabled" value="TRUE"/>
 
     <entry-point class='com.mySampleApplication.client.MySampleApplication'/>
-
+    <!-- Specify the app servlets.                   -->
     <servlet path='/MySampleApplicationService' class='com.mySampleApplication.server.MySampleApplicationServiceImpl'/>
+
 
 </module>

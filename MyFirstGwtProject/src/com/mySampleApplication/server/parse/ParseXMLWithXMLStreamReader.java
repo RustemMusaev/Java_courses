@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ParseXMLWithXMLStreamReader {
 
-    public static final String XML_FILE_TO_READ = "Data.xml";
+    public static final String XML_FILE_TO_READ = "../Data.xml";
 
     public List<Point> ParseXMLWithXMLStreamReader() {
         CreateXMLfileWithXMLStreamWriter createXMLfileWithXMLStreamWriter = new CreateXMLfileWithXMLStreamWriter();
@@ -29,7 +29,8 @@ public class ParseXMLWithXMLStreamReader {
         } catch (XMLStreamException e) {
             new RuntimeException("Error xmlInputFactory");
         } catch (FileNotFoundException e) {
-            new RuntimeException("Error open(file not found) file = " + XML_FILE_TO_READ);;
+            new RuntimeException("Error open(file not found) file = " + XML_FILE_TO_READ);
+            ;
         }
         List<Point> pointList = new ArrayList<>();
         Point point = null;
@@ -52,7 +53,6 @@ public class ParseXMLWithXMLStreamReader {
                             break;
                         break;
                     case XMLStreamConstants.END_ELEMENT:
-                        System.out.println("End Element:" + parser.getName());
                         if (String.valueOf(parser.getName()).equals("point")) {
                             pointList.add(point);
                             point = null;
@@ -101,7 +101,7 @@ public class ParseXMLWithXMLStreamReader {
 
     private List<Point> generatePoints() {
         List<Point> points = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000; i++) {
             Point point = new Point();
             point.setId(i + 1);
             point.setCountry(generateCountry());
@@ -195,7 +195,7 @@ public class ParseXMLWithXMLStreamReader {
         countries.add("Cuba");
         countries.add("Cyprus");
         countries.add("Czech Republic");
-       /* countries.add("Denmark");
+        countries.add("Denmark");
         countries.add("Djibouti");
         countries.add("Dominica");
         countries.add("Dominican Republic");
@@ -375,7 +375,7 @@ public class ParseXMLWithXMLStreamReader {
         countries.add("Yemen");
         countries.add("Yugoslavia");
         countries.add("Zambia");
-        countries.add("Zimbabwe");*/
+        countries.add("Zimbabwe");
         int index = (int) (Math.random() * countries.size());
         String country = countries.get(index);
         return country;
