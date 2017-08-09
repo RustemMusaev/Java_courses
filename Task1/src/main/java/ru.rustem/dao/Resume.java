@@ -8,31 +8,22 @@ import java.io.Serializable;
 public class Resume implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Access(AccessType.FIELD)
     @Column(name = "id")
     Integer id;
-    @Access(AccessType.FIELD)
     @Column(name = "name")
     String name;
-    @Access(AccessType.FIELD)
     @Column(name = "position")
     String position;
-    @Access(AccessType.FIELD)
     @Column(name = "address")
     String address;
-    @Access(AccessType.FIELD)
     @Column(name = "study")
     String study;
-    @Access(AccessType.FIELD)
     @Column(name = "about")
     String about;
-    @Access(AccessType.FIELD)
     @Column(name = "skill")
     String skill;
-    @Access(AccessType.FIELD)
     @Column(name = "phone")
     String phone;
-    @Access(AccessType.FIELD)
     @Column(name = "other")
     String other;
 

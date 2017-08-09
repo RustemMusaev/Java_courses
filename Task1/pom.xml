@@ -12,24 +12,10 @@
         <spring.version>4.3.10.RELEASE</spring.version>
         <hibernate.version>5.2.9.Final</hibernate.version>
         <postgres.version>9.4.1207</postgres.version>
-        <json.version>20160810</json.version>
         <jsoup.version>1.10.3</jsoup.version>
-        <apache.httpclient.version>4.5.2</apache.httpclient.version>
     </properties>
 
     <dependencies>
-        <!--HttpClient-->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>${apache.httpclient.version}</version>
-        </dependency>
-        <!--JSON-->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>${json.version}</version>
-        </dependency>
         <!--Jsoup-->
         <dependency>
             <groupId>org.jsoup</groupId>
