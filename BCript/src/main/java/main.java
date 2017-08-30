@@ -12,6 +12,7 @@ public class main {
     public static void main(String[] args) {
         PasswordEncoder encoder=new BCryptPasswordEncoder();
         String password_hash=encoder.encode("marsel");
+        System.out.println(password_hash);
         if (encoder.matches("marsel",password_hash)){
             System.out.println(" result ");
         } else {

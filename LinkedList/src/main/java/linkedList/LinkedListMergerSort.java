@@ -1,3 +1,5 @@
+package linkedList;
+
 public class LinkedListMergerSort {
 
     private static final int MAX_BUCKETS_COUNT = 32;
