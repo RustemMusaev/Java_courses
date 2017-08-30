@@ -6,11 +6,10 @@ import org.springframework.stereotype.Service;
 import ru.rustem.rambler.dao.PasswordDao;
 import ru.rustem.rambler.dao.UserDao;
 import ru.rustem.rambler.exception.CustomException;
-import ru.rustem.rambler.model.Password;
-import ru.rustem.rambler.model.User;
+import ru.rustem.rambler.models.Password;
+import ru.rustem.rambler.models.User;
 import ru.rustem.rambler.util.EncodeMD5;
 import ru.rustem.rambler.util.EncodeSHA1;
-import ru.rustem.rambler.util.EncoderError;
 import ru.rustem.rambler.util.EncoreMethod;
 
 @Service
@@ -35,19 +34,17 @@ public class UserServiceImpl implements UserService {
         return databasePassword.equals(inputPassword);
     }
 
-    private String generatePassword(String pwd, String encryption) {
-        String first = DigestUtils.md5Hex(pwd.substring(0, (int)(pwd.length()/2)));
+    private String generatePassword(String pwd, String encryption) throws CustomException {
+        String first = DigestUtils.md5Hex(pwd.substring(0, (int) (pwd.length() / 2)));
         EncoreMethod encoder;
         if (encryption.equals("SHA1")) {
             encoder = new EncodeSHA1();
         } else if (encryption.equals("MD5")) {
             encoder = new EncodeMD5();
         } else {
-            encoder = new EncoderError();
+            throw new CustomException("unregister encrypt method");
         }
-        String second = encoder.encode(pwd.substring((int)(pwd.length()/2), pwd.length()));
+        String second = encoder.encode(pwd.substring((int) (pwd.length() / 2), pwd.length()));
         return first + second;
     }
-
-
 }

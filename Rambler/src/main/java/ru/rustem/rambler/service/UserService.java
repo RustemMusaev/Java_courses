@@ -1,8 +1,7 @@
 package ru.rustem.rambler.service;
 
-
 import ru.rustem.rambler.exception.CustomException;
-import ru.rustem.rambler.model.User;
+import ru.rustem.rambler.models.User;
 
 public interface UserService {
     User findByLogin(String login) throws CustomException;

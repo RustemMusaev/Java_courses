@@ -1,7 +1,7 @@
 package ru.rustem.rambler.dao;
 
 import ru.rustem.rambler.exception.CustomException;
-import ru.rustem.rambler.model.User;
+import ru.rustem.rambler.models.User;
 
 
 public interface UserDao {

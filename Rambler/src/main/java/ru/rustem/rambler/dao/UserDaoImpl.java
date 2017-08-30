@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rustem.rambler.exception.CustomException;
-import ru.rustem.rambler.model.User;
+import ru.rustem.rambler.models.User;
 
 import javax.persistence.NoResultException;
 
@@ -24,11 +24,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByLogin(String login) throws CustomException {
-            try {return getSession().createQuery("FROM User user where user.login = :login", User.class)
-                    .setParameter("login", login).getSingleResult();}
-                    catch (NoResultException ex) {
-                throw new CustomException("does n't found user login = "+ login);
-            }
+        try {
+            return getSession().createQuery("FROM User user where user.login = :login", User.class)
+                    .setParameter("login", login).getSingleResult();
+        } catch (NoResultException ex) {
+            throw new CustomException("does n't found user login = " + login);
+        }
     }
 
     private Session getSession() {

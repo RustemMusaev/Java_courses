@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rustem.rambler.exception.CustomException;
-import ru.rustem.rambler.model.Password;
+import ru.rustem.rambler.models.Password;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -38,7 +38,7 @@ public class PasswordDaoImpl implements PasswordDao {
     @Override
     public String findPasswordUseFile(Integer userId) throws CustomException {
         StringBuilder passwordHash = new StringBuilder();
-        String fileName = folder+"ID" + userId + "MD5";
+        String fileName = folder + "ID" + userId + "MD5";
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {

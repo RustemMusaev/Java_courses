@@ -1,4 +1,4 @@
-package ru.rustem.rambler.model;
+package ru.rustem.rambler.models;
 
 import javax.persistence.*;
 
