@@ -1,6 +1,10 @@
 package ru.rustem.model;
 
 public class Street {
+    public Street(String name, Integer length) {
+        this.name = name;
+        this.length = length;
+    }
 
     private Integer id;
     private String name;

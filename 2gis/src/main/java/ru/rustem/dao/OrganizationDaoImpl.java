@@ -73,6 +73,10 @@ public class OrganizationDaoImpl implements OrganizathionDao {
     }
 
     @Override
+    public List<Organization> find(String name) {
+        return template.query(SQL_SELECT_BY_NAME, organizationRowMapper, name);
+    }
+    @Override
     public void update(Organization model) {
         template.update(SQL_UPDATE_ORGANIZATHION, model.getName(), model.getCity().getId(), model.getStreet().getId(),
                 model.getHouseNumber(), model.getDescription(), model.getWebsite(), new Timestamp(System.currentTimeMillis()));
@@ -106,4 +110,5 @@ public class OrganizationDaoImpl implements OrganizathionDao {
             return new Organization(id, name, city, street, houseNumber,description,website,dateUpdate);
         }
     };
+
 }

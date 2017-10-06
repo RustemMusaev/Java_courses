@@ -65,7 +65,7 @@ public class CityDaoImpl implements CityDao {
 
     @Override
     public int[] saveBatch(List<City> list) {
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(template).withTableName("PERSON").usingGeneratedKeyColumns("id");
+        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(template).withTableName("citys").usingGeneratedKeyColumns("id");
         SqlParameterSource[] batch = SqlParameterSourceUtils.createBatch(list.toArray());
         int[] ints = simpleJdbcInsert.executeBatch(batch);
         return ints;
