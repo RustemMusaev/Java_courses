@@ -36,6 +36,9 @@ public class OrganizationDaoImpl implements OrganizathionDao {
     //language=SQL
     private final static String SQL_SELECT_BY_NAME =
             "SELECT * FROM organizations WHERE name = ?";
+    //language=SQL
+    private final static String SQL_SELECT_BY_TIME =
+            "SELECT * FROM organizations WHERE date_update > ?";
 
     private JdbcTemplate template;
 
@@ -53,7 +56,7 @@ public class OrganizationDaoImpl implements OrganizathionDao {
     @Override
     public Integer save(Organization model) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(template);
-        jdbcInsert.withTableName("organizations").usingGeneratedKeyColumns("id");
+        jdbcInsert.withTableName("organizations");
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("name", model.getName());
         params.put("city_id", model.getCity().getId());
@@ -62,9 +65,8 @@ public class OrganizationDaoImpl implements OrganizathionDao {
         params.put("description", model.getDescription());
         params.put("website", model.getWebsite());
         params.put("date_update", new Timestamp(System.currentTimeMillis()));
-        int id = jdbcInsert.executeAndReturnKey(params).intValue();
-        model.setId(id);
-        return id;
+        jdbcInsert.execute(params);
+        return model.getId();
     }
 
     @Override
@@ -76,6 +78,12 @@ public class OrganizationDaoImpl implements OrganizathionDao {
     public List<Organization> find(String name) {
         return template.query(SQL_SELECT_BY_NAME, organizationRowMapper, name);
     }
+
+    @Override
+    public List<Organization> findByUpdateDate(Timestamp time) {
+        return template.query(SQL_SELECT_BY_TIME, organizationRowMapper, time);
+    }
+
     @Override
     public void update(Organization model) {
         template.update(SQL_UPDATE_ORGANIZATHION, model.getName(), model.getCity().getId(), model.getStreet().getId(),
@@ -101,7 +109,7 @@ public class OrganizationDaoImpl implements OrganizathionDao {
             String name = resultSet.getString("name");
             Integer cityId = resultSet.getInt("city_id");
             Integer streetId = resultSet.getInt("street_id");
-            Integer houseNumber = resultSet.getInt("hous_number");
+            Integer houseNumber = resultSet.getInt("house_number");
             String description = resultSet.getString("description");
             String website = resultSet.getString("website");
             Timestamp dateUpdate = resultSet.getTimestamp("date_update");

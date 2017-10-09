@@ -23,7 +23,6 @@ public class OrganizationController {
     }
 
     @GetMapping("/organization/{param}")
-    @ExceptionHandler()
     public ResponseEntity<List<OrganizationDto>> getCityById(@PathVariable("param") String param){
         List<OrganizationDto> result ;
         try {
@@ -37,21 +36,18 @@ public class OrganizationController {
     }
 
     @PostMapping("/organization/{id}")
-    @ExceptionHandler()
     public ResponseEntity<OrganizationDto> addCity(@PathVariable("id") Integer id,@RequestBody OrganizationDto model){
         service.save(model, id);
         return ResponseEntity.ok(model);
     }
 
     @PostMapping("/organization")
-    @ExceptionHandler()
     public ResponseEntity<List<OrganizationDto>> addCitys(@RequestBody List<OrganizationDto> list){
         service.saveBatch(list);
         return ResponseEntity.ok(list);
     }
 
     @PutMapping("/organization/{id}")
-    @ExceptionHandler()
     public void updateCity(@PathVariable("id") Integer id, @RequestBody OrganizationDto model){
         service.update(model, id);
     }

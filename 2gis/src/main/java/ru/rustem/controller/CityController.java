@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.rustem.dto.CityDto;
-import ru.rustem.exception.CityIdNotUniqueException;
 import ru.rustem.service.CityService;
 
 import java.util.List;
@@ -28,14 +27,12 @@ public class CityController {
     }
 
     @PostMapping("/city/{id}")
-    @ExceptionHandler(CityIdNotUniqueException.class)
     public ResponseEntity<CityDto> addCity(@PathVariable("id") Integer id,@RequestBody CityDto cityDto){
         service.save(cityDto, id);
         return ResponseEntity.ok(cityDto);
     }
 
     @PostMapping("/city")
-    @ExceptionHandler(CityIdNotUniqueException.class)
     public ResponseEntity<List<CityDto>> addCitys(@RequestBody List<CityDto> cityDtoList){
         service.saveBatch(cityDtoList);
         return ResponseEntity.ok(cityDtoList);

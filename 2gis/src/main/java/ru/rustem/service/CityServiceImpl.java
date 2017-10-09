@@ -9,8 +9,8 @@ import ru.rustem.converter.DtoToCityConverter;
 import ru.rustem.converter.CityToDtoConverter;
 import ru.rustem.dao.CityDao;
 import ru.rustem.dto.CityDto;
-import ru.rustem.exception.CityIdNotUniqueException;
-import ru.rustem.exception.CityNotFoundException;
+import ru.rustem.exception.IdNotUniqueException;
+import ru.rustem.exception.NotFoundException;
 import ru.rustem.model.City;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class CityServiceImpl implements CityService {
             City city = new City(id,model.getName(), model.getArea(), model.getCountPeople());
             return dao.save(city);
         } catch (DuplicateKeyException e) {
-            throw  new CityIdNotUniqueException(id);
+            throw  new IdNotUniqueException(model.getName(),id);
         }
     }
 
@@ -37,7 +37,7 @@ public class CityServiceImpl implements CityService {
         try {
             return new CityToDtoConverter().convert(dao.find(id));
         } catch (EmptyResultDataAccessException ex) {
-            throw new CityNotFoundException(id);
+            throw new NotFoundException("City",id);
         }
     }
 

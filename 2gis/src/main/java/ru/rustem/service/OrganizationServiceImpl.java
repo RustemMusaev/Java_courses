@@ -8,11 +8,11 @@ import ru.rustem.converter.DtoToOrganizationConverter;
 import ru.rustem.converter.OrganizationToDtoConverter;
 import ru.rustem.dao.OrganizathionDao;
 import ru.rustem.dto.OrganizationDto;
-import ru.rustem.exception.OrganizationNotFoundException;
-import ru.rustem.exception.OrganizationNotUnidueException;
+import ru.rustem.exception.IdNotUniqueException;
+import ru.rustem.exception.NotFoundException;
 import ru.rustem.model.Organization;
-import ru.rustem.model.Street;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +31,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             Organization organization = converter.convert(model);
             return dao.save(organization);
         } catch (DuplicateKeyException e) {
-            throw  new OrganizationNotUnidueException(id);
+            throw  new IdNotUniqueException(model.getName(),id);
         }
     }
 
@@ -40,7 +40,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         try {
             return converterToDto.convert(dao.find(id));
         } catch (EmptyResultDataAccessException ex) {
-            throw new OrganizationNotFoundException(id);
+            throw new NotFoundException("Organization",id);
         }
     }
 
@@ -72,7 +72,19 @@ public class OrganizationServiceImpl implements OrganizationService {
                     .collect(Collectors.toList());
             return cityDtoList;
         } catch (EmptyResultDataAccessException ex) {
-            throw new OrganizationNotFoundException(name);
+            throw new NotFoundException(name);
+        }
+    }
+
+    @Override
+    public List<OrganizationDto> findByUpdateDate(Timestamp time) {
+        try {
+            List<OrganizationDto> cityDtoList = dao.findByUpdateDate(time).stream()
+                    .map(x->converterToDto.convert(x))
+                    .collect(Collectors.toList());
+            return cityDtoList;
+        } catch (EmptyResultDataAccessException ex) {
+            throw new NotFoundException(String.valueOf(time));
         }
     }
 }

@@ -1,6 +1,5 @@
 package ru.rustem.model;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 
 public class Organization {

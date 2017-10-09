@@ -8,8 +8,8 @@ import ru.rustem.converter.DtoToStreetConverter;
 import ru.rustem.converter.StreetToDtoConverter;
 import ru.rustem.dao.StreetDao;
 import ru.rustem.dto.StreetDto;
-import ru.rustem.exception.StreetNotFoundException;
-import ru.rustem.exception.StreetNotUnidueException;
+import ru.rustem.exception.IdNotUniqueException;
+import ru.rustem.exception.NotFoundException;
 import ru.rustem.model.Street;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class StreetServiceImpl implements StreetService {
             Street street = new Street(id,model.getName(), model.getLength());
             return dao.save(street);
         } catch (DuplicateKeyException e) {
-            throw  new StreetNotUnidueException(id);
+            throw  new IdNotUniqueException(model.getName(),id);
         }
     }
 
@@ -36,7 +36,7 @@ public class StreetServiceImpl implements StreetService {
         try {
             return new StreetToDtoConverter().convert(dao.find(id));
         } catch (EmptyResultDataAccessException ex) {
-            throw new StreetNotFoundException(id);
+            throw new NotFoundException("Street",id);
         }
     }
 

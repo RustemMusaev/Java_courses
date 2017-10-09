@@ -21,28 +21,24 @@ public class StreetController {
     }
 
     @GetMapping("/street/{id}")
-    @ExceptionHandler()
     public ResponseEntity<StreetDto> getCityById(@PathVariable("id") Integer id){
         StreetDto result = service.find(id);
         return ResponseEntity.ok(result);
     }
 
     @PostMapping("/street/{id}")
-    @ExceptionHandler()
     public ResponseEntity<StreetDto> addCity(@PathVariable("id") Integer id,@RequestBody StreetDto streetDto){
         service.save(streetDto, id);
         return ResponseEntity.ok(streetDto);
     }
 
     @PostMapping("/street")
-    @ExceptionHandler()
     public ResponseEntity<List<StreetDto>> addCitys(@RequestBody List<StreetDto> streetDtoList){
         service.saveBatch(streetDtoList);
         return ResponseEntity.ok(streetDtoList);
     }
 
     @PutMapping("/street/{id}")
-    @ExceptionHandler()
     public void updateCity(@PathVariable("id") Integer id, @RequestBody StreetDto streetDto){
         service.update(streetDto, id);
     }

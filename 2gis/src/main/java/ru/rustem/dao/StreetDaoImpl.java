@@ -38,13 +38,12 @@ public class StreetDaoImpl implements StreetDao {
     @Override
     public Integer save(Street model) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(template);
-        jdbcInsert.withTableName("streets").usingGeneratedKeyColumns("id");
+        jdbcInsert.withTableName("streets");
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("name", model.getName());
         params.put("length", model.getLength());
-        int id = jdbcInsert.executeAndReturnKey(params).intValue();
-        model.setId(id);
-        return id;
+        jdbcInsert.execute(params);
+        return model.getId();
     }
 
     @Override
