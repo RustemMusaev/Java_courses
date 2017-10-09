@@ -6,7 +6,9 @@ import ru.rustem.model.Street;
 
 public class StreetToDtoConverter implements Converter<Street, StreetDto> {
     @Override
-    public StreetDto convert(Street street) {
-        return new StreetDto(street.getName(), street.getLength());
-    }
+    public StreetDto convert(Street model) {
+        return StreetDto.builder()
+                .name(model.getName())
+                .length(model.getLength())
+                .build();}
 }

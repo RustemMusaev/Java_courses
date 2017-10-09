@@ -11,12 +11,14 @@ public class DtoToOrganizationConverter implements Converter<OrganizationDto, Or
 
     @Override
     public Organization convert(OrganizationDto model) {
-        return new Organization(model.getName(),
-                model.getCity(),
-                model.getStreet(),
-                model.getHouseNumber(),
-                model.getDescription(),
-                model.getWebsite(),
-                model.getDateUpdate());
+        return Organization.builder()
+                .name(model.getName())
+                .city(model.getCity())
+                .street(model.getStreet())
+                .houseNumber(model.getHouseNumber())
+                .description(model.getDescription())
+                .website(model.getWebsite())
+                .dateUpdate(model.getDateUpdate())
+                .build();
     }
 }
