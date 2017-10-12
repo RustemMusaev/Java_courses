@@ -36,6 +36,16 @@ public class TransactionDaoImpl implements TransactionDao {
         return id;
     }
 
+    @Override
+    public Transaction find(Integer id) {
+        return (Transaction) getSession().createQuery("From Transaction t where t.id=:id").setParameter("id", id).uniqueResult();
+    }
+
+    @Override
+    public boolean delete(Transaction transaction) {
+        return false;
+    }
+
     Session getSession() {
         return sessionFactory.getCurrentSession();
     }

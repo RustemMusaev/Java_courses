@@ -14,7 +14,9 @@ import ru.rustem.service.TransactionService;
 
 @AuthorizeInstantiation("USER")
 public class UserActionPage extends BasePage {
+
     private Product selectedProduct;
+
     @SpringBean
     private TransactionService transactionService;
 
@@ -53,7 +55,7 @@ public class UserActionPage extends BasePage {
         if (product == null) {
             return "Select product";
         }
-        if (product.getCount() > 0) {
+        if (0 <= product.getCount()) {
             return "Buy the product : name = " + product.getId() + " , price=" + product.getPrice();
         } else
             return "This position is Empty ";

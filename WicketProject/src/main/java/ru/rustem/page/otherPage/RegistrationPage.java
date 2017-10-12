@@ -12,7 +12,7 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.PatternValidator;
-import ru.rustem.model.RegUser;
+import ru.rustem.dto.UserDto;
 import ru.rustem.service.UserService;
 import ru.rustem.validator.UserNameValidator;
 
@@ -26,24 +26,25 @@ public class RegistrationPage extends WebPage {
     private UserService userService;
 
     Form<?> form = null;
-    RegUser regUser = new RegUser();
+    UserDto model = new UserDto();
 
     public RegistrationPage(final PageParameters page) throws Exception {
         super();
         add(new FeedbackPanel("feedback"));
         Label regDate = new Label("regDateId", new Date());
-        TextField login = new TextField("login", new PropertyModel(regUser, "login"));
-        PasswordTextField password = new PasswordTextField("password", new PropertyModel(regUser, "password"));
-        PasswordTextField cpassword = new PasswordTextField("cpassword", new PropertyModel(regUser, "cpassword"));
+        TextField login = new TextField("login", new PropertyModel(model, "login"));
+        PasswordTextField password = new PasswordTextField("password", new PropertyModel(model, "password"));
+        PasswordTextField cpassword = new PasswordTextField("cpassword", new PropertyModel(model, "cpassword"));
         login.setRequired(true);
         password.setRequired(true);
         cpassword.setRequired(true);
 
         form = new Form<Void>("regForm") {
             public void onSubmit() {
-                if (userService.loginIsCorrect(regUser.getLogin())) {
-                    userService.save(regUser);
+                if (userService.save(model)) {
                     setResponsePage(HomePage.class);
+                } else {
+                    error("This name not Unique");
                 }
             }
         };

@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
         product.setPrice(price);
         User user = (User) AuthenticatedWebSession.get().getAttribute("userToSession");
         if (log.isInfoEnabled()) {
-            log.info("User = "+ user.getLogin() +"create Product id = " + product.getId());
+            log.info("User = " + user.getLogin() + "create Product id = " + product.getId());
         }
         return productDao.save(product);
     }

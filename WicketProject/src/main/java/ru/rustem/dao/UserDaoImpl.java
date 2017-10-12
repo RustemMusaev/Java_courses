@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Integer save(User user) {
-        getSession().saveOrUpdate(user);
+        getSession().save(user);
         Integer id = user.getId();
         if (id != null && log.isInfoEnabled()) {
             log.info("Save User id = " + id);
@@ -39,11 +39,21 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User find(Integer id) {
+        return (User) getSession().createQuery("From User where id=:id").setParameter("id", id).uniqueResult();
+
+    }
+
+    @Override
+    public boolean delete(User user) {
+        return false;
+    }
+
+    @Override
     public User findByLogin(String login) {
         User user = (User) getSession().createQuery("FROM User user where login = :login")
                 .setParameter("login", login).uniqueResult();
-        if (user != null) return user;
-        return null;
+        return user;
     }
 
     Session getSession() {

@@ -2,16 +2,17 @@ package ru.rustem.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.rustem.converter.DtoToUserConverter;
 import ru.rustem.dao.UserDao;
-import ru.rustem.model.RegUser;
+import ru.rustem.dto.UserDto;
+import ru.rustem.exception.UserNotFounException;
 import ru.rustem.model.User;
-
-import static ru.rustem.config.MyAuthenticatedWebSession.ENCODER;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
+    private DtoToUserConverter converer = new DtoToUserConverter();
 
     public UserServiceImpl() {
     }
@@ -22,13 +23,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer save(RegUser regUser) {
-        User user = new User(regUser.getLogin(), ENCODER.encode(regUser.getPassword()), "USER");
-        return userDao.save(user);
+    public boolean save(UserDto model) {
+        if (findByLogin(model.getLogin()) != null) return false;
+        userDao.save(converer.convert(model));
+        return true;
     }
 
     @Override
     public User findByLogin(String login) {
-        return userDao.findByLogin(login);
+        User user = userDao.findByLogin(login);
+        if (user != null) {
+            return user;
+        } else {
+            throw new UserNotFounException(login);
+        }
     }
 }

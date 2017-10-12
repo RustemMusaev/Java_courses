@@ -77,7 +77,7 @@ public class AdminPage extends BasePage {
                                 item.setDefaultModelObject(product);
                                 productService.save(product);
                                 if (log.isInfoEnabled()) {
-                                    log.info("User = "+ user.getLogin() +"change product id = " + product.getId()+ " new name = " + product.getName());
+                                    log.info("User = " + user.getLogin() + "change product id = " + product.getId() + " new name = " + product.getName());
                                 }
                             }
                         }));
@@ -89,7 +89,7 @@ public class AdminPage extends BasePage {
                                 item.setDefaultModelObject(product);
                                 productService.save(product);
                                 if (log.isInfoEnabled()) {
-                                    log.info("User = "+ user.getLogin() +"change product id = " + product.getId()+ " new description = " + product.getDescription());
+                                    log.info("User = " + user.getLogin() + "change product id = " + product.getId() + " new description = " + product.getDescription());
                                 }
                             }
                         }));
@@ -101,7 +101,7 @@ public class AdminPage extends BasePage {
                                 item.setDefaultModelObject(product);
                                 productService.save(product);
                                 if (log.isInfoEnabled()) {
-                                    log.info("User = "+ user.getLogin() +"change product id = " + product.getId()+ " new price = " + product.getPrice());
+                                    log.info("User = " + user.getLogin() + "change product id = " + product.getId() + " new price = " + product.getPrice());
                                 }
                             }
                         }));
@@ -113,7 +113,7 @@ public class AdminPage extends BasePage {
                                 item.setDefaultModelObject(product);
                                 productService.save(product);
                                 if (log.isInfoEnabled()) {
-                                    log.info("User = "+ user.getLogin() +"change product id = " + product.getId()+ " new count = " + product.getCount());
+                                    log.info("User = " + user.getLogin() + "change product id = " + product.getId() + " new count = " + product.getCount());
                                 }
                             }
                         }));

@@ -8,6 +8,7 @@ import org.apache.wicket.request.Request;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.rustem.exception.UserNotFounException;
 import ru.rustem.model.User;
 import ru.rustem.service.UserService;
 
@@ -28,18 +29,25 @@ public class MyAuthenticatedWebSession extends AuthenticatedWebSession {
 
     @Override
     public boolean authenticate(final String login, final String password) {
-        user = userService.findByLogin(login);
-        if (user != null && ENCODER.matches(password, user.getPassword())) {
-            this.setAttribute("userToSession", user);
-            if (log.isInfoEnabled()) {
-                log.info("User = "+ user.getLogin() +" open session");
+        try {
+            user = userService.findByLogin(login);
+            if (ENCODER.matches(password, user.getPassword())) {
+                this.setAttribute("userToSession", user);
+                if (log.isInfoEnabled()) {
+                    log.info("User = " + user.getLogin() + " open session");
+                }
+                return true;
             }
-            return true;
+            if (log.isInfoEnabled()) {
+                log.info("User = " + login + "error authenticate ");
+            }
+            return false;
+        } catch (UserNotFounException ex) {
+            if (log.isInfoEnabled()) {
+                log.info("User = " + login + "not found ");
+            }
+            return false;
         }
-        if (log.isInfoEnabled()) {
-            log.info("User = "+ user.getLogin() +"error authenticate ");
-        }
-        return false;
     }
 
     @Override

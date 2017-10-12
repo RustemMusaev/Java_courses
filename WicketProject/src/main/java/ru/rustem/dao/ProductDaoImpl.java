@@ -14,8 +14,10 @@ import java.util.List;
 @Repository
 @Transactional
 public class ProductDaoImpl implements ProductDao {
+
     @SpringBean
     private SessionFactory sessionFactory;
+
     private static final Logger log = Logger.getLogger(ProductDaoImpl.class);
 
     public ProductDaoImpl(SessionFactory sessionFactory) {

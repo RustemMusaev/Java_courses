@@ -59,7 +59,7 @@ public class TransactionServiceImpl implements TransactionService {
             User user = (User) AuthenticatedWebSession.get().getAttribute("userToSession");
             Integer count = shop(product, user);
             if (count != null && log.isInfoEnabled()) {
-                    log.info("User = "+ user.getLogin() +"buy product id = " + product.getId());
+                log.info("User = " + user.getLogin() + "buy product id = " + product.getId());
             }
         }
     }
