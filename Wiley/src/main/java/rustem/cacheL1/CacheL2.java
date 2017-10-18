@@ -17,7 +17,7 @@ public class CacheL2 {
     private long size;
     private String file;
 
-    public CacheL2(long maxSize, String file){
+    public CacheL2(long maxSize, String file) {
         this.maxSize = maxSize;
         this.file = file;
     }
@@ -26,29 +26,30 @@ public class CacheL2 {
         ObjectMapper mapper = new ObjectMapper();
         try {
             mapper.writeValue(new File(file), map);
-        } catch (JsonGenerationException e) {
-            e.printStackTrace();
+        }catch (JsonGenerationException e) {
+            System.out.println("JsonGenerationException");
         } catch (JsonMappingException e) {
-            e.printStackTrace();
+            System.out.println("JsonMappingException");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error read/wrie file"+ file);
         }
         return true;
     }
 
-    public TreeMap<Object, Integer> readFile(){
+    public TreeMap<Object, Integer> readFile() {
         TreeMap<Object, Integer> map = new TreeMap<Object, Integer>();
         try {
             ObjectMapper mapper = new ObjectMapper();
             map = mapper.readValue(
-                    new File(file),new TypeReference<Map<Object,Integer>>() {});
+                    new File(file), new TypeReference<Map<Object, Integer>>() {
+                    });
 
         } catch (JsonGenerationException e) {
-            e.printStackTrace();
+            System.out.println("JsonGenerationException");
         } catch (JsonMappingException e) {
-            e.printStackTrace();
+            System.out.println("JsonMappingException");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error read/wrie file"+ file);
         }
         return map;
     }
@@ -60,26 +61,27 @@ public class CacheL2 {
             Object current = map.pollFirstEntry();
             size = size - ObjectSizeFetcher.getObjectSize(current);
         }
-        map.put(object,0);
+        map.put(object, 0);
         writeToFile(map);
         size = size + objectSize;
         return object;
 
     }
 
-    public boolean contains(Object object){
+    public boolean contains(Object object) {
         TreeMap map = readFile();
         return map.containsKey(object);
     }
 
-    public Object getObject(Object object){
-        TreeMap map = readFile();
-        return map.ceilingKey(object);
+    public Object getObject(Object object) {
+        Object current= updateObject(object);
+        return current;
     }
+
     public Object updateObject(Object object) {
         TreeMap map = readFile();
         Integer current = (Integer) map.get(object);
-        map.replace(object,new Integer(current.intValue()+1));
+        map.replace(object, new Integer(current.intValue() + 1));
         writeToFile(map);
         return object;
     }

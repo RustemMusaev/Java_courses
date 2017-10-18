@@ -17,7 +17,7 @@ public class CacheL1Out {
         this.queue = new LinkedList();
     }
 
-    public boolean contains(Object object){
+    public boolean contains(Object object) {
         return queue.contains(object);
     }
 
@@ -31,6 +31,7 @@ public class CacheL1Out {
         size = size + objectSize;
         return object;
     }
+
     public Object removeObject(Object object) {
         Object current = queue.remove(queue.indexOf(object));
         size = size - ObjectSizeFetcher.getObjectSize(current);

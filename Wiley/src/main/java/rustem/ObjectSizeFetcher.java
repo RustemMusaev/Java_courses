@@ -13,6 +13,6 @@ public class ObjectSizeFetcher {
         if (instrumentation != null) {
             throw new IllegalStateException("Agent not initialised");
         }
-        return 1000;
+        return instrumentation.getObjectSize(o);
     }
 }

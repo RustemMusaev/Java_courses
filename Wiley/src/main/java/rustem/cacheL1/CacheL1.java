@@ -9,13 +9,13 @@ public class CacheL1 {
     private CacheL2 cacheL2;
 
     public CacheL1(long maxSizeL1, long maxSizeL2, String file) {
-        this.cacheIn = new CacheL1In((int) (maxSizeL1*0.2));
-        this.cacheOut = new CacheL1Out((int) (maxSizeL1*0.6));
-        this.cacheMain = new CacheL1Main((int) (maxSizeL1*0.2));
-        this.cacheL2 = new CacheL2(maxSizeL2,file);
+        this.cacheIn = new CacheL1In((int) (maxSizeL1 * 0.2));
+        this.cacheOut = new CacheL1Out((int) (maxSizeL1 * 0.6));
+        this.cacheMain = new CacheL1Main((int) (maxSizeL1 * 0.2));
+        this.cacheL2 = new CacheL2(maxSizeL2, file);
     }
 
-    public Object startCache(Object object){
+    public Object startCache(Object object) {
         Object current;
         if (cacheIn.contains(object)) {
             current = cacheIn.getObject(object);
@@ -29,10 +29,11 @@ public class CacheL1 {
                 cacheMain.addObject(current);
             } else if (cacheMain.contains(object)) {
                 current = cacheMain.updateObject(object);
-            } if (cacheL2.contains(object)) {
+            }
+            if (cacheL2.contains(object)) {
                 current = cacheL2.getObject(object);
             } else {
-                while (cacheIn.isFull(object)){
+                while (cacheIn.isFull(object)) {
                     current = cacheIn.remove();
                     cacheOut.addObject(current);
                 }
